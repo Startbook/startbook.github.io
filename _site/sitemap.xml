@@ -19,9 +19,6 @@
 <loc>http://localhost:4000/ventures/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/</loc>
-</url>
-<url>
 <loc>http://localhost:4000/cvc/index.html</loc>
 <lastmod>2021-06-30T13:03:56+01:00</lastmod>
 </url>
@@ -32,6 +29,10 @@
 <url>
 <loc>http://localhost:4000/feedback/index.html</loc>
 <lastmod>2021-06-30T13:03:56+01:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/index.html</loc>
+<lastmod>2022-03-17T15:51:38+00:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/london-youth-profiles/index.html</loc>
