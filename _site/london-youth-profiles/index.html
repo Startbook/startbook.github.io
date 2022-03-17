@@ -1,0 +1,175 @@
+<style>
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  /* Style the tab */
+  .tab {
+    overflow: hidden;
+    border: none;
+    background-color: #492861;
+    /* background-image: url('cvc-banner.jpg'); */
+  }
+
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: 2px white solid;
+    outline: none;
+    cursor: pointer;
+    padding: 25px 25px;
+    transition: 0.3s;
+    font-size: 24px;
+    color: white;
+    width: 50%;
+  }
+
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #5ac1d5;
+  }
+
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #d3da44;
+    color: #492861;
+    font-weight: bold;
+  }
+
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    /* border: 1px solid #ccc; */
+    border-top: none;
+  }
+</style>
+
+<body style="margin: 0;">
+  <img src="ly.png" width="100%" />
+
+  <div class="tab">
+    <button class="tablinks active" onclick="openCity(event, 'Tab1')">
+      Review Video Applications
+    </button>
+    <button class="tablinks" onclick="openCity(event, 'Tab2')">
+      Review Written Applications
+    </button>
+
+    <!-- <button class="tablinks" onclick="openCity(event, 'Tab3')">
+      View Judge Selection Results
+    </button> -->
+  </div>
+
+  <div id="Tab1" class="tabcontent" style="display: block;">
+    <div>
+      <video width="24.5%" height="240" controls>
+        <source src="1.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <video width="24.5%" height="240" controls>
+        <source src="2.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <video width="24.5%" height="240" controls>
+        <source src="3.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <video width="24.5%" height="240" controls>
+        <source src="4.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <iframe
+      class="airtable-embed"
+      src="https://airtable.com/embed/shrAVPBkYFuham6ZD?backgroundColor=purple"
+      frameborder="0"
+      onmousewheel=""
+      width="24.5%"
+      height="1000"
+    ></iframe>
+
+    <iframe
+      class="airtable-embed"
+      src="https://airtable.com/embed/shrcsYshbYA2wNHnJ?backgroundColor=purple"
+      frameborder="0"
+      onmousewheel=""
+      width="24.5%"
+      height="1000"
+    ></iframe>
+
+    <iframe
+      class="airtable-embed"
+      src="https://airtable.com/embed/shrlxE6JnYpPMMDzL?backgroundColor=purple"
+      frameborder="0"
+      onmousewheel=""
+      width="24.5%"
+      height="1000"
+    ></iframe>
+
+    <iframe
+      class="airtable-embed"
+      src="https://airtable.com/embed/shrmVnjE5vjoAK29b?backgroundColor=purple"
+      frameborder="0"
+      onmousewheel=""
+      width="24.5%"
+      height="1000"
+    ></iframe>
+
+    <!-- <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSf152WRSKIL6ewEK7_5YnGVfOTTABtaB2OQ4mu9-1Wj3DMabQ/viewform?embedded=true"
+      width="32%"
+      height="1000"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      >Loading…</iframe
+    > -->
+  </div>
+
+  <div id="Tab2" class="tabcontent">
+    <iframe
+      class="airtable-embed"
+      src="https://airtable.com/embed/shr04wf2GjD0sy9Jc?backgroundColor=purple"
+      frameborder="0"
+      onmousewheel=""
+      width="100%"
+      height="100%"
+    ></iframe>
+    <!-- <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSf152WRSKIL6ewEK7_5YnGVfOTTABtaB2OQ4mu9-1Wj3DMabQ/viewform?embedded=true"
+      width="32%"
+      height="100%"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      >Loading…</iframe
+    > -->
+  </div>
+
+  <!-- <div id="Tab3" class="tabcontent">
+    <div>
+      <h1>Results will appear here once voting is complete.</h1>
+  </div> -->
+
+  <script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  </script>
+</body>
