@@ -588,6 +588,46 @@
   background-image: url(../../assets/img/team/27b.png);
 }
 
+.it28 {
+  background-image: url(/assets/img/team/28a.png);
+}
+
+.it28:hover {
+  background-image: url(../../assets/img/team/28b.png);
+}
+
+.it29 {
+  background-image: url(/assets/img/team/29a.png);
+}
+
+.it29:hover {
+  background-image: url(../../assets/img/team/29b.png);
+}
+
+.it30 {
+  background-image: url(/assets/img/team/30a.png);
+}
+
+.it30:hover {
+  background-image: url(../../assets/img/team/30b.png);
+}
+
+.it31 {
+  background-image: url(/assets/img/team/31a.png);
+}
+
+.it31:hover {
+  background-image: url(../../assets/img/team/31b.png);
+}
+
+.it32 {
+  background-image: url(/assets/img/team/32a.png);
+}
+
+.it32:hover {
+  background-image: url(../../assets/img/team/32b.png);
+}
+
 /* preload images */
 
 #preload {
