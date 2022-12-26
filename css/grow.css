@@ -9,6 +9,16 @@
   margin-bottom: 2em;
 }
 
+.switch {
+  transition: all 0.4s ease-in-out;
+  background-size: cover;
+  display: grid;
+  height: 175px;
+  width: 175px;
+  margin: auto;
+}
+
+
 @media only screen and (max-width: 480px) {
   #partners a {
     transition: all 0.2s ease-in-out;
@@ -30,7 +40,7 @@
 
 .grow:hover {
   transform: scale(1.15);
-  background-color: #f5633b;
+  background-color: #6429E9;
   background-size: cover;
 }
 
@@ -568,6 +578,14 @@
 
 .it26:hover {
   background-image: url(../../assets/img/team/26b.png);
+}
+
+.it27 {
+  background-image: url(/assets/img/team/27a.png);
+}
+
+.it27:hover {
+  background-image: url(../../assets/img/team/27b.png);
 }
 
 /* preload images */
