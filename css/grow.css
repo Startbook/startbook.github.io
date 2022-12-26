@@ -1,0 +1,628 @@
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1463px;
+  }
+}
+
+#ventures a {
+  transition: all 0.2s ease-in-out;
+  background-size: cover;
+  /* min-height: 250px; */
+  /* width: 250px; */
+  margin: auto;
+}
+
+.switch {
+  transition: all 0.4s ease-in-out;
+  background-size: cover;
+  display: grid;
+  height: 175px;
+  width: 175px;
+  margin: auto;
+}
+
+.list-inline {
+  padding-left: 0;
+  margin-left: -5px;
+  list-style: none;
+}
+.list-inline > li {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.grow {
+  transition: all 0.2s ease-in-out;
+  background-size: cover;
+  display: grid;
+  min-height: 330px;
+  min-width: 330px;
+  margin: 1em;
+}
+
+@media only screen and (max-width: 480px) {
+  #ventures a {
+    transition: all 0.2s ease-in-out;
+    background-size: cover;
+    width: 100%;
+    margin: 0;
+    display: grid;
+  }
+
+  .grow {
+    transition: all 0.2s ease-in-out;
+    background-size: cover;
+    /* height: 250px; */
+    width: 100%;
+    padding-top: 100%;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #partners a {
+    transition: all 0.2s ease-in-out;
+    background-size: cover;
+    width: 100%;
+    margin: 0;
+    display: grid;
+  }
+
+  .grow {
+    transition: all 0.2s ease-in-out;
+    background-size: cover;
+    /* height: 250px; */
+    width: 100%;
+    padding-top: 100%;
+    margin: auto;
+  }
+}
+
+.grow:hover {
+  transform: scale(1.1);
+  background-color: #f5633b;
+  background-size: cover;
+}
+
+.iv1 {
+  background-image: url(/assets/img/ventures/1a-min.png);
+}
+
+.iv1:hover {
+  background-image: url(../../assets/img/ventures/1b-min.png);
+}
+
+.iv2 {
+  background-image: url(/assets/img/ventures/2a-min.png);
+}
+
+.iv2:hover {
+  background-image: url(../../assets/img/ventures/2b-min.png);
+}
+
+.iv3 {
+  background-image: url(/assets/img/ventures/3a-min.png);
+}
+
+.iv3:hover {
+  background-image: url(../../assets/img/ventures/3b-min.png);
+}
+
+.iv4 {
+  background-image: url(/assets/img/ventures/4a-min.png);
+}
+
+.iv4:hover {
+  background-image: url(../../assets/img/ventures/4b-min.png);
+}
+
+.iv5 {
+  background-image: url(/assets/img/ventures/5a-min.png);
+}
+
+.iv5:hover {
+  background-image: url(../../assets/img/ventures/5b-min.png);
+}
+
+.iv6 {
+  background-image: url(/assets/img/ventures/6a-min.png);
+}
+
+.iv6:hover {
+  background-image: url(../../assets/img/ventures/6b-min.png);
+}
+
+.iv7 {
+  background-image: url(/assets/img/ventures/7a-min.png);
+}
+
+.iv7:hover {
+  background-image: url(../../assets/img/ventures/7b-min.png);
+}
+
+.iv8 {
+  background-image: url(/assets/img/ventures/8a-min.png);
+}
+
+.iv8:hover {
+  background-image: url(../../assets/img/ventures/8b-min.png);
+}
+
+.iv9 {
+  background-image: url(/assets/img/ventures/9a-min.png);
+}
+
+.iv9:hover {
+  background-image: url(../../assets/img/ventures/9b-min.png);
+}
+
+.iv10 {
+  background-image: url(/assets/img/ventures/10a-min.png);
+}
+
+.iv10:hover {
+  background-image: url(../../assets/img/ventures/10b-min.png);
+}
+
+.iv11 {
+  background-image: url(/assets/img/ventures/11a-min.png);
+}
+
+.iv11:hover {
+  background-image: url(../../assets/img/ventures/11b-min.png);
+}
+
+.iv12 {
+  background-image: url(/assets/img/ventures/12a-min.png);
+}
+
+.iv12:hover {
+  background-image: url(../../assets/img/ventures/12b-min.png);
+}
+
+.iv13 {
+  background-image: url(/assets/img/ventures/13a-min.png);
+}
+
+.iv13:hover {
+  background-image: url(../../assets/img/ventures/13b-min.png);
+}
+
+.iv14 {
+  background-image: url(/assets/img/ventures/14a-min.png);
+}
+
+.iv14:hover {
+  background-image: url(../../assets/img/ventures/14b-min.png);
+}
+
+.iv15 {
+  background-image: url(/assets/img/ventures/15a-min.png);
+}
+
+.iv15:hover {
+  background-image: url(../../assets/img/ventures/15b-min.png);
+}
+
+.iv16 {
+  background-image: url(/assets/img/ventures/16a-min.png);
+}
+
+.iv16:hover {
+  background-image: url(../../assets/img/ventures/16b-min.png);
+}
+
+#partners a {
+  transition: all 0.2s ease-in-out;
+  background-size: cover;
+  /* min-height: 250px; */
+  /* width: 250px; */
+  margin: auto;
+}
+
+.ip1 {
+  background-image: url(/assets/img/partners/1a-min.png);
+}
+
+.ip1:hover {
+  background-image: url(../../assets/img/partners/1b-min.png);
+}
+
+.ip2 {
+  background-image: url(/assets/img/partners/2a-min.png);
+}
+
+.ip2:hover {
+  background-image: url(../../assets/img/partners/2b-min.png);
+}
+
+.ip3 {
+  background-image: url(/assets/img/partners/3a-min.png);
+}
+
+.ip3:hover {
+  background-image: url(../../assets/img/partners/3b-min.png);
+}
+
+.ip4 {
+  background-image: url(/assets/img/partners/4a-min.png);
+}
+
+.ip4:hover {
+  background-image: url(../../assets/img/partners/4b-min.png);
+}
+
+.ip5 {
+  background-image: url(/assets/img/partners/5a-min.png);
+}
+
+.ip5:hover {
+  background-image: url(../../assets/img/partners/5b-min.png);
+}
+
+.ip6 {
+  background-image: url(/assets/img/partners/6a-min.png);
+}
+
+.ip6:hover {
+  background-image: url(../../assets/img/partners/6b-min.png);
+}
+
+.ip7 {
+  background-image: url(/assets/img/partners/7a-min.png);
+}
+
+.ip7:hover {
+  background-image: url(../../assets/img/partners/7b-min.png);
+}
+
+.ip8 {
+  background-image: url(/assets/img/partners/8a-min.png);
+}
+
+.ip8:hover {
+  background-image: url(../../assets/img/partners/8b-min.png);
+}
+
+.ip9 {
+  background-image: url(/assets/img/partners/9a-min.png);
+}
+
+.ip9:hover {
+  background-image: url(../../assets/img/partners/9b-min.png);
+}
+
+.ip10 {
+  background-image: url(/assets/img/partners/10a-min.png);
+}
+
+.ip10:hover {
+  background-image: url(../../assets/img/partners/10b-min.png);
+}
+
+.ip11 {
+  background-image: url(/assets/img/partners/11a-min.png);
+}
+
+.ip11:hover {
+  background-image: url(../../assets/img/partners/11b-min.png);
+}
+
+.ip12 {
+  background-image: url(/assets/img/partners/12a-min.png);
+}
+
+.ip12:hover {
+  background-image: url(../../assets/img/partners/12b-min.png);
+}
+
+.ip13 {
+  background-image: url(/assets/img/partners/13a-min.png);
+}
+
+.ip13:hover {
+  background-image: url(../../assets/img/partners/13b-min.png);
+}
+
+.ip14 {
+  background-image: url(/assets/img/partners/14a-min.png);
+}
+
+.ip14:hover {
+  background-image: url(../../assets/img/partners/14b-min.png);
+}
+
+.ip15 {
+  background-image: url(/assets/img/partners/15a-min.png);
+}
+
+.ip15:hover {
+  background-image: url(../../assets/img/partners/15b-min.png);
+}
+
+.ip16 {
+  background-image: url(/assets/img/partners/16a-min.png);
+}
+
+.ip16:hover {
+  background-image: url(../../assets/img/partners/16b-min.png);
+}
+
+.ip17 {
+  background-image: url(/assets/img/partners/17a-min.png);
+}
+
+.ip17:hover {
+  background-image: url(../../assets/img/partners/17b-min.png);
+}
+
+.ip18 {
+  background-image: url(/assets/img/partners/18a-min.png);
+}
+
+.ip18:hover {
+  background-image: url(../../assets/img/partners/18b-min.png);
+}
+
+.ip19 {
+  background-image: url(/assets/img/partners/19a-min.png);
+}
+
+.ip19:hover {
+  background-image: url(../../assets/img/partners/19b-min.png);
+}
+
+.ip20 {
+  background-image: url(/assets/img/partners/20a-min.png);
+}
+
+.ip20:hover {
+  background-image: url(../../assets/img/partners/20b-min.png);
+}
+
+.ip21 {
+  background-image: url(/assets/img/partners/21a-min.png);
+}
+
+.ip21:hover {
+  background-image: url(../../assets/img/partners/21b-min.png);
+}
+
+.ip22 {
+  background-image: url(/assets/img/partners/22a-min.png);
+}
+
+.ip22:hover {
+  background-image: url(../../assets/img/partners/22b-min.png);
+}
+
+.ip23 {
+  background-image: url(/assets/img/partners/23a-min.png);
+}
+
+.ip23:hover {
+  background-image: url(../../assets/img/partners/23b-min.png);
+}
+
+.it0 {
+  background-image: url(/assets/img/team/tbca.png);
+}
+
+.it0:hover {
+  background-image: url(/assets/img/team/tbcb.png);
+}
+
+.it1 {
+  background-image: url(/assets/img/team/1a.png);
+}
+
+.it1:hover {
+  background-image: url(../../assets/img/team/1b.png);
+}
+
+.it2 {
+  background-image: url(/assets/img/team/2a.png);
+}
+
+.it2:hover {
+  background-image: url(../../assets/img/team/2b.png);
+}
+
+.it3 {
+  background-image: url(/assets/img/team/3a.png);
+}
+
+.it3:hover {
+  background-image: url(../../assets/img/team/3b.png);
+}
+
+.it4 {
+  background-image: url(/assets/img/team/4a.png);
+}
+
+.it4:hover {
+  background-image: url(../../assets/img/team/4b.png);
+}
+
+.it5 {
+  background-image: url(/assets/img/team/5a.png);
+}
+
+.it5:hover {
+  background-image: url(../../assets/img/team/5b.png);
+}
+
+.it6 {
+  background-image: url(/assets/img/team/6a.png);
+}
+
+.it6:hover {
+  background-image: url(../../assets/img/team/6b.png);
+}
+
+.it7 {
+  background-image: url(/assets/img/team/7a.png);
+}
+
+.it7:hover {
+  background-image: url(../../assets/img/team/7b.png);
+}
+
+.it8 {
+  background-image: url(/assets/img/team/8a.png);
+}
+
+.it8:hover {
+  background-image: url(../../assets/img/team/8b.png);
+}
+
+.it9 {
+  background-image: url(/assets/img/team/9a.png);
+}
+
+.it9:hover {
+  background-image: url(../../assets/img/team/9b.png);
+}
+
+.it10 {
+  background-image: url(/assets/img/team/10a.png);
+}
+
+.it10:hover {
+  background-image: url(../../assets/img/team/10b.png);
+}
+
+.it11 {
+  background-image: url(/assets/img/team/11a.png);
+}
+
+.it11:hover {
+  background-image: url(../../assets/img/team/11b.png);
+}
+
+.it12 {
+  background-image: url(/assets/img/team/12a.png);
+}
+
+.it12:hover {
+  background-image: url(../../assets/img/team/12b.png);
+}
+
+.it13 {
+  background-image: url(/assets/img/team/13a.png);
+}
+
+.it13:hover {
+  background-image: url(../../assets/img/team/13b.png);
+}
+
+.it14 {
+  background-image: url(/assets/img/team/14a.png);
+}
+
+.it14:hover {
+  background-image: url(../../assets/img/team/14b.png);
+}
+
+.it15 {
+  background-image: url(/assets/img/team/15a.png);
+}
+
+.it15:hover {
+  background-image: url(../../assets/img/team/15b.png);
+}
+
+.it16 {
+  background-image: url(/assets/img/team/16a.png);
+}
+
+.it16:hover {
+  background-image: url(../../assets/img/team/16b.png);
+}
+
+.it17 {
+  background-image: url(/assets/img/team/17a.png);
+}
+
+.it17:hover {
+  background-image: url(../../assets/img/team/17b.png);
+}
+
+.it18 {
+  background-image: url(/assets/img/team/18a.png);
+}
+
+.it18:hover {
+  background-image: url(../../assets/img/team/18b.png);
+}
+
+.it19 {
+  background-image: url(/assets/img/team/19a.png);
+}
+
+.it19:hover {
+  background-image: url(../../assets/img/team/19b.png);
+}
+
+.it20 {
+  background-image: url(/assets/img/team/20a.png);
+}
+
+.it20:hover {
+  background-image: url(../../assets/img/team/20b.png);
+}
+
+.it21 {
+  background-image: url(/assets/img/team/21a.png);
+}
+
+.it21:hover {
+  background-image: url(../../assets/img/team/21b.png);
+}
+
+.it22 {
+  background-image: url(/assets/img/team/22a.png);
+}
+
+.it22:hover {
+  background-image: url(../../assets/img/team/22b.png);
+}
+
+.it23 {
+  background-image: url(/assets/img/team/23a.png);
+}
+
+.it23:hover {
+  background-image: url(../../assets/img/team/23b.png);
+}
+
+.it24 {
+  background-image: url(/assets/img/team/24a.png);
+}
+
+.it24:hover {
+  background-image: url(../../assets/img/team/24b.png);
+}
+
+.it25 {
+  background-image: url(/assets/img/team/25a.png);
+}
+
+.it25:hover {
+  background-image: url(../../assets/img/team/25b.png);
+}
+
+.it26 {
+  background-image: url(/assets/img/team/26a.png);
+}
+
+.it26:hover {
+  background-image: url(../../assets/img/team/26b.png);
+}
+
+/* preload images */
+
+#preload {
+  display: none;
+}
