@@ -13,9 +13,10 @@
   transition: all 0.4s ease-in-out;
   background-size: cover;
   display: grid;
-  height: 175px;
-  width: 175px;
+  height: 250px;
+  width: 250px;
   margin: auto;
+  border-radius: 10px;
 }
 
 
@@ -627,6 +628,15 @@
 .it32:hover {
   background-image: url(../../assets/img/team/32b.png);
 }
+
+.it33 {
+  background-image: url(/assets/img/team/33a.png);
+}
+
+.it33:hover {
+  background-image: url(../../assets/img/team/33b.png);
+}
+
 
 /* preload images */
 
