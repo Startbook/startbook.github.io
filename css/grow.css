@@ -637,6 +637,39 @@
   background-image: url(../../assets/img/team/33b.png);
 }
 
+.it34 {
+  background-image: url(/assets/img/team/34a.png);
+}
+
+.it34:hover {
+  background-image: url(../../assets/img/team/34b.png);
+}
+
+.it35 {
+  background-image: url(/assets/img/team/35a.png);
+}
+
+.it35:hover {
+  background-image: url(../../assets/img/team/35b.png);
+}
+
+.it36 {
+  background-image: url(/assets/img/team/36a.png);
+}
+
+.it36:hover {
+  background-image: url(../../assets/img/team/36b.png);
+}
+
+.it37 {
+  background-image: url(/assets/img/team/37a.png);
+}
+
+.it37:hover {
+  background-image: url(../../assets/img/team/37b.png);
+}
+
+
 
 /* preload images */
 
