@@ -668,3 +668,19 @@
 #preload {
   display: none;
 }
+
+/* word swapping css */
+
+.ease {
+  transition: 0.9px all ease-in-out;
+}
+
+.swap-words {
+  transition: .9s all ease-in-out;
+  display: inline-flex;
+  text-decoration: underline;
+}
+
+.transparent {
+  opacity: 0;
+}
