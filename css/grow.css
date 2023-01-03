@@ -672,16 +672,32 @@
 /* word swapping css */
 /* https://codepen.io/AnyaCraig/pen/rdggKE */
 
-.ease {
+.swap-phrase {
   transition: 0.9px all ease-in-out;
 }
 
 .swap-words {
   transition: .9s all ease-in-out;
   display: inline-flex;
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  font-weight: 400;
+  color: #6429E9;
 }
 
 .transparent {
   opacity: 0;
+}
+
+/* #swap-word-1 {
+  color: #2937f0;
+}
+
+#swap-word-2 {
+  color: #9f1ae2;
+} */
+
+@media (min-width: 600px) {
+  .swap-phrase {
+    font-size: 4rem;
+  }
 }

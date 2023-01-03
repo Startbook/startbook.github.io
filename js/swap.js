@@ -2,12 +2,12 @@
 
 var pairs = [
   ["digital ecosystem", "incubator"],
-  ["pitch book", "demo day"],
+  ["digital pitch book", "demo day"],
   ["data tool", "startup programme"],
   ["summary", "pitch competition"],
   ["mentoring tool", "programme"],
   ["showcase", "programme alumni"],
-  ["lookbook", "startups"],
+  ["lookbook", "founders/startups"],
   ["collaboration tool", "founders"],
   ["summary", "stakeholders"],
   ["community tool", "alumni"],
