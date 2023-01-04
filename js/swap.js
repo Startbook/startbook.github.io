@@ -11,6 +11,7 @@ var pairs = [
   ["collaboration tool", "founders"],
   ["summary", "stakeholders"],
   ["community tool", "alumni"],
+  ["digital directory", "accelerator"],
 ];
 
 var count = 0;
