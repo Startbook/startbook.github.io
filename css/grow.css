@@ -661,6 +661,14 @@
   background-image: url(../../assets/img/team/37a.png);
 }
 
+.ittbc {
+  background-image: url(/assets/img/team/tbc.png);
+}
+
+.ittbc:hover {
+  background-image: url(../../assets/img/team/tbc.png);
+}
+
 
 
 /* preload images */
