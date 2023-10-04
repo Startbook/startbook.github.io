@@ -365,6 +365,14 @@
   background-image: url(../../assets/img/partners/23b-min.png);
 }
 
+.ip24 {
+  background-image: url(/assets/img/partners/24a-min.png);
+}
+
+.ip24:hover {
+  background-image: url(../../assets/img/partners/24b-min.png);
+}
+
 .it1 {
   background-image: url(/assets/img/team/1a.png);
 }
