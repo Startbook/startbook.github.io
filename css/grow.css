@@ -19,7 +19,6 @@
   border-radius: 10px;
 }
 
-
 @media only screen and (max-width: 480px) {
   #partners a {
     transition: all 0.2s ease-in-out;
@@ -41,7 +40,7 @@
 
 .grow:hover {
   transform: scale(1.15);
-  background-color: #6429E9;
+  background-color: #6429e9;
   background-size: cover;
 }
 
@@ -741,6 +740,14 @@
   background-image: url(../../assets/img/team/46a.png);
 }
 
+.it47 {
+  background-image: url(/assets/img/team/47a.png);
+}
+
+.it47:hover {
+  background-image: url(../../assets/img/team/47a.png);
+}
+
 .ittbc {
   background-image: url(/assets/img/team/tbc.png);
 }
@@ -748,8 +755,6 @@
 .ittbc:hover {
   background-image: url(../../assets/img/team/tbc.png);
 }
-
-
 
 /* preload images */
 
@@ -765,11 +770,11 @@
 }
 
 .swap-words {
-  transition: .9s all ease-in-out;
+  transition: 0.9s all ease-in-out;
   display: inline-flex;
   /* text-decoration: underline; */
   font-weight: 400;
-  color: #6429E9;
+  color: #6429e9;
 }
 
 .transparent {
