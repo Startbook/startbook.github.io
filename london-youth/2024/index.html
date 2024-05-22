@@ -61,9 +61,7 @@
   </div>
 
   <div class="tab">
-    <button class="tablinks active" onclick="openCity(event, 'Tab1')">
-      Slides
-    </button>
+    <button class="tablinks" onclick="openCity(event, 'Tab1')">Slides</button>
 
     <button class="tablinks" onclick="openCity(event, 'Tab2')">
       Attendees
@@ -85,12 +83,12 @@
       Side-by-side view
     </button>
 
-    <button class="tablinks" onclick="openCity(event, 'Tab7')">
+    <button class="tablinks active" onclick="openCity(event, 'Tab7')">
       Results view
     </button>
   </div>
 
-  <div id="Tab1" class="tabcontent">
+  <div id="Tab1" class="tabcontent" style="display: none">
     <iframe
       src="https://docs.google.com/presentation/d/e/2PACX-1vSAXoFB1qXz2Qku4raNR-QrGJXvgKyvVzgZJ9sxgMDTnQeoUE1VdX9UfwdYQWGNrP_znBXAWQvgoUeP/embed?start=false&loop=false&delayms=60000"
       frameborder="0"
@@ -160,7 +158,7 @@
     ></iframe>
   </div>
 
-  <div id="Tab7" class="tabcontent" style="display: none">
+  <div id="Tab7" class="tabcontent">
     <iframe
       width="100%"
       height="100%"
