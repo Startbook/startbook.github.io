@@ -153,53 +153,67 @@
 <body>
   <div
     style="
-      position: fixed;
       top: 0;
+      position: fixed;
+      margin: 0;
       width: 100%;
       z-index: 100;
-      background-color: #0a3b66;
-      border-bottom: #002c67 3px solid;
+      background-image: linear-gradient(
+          rgba(0, 44, 103, 0.5),
+          rgba(0, 0, 0, 0.5)
+        ),
+        url(assets/img/cvc-bg.jpg);
+      background-repeat: no-repeat;
+      background-size: 100%;
+      border-bottom: black 1px solid;
     "
   >
-    <div>
-      <h1
-        style="
-          text-align: center;
-          color: white;
-          margin: 20px;
-          font-size: 42px;
-          font-weight: 600;
-        "
-      >
-        CVC x Oxford Impact Pitch Day
-      </h1>
-      <!-- <h2
-        style="
-          text-align: center;
-          color: white;
-          margin: 20px;
-          font-size: 21px;
-          font-weight: 300;
-          font-style: italic;
-        "
-      >
-        Powered by:
-      </h2> -->
-    </div>
-
-    <!-- <div style="text-align: center">
+    <h1
+      style="
+        text-align: center;
+        color: white;
+        margin: 20px;
+        font-size: 42px;
+        font-weight: 600;
+      "
+    >
       <a
         target="_blank"
         href="https://www.cvc.com/sustainable-value/sustainability/cvc-foundation/"
+        style="text-decoration: none"
       >
         <img
           class="sponsor"
           src="../assets/img/clients/cvc-logo-white-rectangle.png"
-          height="100px"
-          style="display: inline-block; margin: auto; margin: 5px 10px 5px 10px"
+          height="75px"
+          style="
+            display: inline-block;
+            margin: auto;
+            margin: 5px 10px 5px 10px;
+            vertical-align: middle;
+          "
         />
       </a>
-    </div> -->
+      <span style="font-weight: normal"> x </span>
+      <a
+        target="_blank"
+        href="https://www.cvc.com/sustainable-value/sustainability/cvc-foundation/"
+        style="text-decoration: none"
+      >
+        <img
+          class="sponsor"
+          src="assets/img/oxford-seed-fund-white-logo.webp"
+          height="75px"
+          style="
+            display: inline-block;
+            margin: auto;
+            margin: 5px 10px 5px 10px;
+            vertical-align: middle;
+          "
+        />
+      </a>
+      Impact Pitch Day
+    </h1>
 
     <div class="tab" style="display: flex; justify-content: center">
       <button class="tablinks active" onclick="openCity(event, 'Tab1')">
@@ -212,21 +226,11 @@
     </div>
   </div>
 
-  <div
-    id="Tab1"
-    class="tabcontent"
-    style="
-      width: 100%;
-      position: absolute;
-      background-image: url(assets/img/london-skyline.png);
-      background-repeat: no-repeat;
-      background-position: bottom;
-      background-size: 100%;
-    "
-  >
+  <div id="Tab1" class="tabcontent">
     <div
       style="
-        margin: 227px auto;
+        margin: auto;
+        margin-top: 241px;
         font-size: 20;
         max-width: 800px;
         background-color: white;
@@ -262,21 +266,11 @@
         <b>*Eligibility Criteria:</b>
       </p>
       <ul>
-        <!-- <li>
-          One of the founders must be a current student/staff member or alumnus
-          of the University of Oxford; they must be under 30 years or if over,
-          the business should have a social purpose helping young people under
-          the age of 30
-        </li> -->
         <li>
           The team must have progressed beyond the concept/idea stage and at
           least have a solution or prototype they are actively testing with
           users
         </li>
-        <!-- <li>
-          The business must be incorporated or with intention to incorporate in
-          the UK with a UK-based business bank account
-        </li> -->
         <li>
           Startups must be tackling challenges in one of the following areas:
           <ul>
@@ -293,25 +287,94 @@
           event in person at CVC's offices.
         </li>
       </ul>
+    </div>
 
-      <br />
-      <p>
-        <b>Pitch Event:</b>
-      </p>
-      <p>
-        Following the assessment of written applications, 4-5 finalists will be
-        selected to pitch in person in June 2025 at CVC’s offices at CVC Capital
-        Partners, 111 Strand, London, WC2R 0AG. Each ptich will be followed by
-        Q&A with the CVC judges.
-      </p>
-      <p>
-        Pitches will be scored based on the below judging criteria; once the
-        pitches have completed the CVC judges will provide feedback to the
-        Oxford Seed Fund Investment Committee, who will ultimately decide the
-        winner(s) of the competition. The available £40,000 may be invested into
-        one finalist or split between multiple finalists.
-      </p>
-      <br />
+    <div
+      style="
+        margin: auto;
+        margin-top: 25px;
+        font-size: 20;
+        max-width: 800px;
+        padding: 25px;
+        border-radius: 15px;
+        width: 100%;
+        position: absolute;
+        background-image: linear-gradient(
+            rgba(0, 44, 103, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url(assets/img/london-skyline.png);
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+        min-height: 150px;
+        border-radius: 15px;
+        position: relative;
+        color: white;
+      "
+      class="startheight"
+    >
+      <div>
+        <div style="z-index: 1">
+          <div style="width: 45%; display: inline-block; padding: 25px">
+            <h2 style="text-decoration: underline">
+              <b>Live Pitch</b>
+            </h2>
+            <p>
+              Following the assessment of written applications, 4-5 finalists
+              will be selected to pitch in person in June 2025 at CVC’s offices
+              at CVC Capital Partners, 111 Strand, London, WC2R 0AG. Each ptich
+              will be followed by Q&A with the CVC judges.
+            </p>
+            <p>
+              Pitches will be scored based on the below judging criteria; once
+              the pitches have completed the CVC judges will provide feedback to
+              the Oxford Seed Fund Investment Committee, who will ultimately
+              decide the winner(s) of the competition. The available £40,000 may
+              be invested into one finalist or split between multiple finalists.
+            </p>
+          </div>
+          <div style="width: 45%; display: inline-block">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.130195238561!2d-0.12262442270382046!3d51.51082737181398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ca365633f1%3A0x3cebe08d9cea6d52!2sCVC%20Capital%20Partners!5e0!3m2!1sen!2suk!4v1744030344569!5m2!1sen!2suk"
+              width="100%"
+              height="350px"
+              frameborder="0"
+              style="border: 0"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <br /><br /><br /><br />
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        margin: auto;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        font-size: 20;
+        max-width: 800px;
+        padding: 25px;
+        border-radius: 15px;
+        background-color: white;
+        /* width: 100%;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url(assets/img/london-skyline.png);
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%; */
+        min-height: 150px;
+        border-radius: 15px;
+        position: relative;
+      "
+      class="startheight"
+    >
       <p>
         <b>Judging Criteria:</b>
       </p>
@@ -385,11 +448,39 @@
         team on
         <a href="mailto:support@startbook.co.uk">support@startbook.co.uk</a>.
       </p>
+    </div>
+
+    <div
+      style="
+        margin: auto;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        font-size: 20;
+        max-width: 800px;
+        padding: 25px;
+        border-radius: 15px;
+        background-color: white;
+        /* width: 100%;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url(assets/img/london-skyline.png);
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%; */
+        min-height: 150px;
+        border-radius: 15px;
+        position: relative;
+      "
+      class="startheight"
+    >
       <a href="https://startbook.co.uk/" target="_blank">
         <img
           src="../assets/img/startbook-logo-word-dark-colour.png"
           alt="..."
-          style="display: block; margin: 50px auto 50px auto; width: 200px"
+          style="display: block; margin: 25px auto 50px auto; width: 200px"
         />
       </a>
       <div style="text-align: center; font-size: 15px; color: #808080">
@@ -425,15 +516,17 @@
     id="Tab2"
     style="
       display: none;
-      margin-top: 227px;
-      /* background-image: url(assets/img/bg.png); */
-      width: 100%;
+      /* background-image: url(assets/img/london-skyline.png); */
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: bottom;
     "
     class="tabcontent startheight"
   >
     <div
       style="
-        margin: 227px auto;
+        margin: auto;
+        margin-top: 241px;
         font-size: 20;
         max-width: 800px;
         background-color: white;
@@ -453,7 +546,7 @@
         frameborder="0"
         onmousewheel=""
         width="100%"
-        height="100%"
+        height="1500px"
         style="
           max-width: 850px;
           display: block;
@@ -461,12 +554,39 @@
           border-radius: 15px;
         "
       ></iframe>
+    </div>
 
+    <div
+      style="
+        margin: auto;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        font-size: 20;
+        max-width: 800px;
+        padding: 25px;
+        border-radius: 15px;
+        background-color: white;
+        /* width: 100%;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url(assets/img/london-skyline.png);
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%; */
+        min-height: 150px;
+        border-radius: 15px;
+        position: relative;
+      "
+      class="startheight"
+    >
       <a href="https://startbook.co.uk/" target="_blank">
         <img
           src="../assets/img/startbook-logo-word-dark-colour.png"
           alt="..."
-          style="display: block; margin: 50px auto 50px auto; width: 200px"
+          style="display: block; margin: 25px auto 50px auto; width: 200px"
         />
       </a>
       <div style="text-align: center; font-size: 15px; color: #808080">
