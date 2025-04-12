@@ -56,8 +56,13 @@
       margin: 0px;
       /* height: 100%; */
       width: 100%;
-      background-image: linear-gradient(45deg, #00738b, #0a3b66);
-      background-repeat: no-repeat;
+      background-image: linear-gradient(
+          45deg,
+          rgba(0, 115, 139, 0.75),
+          rgba(10, 59, 102, 0.75)
+        ),
+        url(assets/img/cvc-bg.jpg);
+      background-size: cover;
     }
 
     body {
@@ -398,7 +403,7 @@
         <p>
           <b>Judging Criteria:</b>
         </p>
-        <table border="1" style="display: block; width: 100%; overflow: scroll">
+        <table style="display: block; width: 100%; overflow: scroll">
           <tr>
             <th>Criterion</th>
             <th>Description</th>
@@ -483,14 +488,11 @@
           background-color: white;
           /* width: 100%;
           position: absolute;
-          background-image: linear-gradient(
-              rgba(0, 44, 103, 0.5),
-              rgba(0, 0, 0, 0.5)
-            ),
-            url(assets/img/london-skyline.png);
+          background-image: url(assets/img/cube-bg.png),
+            linear-gradient(rgba(0, 44, 103, 0.5), rgba(0, 0, 0, 0.5)); */
           background-repeat: no-repeat;
           background-position: bottom;
-          background-size: 100%; */
+          background-size: 100%;
           min-height: 150px;
           border-radius: 15px;
           position: relative;
