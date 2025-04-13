@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="The CVC Young Innovator Awards with Sky's the Limit is an annual pitch competition funded by the CVC Foundation supporting early-stage entrepreneurs that are part of the Sky's The Limit community."
+    />
+    <meta name="author" content="STARTBOOK LTD" />
+
+    <!-- Open Graph protocol -->
+    <meta
+      prefix="og: http://ogp.me/ns#"
+      property="og:image"
+      itemprop="image"
+      content="https://startbook.co.uk/cvc-skys-the-limit/assets/img/meta-cover.png"
+    />
+    <meta
+      prefix="og: http://ogp.me/ns#"
+      property="og:title"
+      content="Startbook"
+    />
+    <meta prefix="og: http://ogp.me/ns#" property="og:type" content="website" />
+    <meta
+      prefix="og: http://ogp.me/ns#"
+      property="og:url"
+      content="https://startbook.co.uk/"
+    />
+    <meta
+      prefix="og: http://ogp.me/ns#"
+      property="og:description"
+      content="The CVC Young Innovator Awards with Sky's the Limit is an annual pitch competition funded by the CVC Foundation supporting early-stage entrepreneurs that are part of the Sky's The Limit community."
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Startbook" />
+    <meta
+      property="twitter:description"
+      content="The CVC Young Innovator Awards with Sky's the Limit is an annual pitch competition funded by the CVC Foundation supporting early-stage entrepreneurs that are part of the Sky's The Limit community."
+    />
+    <meta
+      property="twitter:image"
+      content="https://startbook.co.uk/cvc-skys-the-limit/assets/img/meta-cover.png"
+    />
+
+    <title>Startbook - CVC Young Innovator Awards with Sky's the Limit</title>
+  </head>
+
+  <style>
+    html {
+      margin: 0px;
+      /* height: 100%; */
+      width: 100%;
+      background-image: linear-gradient(
+          45deg,
+          rgba(0, 115, 139, 0.75),
+          rgba(10, 59, 102, 0.75)
+        ),
+        url(assets/img/cvc-bg.jpg);
+      background-size: cover;
+    }
+
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      /* height: 100%; */
+      width: 100%;
+      margin: 0px;
+    }
+
+    /* Style the tab */
+    .tab {
+      overflow: hidden;
+      border: none;
+      /* height: 100%; */
+      width: 100%;
+      /* background-color: #002C67; */
+      /* background-image: url('cvc-banner.jpg'); */
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      background-color: #002c67;
+      float: left;
+      border: 2px white solid;
+      outline: none;
+      cursor: pointer;
+      /* padding: 10px 10px; */
+      transition: 0.3s;
+      font-size: 24px;
+      color: white;
+      width: 50%;
+      max-width: 300px;
+      height: 5%;
+      margin: 25px;
+      border-radius: 15px;
+      height: 50px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #5ac1d5;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #f39412;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      /* display: none; */
+      /* padding: 6px 12px; */
+      /* border: 1px solid #ccc; */
+      border-top: none;
+      padding: 25px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      /* .sponsor {
+        height: 50px;
+      } */
+
+      .mobile-header-text {
+        font-size: 24px !important;
+      }
+
+      .mobile-header-stl {
+        height: 20px !important;
+        margin-bottom: 10px !important;
+      }
+
+      .mobile-header-cvc {
+        height: 27px !important;
+        margin-bottom: 3px !important;
+      }
+
+      .startheight {
+        margin-top: 187.25px !important;
+      }
+    }
+
+    table {
+      width: 85%;
+      margin: auto;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th,
+    td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #002c67;
+      color: white;
+      /* text-transform: uppercase; */
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+
+  <body>
+    <div
+      style="
+        top: 0;
+        position: fixed;
+        margin: 0;
+        width: 100%;
+        z-index: 100;
+        background-image: linear-gradient(
+            rgba(0, 44, 103, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url(assets/img/cvc-bg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-bottom: black 1px solid;
+      "
+    >
+      <h1
+        style="
+          text-align: center;
+          color: white;
+          margin: 25px 25px 0px 25px;
+          font-size: 40px;
+          font-weight: 600;
+        "
+        class="mobile-header-text"
+      >
+        <a
+          target="_blank"
+          href="https://www.cvc.com/sustainable-value/sustainability/cvc-foundation/"
+          style="text-decoration: none"
+        >
+          <img
+            src="../assets/img/clients/cvc-logo-white-rectangle.png"
+            height="45px"
+            style="
+              display: inline-block;
+              margin: auto;
+              margin: 0px 10px 5px 10px;
+              vertical-align: middle;
+            "
+            class="sponsor mobile-header-cvc"
+          />
+        </a>
+        Young Innovator Awards
+        <br />with
+        <a
+          target="_blank"
+          href="https://www.skysthelimit.org/"
+          style="text-decoration: none"
+        >
+          <img
+            src="assets/img/skys-the-limit-logo-long-white.png"
+            height="45px"
+            style="
+              display: inline-block;
+              margin: auto;
+              margin: 0px 10px 18px 10px;
+              vertical-align: middle;
+            "
+            class="sponsor mobile-header-stl"
+          />
+        </a>
+      </h1>
+
+      <div class="tab" style="display: flex; justify-content: center">
+        <button class="tablinks active" onclick="openCity(event, 'Tab1')">
+          Summary
+        </button>
+
+        <button class="tablinks" onclick="openCity(event, 'Tab2')">
+          Apply Now
+        </button>
+      </div>
+    </div>
+
+    <div id="Tab1" class="tabcontent">
+      <div
+        style="
+          margin: 25px;
+          margin: auto;
+          margin-top: 240.38px;
+          font-size: 20;
+          max-width: 700px;
+          background-color: white;
+          padding: 25px;
+          border-radius: 15px;
+        "
+        class="startheight"
+      >
+        <p>
+          The <b>CVC Young Innovator Awards with Sky's the Limit</b> is an
+          annual pitch competition funded by the
+          <a
+            href="https://www.cvc.com/sustainable-value/sustainability/cvc-foundation/"
+            target="_blank"
+            >CVC Foundation</a
+          >
+          supporting early-stage entrepreneurs that are part of the
+          <a target="_blank" href="https://www.skysthelimit.org/"
+            >Sky's The Limit</a
+          >
+          community.
+        </p>
+        <p>
+          Eligible startups<b>*</b> have the opportunity to receive feedback and
+          mentorship from the CVC judges as well as an equity-free grant from a
+          finalist prize pool of...<br /><br /><span
+            style="
+              font-weight: bold;
+              font-size: 42px;
+              text-align: center;
+              margin: auto;
+              display: block;
+            "
+            >$30,000</span
+          >
+        </p>
+      </div>
+
+      <div
+        style="
+          margin: 25px;
+          margin: auto;
+          margin-top: 25px;
+          margin-bottom: 25px;
+          font-size: 20;
+          max-width: 700px;
+          padding: 25px;
+          border-radius: 15px;
+          background-color: white;
+          /* width: 100%;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url(assets/img/london-skyline.png);
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%; */
+          min-height: 150px;
+          border-radius: 15px;
+          position: relative;
+        "
+      >
+        <p>
+          <b>*Eligibility Criteria:</b>
+        </p>
+        <ul>
+          <li>
+            The team must have progressed beyond the concept/idea stage and at
+            least have a solution or prototype they are actively testing with
+            users
+          </li>
+          <!-- <li>
+            Startups must be tackling challenges in one of the following areas:
+            <ul>
+              <li>Health & Wellbeing</li>
+              <li>Climate & Sustainability</li>
+              <li>Financial Inclusion</li>
+              <li>Education & Employability</li>
+              <li>Responsible AI</li>
+            </ul>
+          </li> -->
+        </ul>
+      </div>
+
+      <div
+        style="
+          margin: auto;
+          margin-top: 25px;
+          font-size: 20;
+          max-width: 700px;
+          padding: 25px;
+          border-radius: 15px;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            )
+            /* ,url(assets/img/london-skyline.png) */;
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%;
+          min-height: 150px;
+          border-radius: 15px;
+          position: relative;
+          color: white;
+        "
+      >
+        <div>
+          <div style="z-index: 1">
+            <div
+              style="
+                width: 50%;
+                min-width: 312px;
+                display: inline-block;
+                vertical-align: middle;
+              "
+            >
+              <h2 style="text-decoration: underline">
+                <b>Live Pitch</b>
+              </h2>
+              <p>
+                Following the assessment of written applications, 4-5 finalists
+                will be selected to pitch virtually via Zoom in June 2025. Each
+                pitch will be followed by Q&A with the CVC judges.
+              </p>
+              <p>
+                Pitches will be scored based on the below judging criteria; once
+                the pitches have completed the CVC judges decide the winner(s)
+                of the competition. The available $30,000 may be awarded to one
+                finalist or split between multiple finalists.
+              </p>
+            </div>
+            <div style="display: inline-block; width: 25px"></div>
+            <div
+              style="
+                width: 25%;
+                min-width: 300px;
+                display: inline-block;
+                vertical-align: middle;
+              "
+            >
+              <img
+                src="assets/img/cvc-skys-the-limit-screenshot.png"
+                width="100%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style="
+          margin: 25px;
+          margin: auto;
+          margin-top: 25px;
+          margin-bottom: 25px;
+          font-size: 20;
+          max-width: 700px;
+          padding: 25px;
+          border-radius: 15px;
+          background-color: white;
+          /* width: 100%;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url(assets/img/london-skyline.png);
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%; */
+          min-height: 150px;
+          border-radius: 15px;
+          position: relative;
+        "
+      >
+        <p>
+          <b>Judging Criteria:</b>
+        </p>
+        <table style="display: block; width: 100%; overflow: scroll">
+          <tr>
+            <th>Criterion</th>
+            <th>Description</th>
+            <th>Weighting</th>
+          </tr>
+          <tr>
+            <td><b>Quality of the business idea</b></td>
+            <td>
+              <i
+                >Problem is real, solution meets target customer needs and the
+                idea has market potential</i
+              >
+            </td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td><b>Business viability</b></td>
+            <td>
+              <i
+                >Business has a sustainable business model that demonstrates it
+                has potential to grow</i
+              >
+            </td>
+            <td>25%</td>
+          </tr>
+          <tr>
+            <td><b>Traction</b></td>
+            <td>
+              <i
+                >Business has demonstrated market traction to evidence its
+                success</i
+              >
+            </td>
+            <td>15%</td>
+          </tr>
+          <tr>
+            <td><b>Potential for impact</b></td>
+            <td>
+              <i
+                >Business has potential/ambitions to have a net positive
+                societal, social and/or environmental impact</i
+              >
+            </td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td><b>Credibility of founder</b></td>
+            <td>
+              <i
+                >Founder/team has/have the necessary skills and commitment to
+                deliver the business plan</i
+              >
+            </td>
+            <td>20%</td>
+          </tr>
+        </table>
+      </div>
+
+      <div
+        style="
+          margin: 25px;
+          margin: auto;
+          margin-top: 25px;
+          margin-bottom: 25px;
+          font-size: 20;
+          max-width: 700px;
+          padding: 25px;
+          border-radius: 15px;
+          background-color: white;
+          /* width: 100%;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url(assets/img/london-skyline.png);
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%; */
+          min-height: 150px;
+          border-radius: 15px;
+          position: relative;
+        "
+      >
+        <p>
+          <b>How to Apply:</b>
+        </p>
+        <p>
+          Click the "Apply Now" button above to register your interest and begin
+          your application on the competition portal hosted on Startbook. Once
+          registered, you'll be able to generate a digital pitch profile for
+          your business, which will be assessed by the competition judges. If
+          you have questions regarding the competition please contact the
+          Startbook Support team on
+          <a href="mailto:support@startbook.co.uk">support@startbook.co.uk</a>.
+        </p>
+      </div>
+
+      <div
+        style="
+          margin: 25px;
+          margin: auto;
+          margin-top: 25px;
+          /* margin-bottom: 25px; */
+          font-size: 20;
+          max-width: 700px;
+          padding: 25px;
+          border-radius: 15px;
+          background-color: white;
+          /* width: 100%;
+          position: absolute;
+          background-image: url(assets/img/cube-bg.png),
+            linear-gradient(rgba(0, 44, 103, 0.5), rgba(0, 0, 0, 0.5)); */
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%;
+          min-height: 150px;
+          border-radius: 15px;
+          position: relative;
+        "
+      >
+        <p
+          style="
+            font-style: italic;
+            text-align: center;
+            font-weight: bold;
+            color: #2b2b2b;
+          "
+        >
+          Event Delivery Partner:
+        </p>
+        <a href="https://startbook.co.uk/" target="_blank">
+          <img
+            src="../assets/img/startbook-logo-word-dark-colour.png"
+            alt="..."
+            style="display: block; margin: 25px auto 50px auto; width: 200px"
+          />
+        </a>
+        <div style="text-align: center; font-size: 15px; color: #808080">
+          <p style="font-weight: bold">
+            &copy; ⚡ Startbook 2025. All Rights Reserved.
+          </p>
+          <p style="max-width: 512px; margin: auto">
+            Startbook is the trading name of STARTBOOK LTD incorporated and
+            registered in England & Wales with company number 12743199 whose
+            registered office is at 124 City Road, London, EC1V 2NX, United
+            Kingdom.
+          </p>
+          <div style="margin: 10px 0px 10px 0px">
+            <a target="_blank" href="https://startbook.app/privacy-policy"
+              >Privacy</a
+            >
+            <span class="mx-1">&middot;</span>
+            <a target="_blank" href="https://startbook.app/terms-and-conditions"
+              >Terms</a
+            >
+            <span class="mx-1">&middot;</span>
+            <a
+              target="_blank"
+              href="https://startbook.app/accessibility-statement"
+              >Accessibility</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="Tab2"
+      style="
+        display: none;
+        /* background-image: url(assets/img/london-skyline.png); */
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: bottom;
+      "
+      class="tabcontent"
+    >
+      <div
+        style="
+          margin: 25px;
+          margin: auto;
+          margin-top: 240.38px;
+          font-size: 20;
+          max-width: 700px;
+          background-color: rgb(250, 250, 250, 0.95);
+          padding: 25px;
+          border-radius: 15px;
+        "
+        class="startheight"
+      >
+        <div style="max-width: 512px; margin: auto">
+          <p style="font-weight: bold; color: red">
+            Deadline to complete this form: 19 May 2025 @ 12:00pm noon BST
+          </p>
+          <p>
+            Please register your interest below; the estimated completed time
+            for the form is ~1 minute.
+          </p>
+          <p>
+            Once your submission has been approved, you'll be sent an email with
+            further guidance and a link giving you access to the competition
+            portal where you can continue your application.
+          </p>
+          <p>
+            If you experience any technical issues, you can contact support
+            on:<br />
+            <a href="mailto:support@startbook.app">support@startbook.app</a>
+          </p>
+        </div>
+      </div>
+
+      <div
+        style="
+          margin: auto;
+          margin-top: 25px;
+          margin-bottom: 25px;
+          font-size: 20;
+          max-width: 700px;
+          padding: 25px;
+          border-radius: 15px;
+          background-color: white;
+          /* width: 100%;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url(assets/img/london-skyline.png);
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%; */
+          min-height: 150px;
+          border-radius: 15px;
+          position: relative;
+        "
+      >
+        <iframe
+          id="apply"
+          class="airtable-embed"
+          src="https://airtable.com/embed/appomtE37coFS9OuQ/shrcncQXAUswfO9jn"
+          frameborder="0"
+          onmousewheel=""
+          width="100%"
+          height="520px"
+          style="
+            max-width: 850px;
+            display: block;
+            margin: auto;
+            border-radius: 15px;
+          "
+        ></iframe>
+      </div>
+
+      <div
+        style="
+          margin: auto;
+          margin-top: 25px;
+          /* margin-bottom: 25px; */
+          font-size: 20;
+          max-width: 700px;
+          padding: 25px;
+          border-radius: 15px;
+          background-color: white;
+          /* width: 100%;
+          position: absolute;
+          background-image: linear-gradient(
+              rgba(0, 44, 103, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url(assets/img/london-skyline.png);
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 100%; */
+          min-height: 150px;
+          border-radius: 15px;
+          position: relative;
+        "
+      >
+        <p
+          style="
+            font-style: italic;
+            text-align: center;
+            font-weight: bold;
+            color: #2b2b2b;
+          "
+        >
+          Event Delivery Partner:
+        </p>
+        <a href="https://startbook.co.uk/" target="_blank">
+          <img
+            src="../assets/img/startbook-logo-word-dark-colour.png"
+            alt="..."
+            style="display: block; margin: 25px auto 50px auto; width: 200px"
+          />
+        </a>
+        <div style="text-align: center; font-size: 15px; color: #808080">
+          <p style="font-weight: bold">
+            &copy; ⚡ Startbook 2025. All Rights Reserved.
+          </p>
+          <p style="max-width: 512px; margin: auto">
+            Startbook is the trading name of STARTBOOK LTD incorporated and
+            registered in England & Wales with company number 12743199 whose
+            registered office is at 124 City Road, London, EC1V 2NX, United
+            Kingdom.
+          </p>
+          <div style="margin: 10px 0px 10px 0px">
+            <a target="_blank" href="https://startbook.app/privacy-policy"
+              >Privacy</a
+            >
+            <span class="mx-1">&middot;</span>
+            <a target="_blank" href="https://startbook.app/terms-and-conditions"
+              >Terms</a
+            >
+            <span class="mx-1">&middot;</span>
+            <a
+              target="_blank"
+              href="https://startbook.app/accessibility-statement"
+              >Accessibility</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName('tabcontent');
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = 'none';
+      }
+      tablinks = document.getElementsByClassName('tablinks');
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(' active', '');
+      }
+      document.getElementById(cityName).style.display = 'block';
+      evt.currentTarget.className += ' active';
+    }
+  </script>
+</html>
