@@ -129,12 +129,24 @@
     }
 
     @media only screen and (max-width: 600px) {
-      .sponsor {
-        height: 50px;
+      /* .sponsor {
+      } */
+
+      .mobile-header {
+        text-align: center !important;
+      }
+
+      .mobile-header-text {
+        text-align: center !important;
+        font-size: 34px !important;
+      }
+
+      .mobile-header-margin {
+        margin-right: 0px !important;
       }
 
       .startheight {
-        margin-top: 387px !important;
+        margin-top: 257.2px !important;
       }
     }
 
@@ -192,6 +204,7 @@
           font-size: 40px;
           font-weight: 600;
         "
+        class="mobile-header-text"
       >
         <a
           target="_blank"
@@ -201,11 +214,11 @@
           <img
             class="sponsor"
             src="assets/img/london-youth-logo.png"
-            height="75px"
+            height="65px"
             style="
               display: inline-block;
               margin: auto;
-              margin: 5px 10px 5px 10px;
+              margin: 0px 10px 0px 10px;
               vertical-align: middle;
             "
           />
@@ -215,13 +228,15 @@
 
       <h1
         style="
-          text-align: center;
+          text-align: right;
           color: white;
-          margin: 0px;
-          font-size: 30px;
+          margin: auto;
+          font-size: 26px;
           font-weight: normal;
           font-style: italic;
+          max-width: 750px;
         "
+        class="mobile-header"
       >
         Powered by
         <a
@@ -232,11 +247,11 @@
           <img
             class="sponsor"
             src="../assets/img/clients/cvc-logo-white-rectangle.png"
-            height="60px"
+            height="30px"
             style="
               display: inline-block;
               margin: auto;
-              margin: 5px 10px 5px 10px;
+              margin: 0px 10px 0px 10px;
               vertical-align: middle;
             "
           />
@@ -248,15 +263,15 @@
           style="text-decoration: none"
         >
           <img
-            class="sponsor"
             src="assets/img/rdas-logo-rectangle.png"
-            height="60px"
+            height="30px"
             style="
               display: inline-block;
               margin: auto;
-              margin: 5px 10px 5px 10px;
+              margin: 0px 20px 0px 10px;
               vertical-align: middle;
             "
+            class="sponsor mobile-header-margin"
           />
         </a>
       </h1>
@@ -277,7 +292,7 @@
         style="
           margin: 25px;
           margin: auto;
-          margin-top: 276px;
+          margin-top: 218.2px;
           font-size: 20;
           max-width: 700px;
           background-color: white;
@@ -480,7 +495,15 @@
           previously funded and successfully delivered:
         </p>
 
-        <table style="width: 100%; border-collapse: collapse; margin-top: 20px">
+        <table
+          style="
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            display: block;
+            overflow: scroll;
+          "
+        >
           <thead>
             <tr style="background-color: #f2f2f2">
               <th style="border: 1px solid #ccc; padding: 8px">
@@ -661,7 +684,7 @@
         <h2>How to Apply:</h2>
         <p>
           You can apply in two ways - either by a video application or a written
-          application. Click the "Apply Now" button above and follow the
+          application. Click the "Apply Now" button above to view the submission
           guidance.
         </p>
       </div>
@@ -671,7 +694,7 @@
           margin: 25px;
           margin: auto;
           margin-top: 25px;
-          margin-bottom: 25px;
+          /* margin-bottom: 25px; */
           font-size: 20;
           max-width: 700px;
           padding: 25px;
@@ -750,7 +773,7 @@
         style="
           margin: 25px;
           margin: auto;
-          margin-top: 276px;
+          margin-top: 218.2px;
           font-size: 20;
           max-width: 700px;
           background-color: rgb(250, 250, 250, 0.95);
@@ -772,13 +795,13 @@
           </p>
           <p>
             There are <span style="font-style: italic">two ways</span> you can
-            apply:
+            apply - you must decide between applying via:
           </p>
-          <ol style="margin-left: 20px">
+          <ol>
             <li>
               <strong>Video Application</strong>
               <br />The video must be maximum 3 minutes in length and include:
-              <ul style="margin-left: 20px">
+              <ul>
                 <li>Overview of your proposal and delivery plan</li>
                 <li>How you will engage hard-to-reach young people</li>
                 <li>Evidence of need for the project</li>
@@ -831,12 +854,12 @@
             purposes.
           </p>
           <p>
-            Addtional information about the application and shortlisting
-            criteria can be found in the
+            Addtional detail can be found in the comprehensive
             <a target="_blank" href="guidance-document.pdf"
-              ><i class="bi bi-file-pdf" style="color: #f40f02"></i>Application
-              Guidance Document</a
-            >.
+              ><i class="bi bi-file-pdf" style="color: #f40f02"></i>Guidance for
+              Applicants</a
+            >
+            document.
           </p>
           <p>
             If you have further questions or if you later decide to withdraw
@@ -899,7 +922,7 @@
         style="
           margin: auto;
           margin-top: 25px;
-          margin-bottom: 25px;
+          /* margin-bottom: 25px; */
           font-size: 20;
           max-width: 700px;
           padding: 25px;
