@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Startbook** is a comprehensive entrepreneurial ecosystem platform that connects founders, mentors, investors, coaches, and other stakeholders across 25+ events and programs. We're seeking an experienced software engineer to lead a complete platform rebuild using modern, scalable architecture from the ground up.
+**Startbook** is a comprehensive entrepreneurial ecosystem platform that connects founders, mentors, investors, coaches, and other stakeholders across 25+ events and programmes. We're seeking an experienced software engineer to lead a complete platform rebuild using modern, scalable architecture from the ground up.
 
 ## Current Platform (Legacy System)
 
@@ -12,7 +12,9 @@
 **File Storage:** Local filesystem on server instances  
 **Authentication:** Custom email-based auth with generated tokens
 
-The platform currently serves **10 distinct user types** (founders, mentors, investors, coaches, staff, guests, sponsors, perks, ventures, generic-guests) across a complex multi-tenant architecture where each event has its own Airtable base with event-specific field configurations.
+**Stack:** [stack.startbook.app](http://stack.startbook.app/)
+
+The platform currently serves **8 distinct user types** (founders, mentors, investors, coaches, staff, guests, sponsors, perk managers) across a complex multi-tenant architecture where each event has its own Airtable base with event-specific field configurations.
 
 ## Target Architecture
 
