@@ -1,27 +1,26 @@
 <!doctype html>
 <head>
-  <title>Startbook - Summer Skills Grants 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Startbook - Summer Skills Grants 2026</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 
 <style>
-  html, body {
+  body {
     font-family: Helvetica, Arial, sans-serif;
-    height: 100%;
-    margin: 0;
   }
 
   /* Style the tab */
   .tab {
-    overflow: hidden;
+    display: flex;
     border: none;
     background-color: #202023;
-    /* background-image: url('cvc-banner.jpg'); */
   }
 
   /* Style the buttons inside the tab */
   .tab button {
     background-color: inherit;
-    float: left;
+    flex: 1;
     border: 2px black solid;
     border-top: 2px black solid;
     outline: none;
@@ -30,9 +29,6 @@
     transition: 0.3s;
     font-size: 20px;
     color: #efefef;
-    /* width: 14.2857142857%; */
-    width: 16.6666666667%;
-    height: 5%;
   }
 
   /* Change background color of buttons on hover */
@@ -49,37 +45,134 @@
     /* font-weight: bold; */
   }
 
+  @media only screen and (max-width: 600px) {
+    .mobile-header {
+      text-align: center !important;
+      font-size: 10px !important;
+    }
+    .mobile-header-text {
+      text-align: center !important;
+      font-size: 18px !important;
+    }
+    .tab-label { display: none; }
+    .tab button { font-size: 18px !important; }
+  }
+
   /* Style the tab content */
   .tabcontent {
-    /* display: none; */
-    padding: 6px 12px;
-    /* border: 1px solid #ccc; */
+    padding: 0;
     border-top: none;
-    height: calc(100vh - 10vh - 50px);
+    position: relative;
+  }
+
+  .lock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #202023;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .lock-box {
+    text-align: center;
+    color: white;
+    padding: 40px;
+    max-width: 400px;
+  }
+
+  .lock-box i {
+    font-size: 48px;
+    color: #888;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .lock-box h2 {
+    margin: 0 0 8px 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .lock-box p {
+    margin: 0 0 20px 0;
+    color: #aaa;
+    font-size: 14px;
+  }
+
+  .lock-box input {
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 2px solid #555;
+    border-radius: 6px;
+    background: #2a2a2d;
+    color: white;
+    outline: none;
+    width: 200px;
+    text-align: center;
+  }
+
+  .lock-box input:focus {
+    border-color: #482961;
+  }
+
+  .lock-box button {
+    margin-left: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background: #482961;
+    color: white;
+    cursor: pointer;
+  }
+
+  .lock-box button:hover {
+    background: #5a3580;
+  }
+
+  .lock-box .error-msg {
+    color: #ff6b6b;
+    font-size: 13px;
+    margin-top: 12px;
+    min-height: 20px;
   }
 </style>
 
 <body style="margin: 0; height: 100%; width: 100%; background-color: black">
-  <div style="background-color: #482961">
-    <img src="london-youth-header.png" style="height: 10vh; display: block; margin: auto" />
+  <div class="header" style="background-color: #482961; padding: 8px 15px; text-align: center; color: white;">
+    <h1 style="margin: 5px 0 0 0; font-size: clamp(20px, 3vw, 32px); font-weight: 600;" class="mobile-header-text">
+      <img
+        src="../../london-youth-summer-skills-grants/assets/img/london-youth-logo.png"
+        height="30px"
+        style="display: inline-block; margin: 0 10px; vertical-align: middle;"
+        alt="London Youth" />
+      Summer Skills Grants
+    </h1>
+    <div style="margin: 0 auto 8px auto; text-align: center; display: flex; align-items: center; justify-content: center; gap: 25px;">
+      <span style="font-size: clamp(10px, 1.5vw, 16px); font-weight: normal; font-style: italic; color: white;">Powered by</span>
+      <img src="../../assets/img/clients/cvc-logo-white-rectangle.png" height="32px" alt="CVC" />
+      <img src="../../london-youth-summer-skills-grants/assets/img/infosys-logo.png" height="32px" alt="Infosys" />
+      <img src="../../london-youth-summer-skills-grants/assets/img/lseg-logo.png" height="32px" alt="LSEG Foundation" />
+    </div>
   </div>
 
   <div class="tab">
-    <!-- <button class="tablinks" onclick="openCity(event, 'Tab1')">Slides</button> -->
+    <button class="tablinks" onclick="openCity(event, 'Tab1')"><i class="bi bi-easel"></i><span class="tab-label"> Slides</span></button>
 
-    <!-- <button class="tablinks" onclick="openCity(event, 'Tab2')">
-      Attendees
-    </button> -->
+    <button class="tablinks active" onclick="openCity(event, 'Tab3')"><i class="bi bi-table"></i><span class="tab-label"> Spreadsheet</span></button>
 
-    <button class="tablinks active" onclick="openCity(event, 'Tab3')">Spreadsheet view</button>
+    <button class="tablinks" onclick="openCity(event, 'Tab4')"><i class="bi bi-grid"></i><span class="tab-label"> Gallery</span></button>
 
-    <button class="tablinks" onclick="openCity(event, 'Tab4')">Gallery view</button>
+    <button class="tablinks" onclick="openCity(event, 'Tab5')"><i class="bi bi-pencil-square"></i><span class="tab-label"> Scoring</span></button>
 
-    <!-- <button class="tablinks" onclick="openCity(event, 'Tab5')">Scoring view</button> -->
+    <button class="tablinks" onclick="openCity(event, 'Tab6')"><i class="bi bi-layout-split"></i><span class="tab-label"> Side-by-side</span></button>
 
-    <!-- <button class="tablinks active" onclick="openCity(event, 'Tab6')">Side-by-side view</button> -->
-
-    <!-- <button class="tablinks" onclick="openCity(event, 'Tab7')">Results view</button> -->
+    <button class="tablinks" onclick="openCity(event, 'Tab7')"><i class="bi bi-trophy"></i><span class="tab-label"> Results</span></button>
   </div>
 
   <div id="Tab1" class="tabcontent" style="display: none">
@@ -240,6 +333,71 @@
 </body>
 
 <script>
+  var tabConfig = {};
+  var configPassword = '';
+  var unlockedTabs = {};
+
+  fetch('config.json')
+    .then(function(r) { return r.json(); })
+    .then(function(config) {
+      tabConfig = config.tabs || {};
+      configPassword = config.password || '';
+    });
+
+  function resizeContent() {
+    var header = document.querySelector('.header');
+    var tab = document.querySelector('.tab');
+    var available = window.innerHeight - header.offsetHeight - tab.offsetHeight;
+    var contents = document.getElementsByClassName('tabcontent');
+    for (var i = 0; i < contents.length; i++) {
+      contents[i].style.height = available + 'px';
+    }
+    var iframes = document.querySelectorAll('.tabcontent iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      iframes[i].style.width = '100%';
+      iframes[i].style.height = available + 'px';
+    }
+  }
+  window.addEventListener('load', resizeContent);
+  window.addEventListener('resize', resizeContent);
+
+  function showLockOverlay(tabId) {
+    // Remove any existing overlay
+    var existing = document.getElementById('lock-' + tabId);
+    if (existing) { existing.remove(); }
+
+    var tabEl = document.getElementById(tabId);
+    var overlay = document.createElement('div');
+    overlay.className = 'lock-overlay';
+    overlay.id = 'lock-' + tabId;
+    overlay.innerHTML =
+      '<div class="lock-box">' +
+        '<i class="bi bi-lock-fill"></i>' +
+        '<h2>This tab is locked</h2>' +
+        '<p>Enter the password to view this content</p>' +
+        '<div>' +
+          '<input type="password" id="pw-' + tabId + '" placeholder="Password" onkeydown="if(event.key===\'Enter\')unlockTab(\'' + tabId + '\')" />' +
+          '<button onclick="unlockTab(\'' + tabId + '\')">Unlock</button>' +
+        '</div>' +
+        '<div class="error-msg" id="err-' + tabId + '"></div>' +
+      '</div>';
+    tabEl.appendChild(overlay);
+    setTimeout(function() { document.getElementById('pw-' + tabId).focus(); }, 50);
+  }
+
+  function unlockTab(tabId) {
+    var input = document.getElementById('pw-' + tabId);
+    var error = document.getElementById('err-' + tabId);
+    if (input.value.toLowerCase() === configPassword.toLowerCase()) {
+      unlockedTabs[tabId] = true;
+      document.getElementById('lock-' + tabId).remove();
+    } else {
+      error.textContent = 'Incorrect password. Please try again.';
+      input.value = '';
+      input.focus();
+    }
+  }
+
   function openCity(evt, cityName) {
     var i, tabcontent, tablinks
     tabcontent = document.getElementsByClassName('tabcontent')
@@ -252,5 +410,10 @@
     }
     document.getElementById(cityName).style.display = 'block'
     evt.currentTarget.className += ' active'
+
+    // Show lock overlay if tab is locked
+    if (tabConfig[cityName] && tabConfig[cityName].locked && !unlockedTabs[cityName]) {
+      showLockOverlay(cityName);
+    }
   }
 </script>

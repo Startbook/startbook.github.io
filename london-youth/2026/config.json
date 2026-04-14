@@ -1,0 +1,11 @@
+{
+  "tabs": {
+    "Tab1": { "locked": true },
+    "Tab3": { "locked": false },
+    "Tab4": { "locked": false },
+    "Tab5": { "locked": true },
+    "Tab6": { "locked": true },
+    "Tab7": { "locked": true }
+  },
+  "password": "cvc"
+}
