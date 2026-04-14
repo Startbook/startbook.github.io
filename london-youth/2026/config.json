@@ -7,5 +7,11 @@
     "side-by-side": { "locked": true },
     "results": { "locked": true }
   },
-  "password": "cvc"
+  "password": "cvc",
+  "scoringSheetUrlCVC": "https://docs.google.com/spreadsheets/d/1mNn-47yo6WEc3PGD6kE7-0omhY6zkJJAAPmIzchdJ8k/edit?usp=sharing&rm=minimal&single=true",
+  "scoringSheetUrlLY": "https://docs.google.com/spreadsheets/d/16SfA-RwbD3qolnMbuZsZx5mHOvoi2J3zTaqAZBg56XQ/edit??usp=sharing&rm=minimal&single=true",
+  "scoringSheetUrl": "https://docs.google.com/spreadsheets/d/16SfA-RwbD3qolnMbuZsZx5mHOvoi2J3zTaqAZBg56XQ/edit??usp=sharing&rm=minimal&single=true",
+  "resultsSheetUrlCVC": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsALUr6NQxjJR78sHU6p3_wvOqNEXbmbMOnJihGl6LJgpheNxTCSrwJ1mrhy6p54C6Bq0ezpScJv5X/pubhtml?widget=true&headers=false#gid=1731717600",
+  "resultsSheetUrlLY": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRa88RH7NcvjJ8ZXiWaYABeoAaLuYc3fjIWo4BIhQO3ZnxuK1LgxXuYHNCwL81wr82UMYY6YRq8geqY/pubhtml?gid=410617165&amp;single=true&amp;widget=true&amp;headers=false",
+  "resultsSheetUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRa88RH7NcvjJ8ZXiWaYABeoAaLuYc3fjIWo4BIhQO3ZnxuK1LgxXuYHNCwL81wr82UMYY6YRq8geqY/pubhtml?gid=410617165&amp;single=true&amp;widget=true&amp;headers=false"
 }
