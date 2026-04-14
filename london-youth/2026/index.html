@@ -56,7 +56,7 @@
     }
     .tab-label { display: none; }
     .tab button { font-size: 18px !important; }
-    #Tab6 iframe { width: 100% !important; height: 50% !important; display: block; }
+    #side-by-side iframe { width: 100% !important; height: 50% !important; display: block; }
   }
 
   /* Style the tab content */
@@ -187,21 +187,21 @@
   </div>
 
   <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Tab1')"><i class="bi bi-easel"></i><span class="tab-label"> Slides</span></button>
+    <button class="tablinks" onclick="openCity(event, 'slides')"><i class="bi bi-easel"></i><span class="tab-label"> Slides</span></button>
 
-    <button class="tablinks active" onclick="openCity(event, 'Tab3')"><i class="bi bi-table"></i><span class="tab-label"> Spreadsheet</span></button>
+    <button class="tablinks active" onclick="openCity(event, 'spreadsheet')"><i class="bi bi-table"></i><span class="tab-label"> Spreadsheet</span></button>
 
-    <button class="tablinks" onclick="openCity(event, 'Tab4')"><i class="bi bi-grid"></i><span class="tab-label"> Gallery</span></button>
+    <button class="tablinks" onclick="openCity(event, 'gallery')"><i class="bi bi-grid"></i><span class="tab-label"> Gallery</span></button>
 
-    <button class="tablinks" onclick="openCity(event, 'Tab5')"><i class="bi bi-pencil-square"></i><span class="tab-label"> Scoring</span></button>
+    <button class="tablinks" onclick="openCity(event, 'scoring')"><i class="bi bi-pencil-square"></i><span class="tab-label"> Scoring</span></button>
 
-    <button class="tablinks" onclick="openCity(event, 'Tab6')"><i class="bi bi-layout-split"></i><span class="tab-label"> Side-by-side</span></button>
+    <button class="tablinks" onclick="openCity(event, 'side-by-side')"><i class="bi bi-layout-split"></i><span class="tab-label"> Side-by-side</span></button>
 
-    <button class="tablinks" onclick="openCity(event, 'Tab7')"><i class="bi bi-trophy"></i><span class="tab-label"> Results</span></button>
+    <button class="tablinks" onclick="openCity(event, 'results')"><i class="bi bi-trophy"></i><span class="tab-label"> Results</span></button>
   </div>
 
-  <div id="Tab1" class="tabcontent" style="display: none">
-    <div id="loadingTab1" class="loading-overlay">
+  <div id="slides" class="tabcontent" style="display: none">
+    <div id="loading-slides" class="loading-overlay">
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
@@ -215,11 +215,11 @@
       mozallowfullscreen="true"
       webkitallowfullscreen="true"
       loading="lazy"
-      onload="document.getElementById('loadingTab1').style.display = 'none'"></iframe>
+      onload="document.getElementById('loading-slides').style.display = 'none'"></iframe>
   </div>
 
-  <div id="Tab2" class="tabcontent" style="display: none">
-    <div id="loadingTab2" class="loading-overlay">
+  <div id="attendees" class="tabcontent" style="display: none">
+    <div id="loading-attendees" class="loading-overlay">
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
@@ -231,11 +231,11 @@
       width="100%"
       height="100%"
       loading="lazy"
-      onload="document.getElementById('loadingTab2').style.display = 'none'"></iframe>
+      onload="document.getElementById('loading-attendees').style.display = 'none'"></iframe>
   </div>
 
-  <div id="Tab3" class="tabcontent">
-    <div id="loadingTab3" class="loading-overlay">
+  <div id="spreadsheet" class="tabcontent">
+    <div id="loading-spreadsheet" class="loading-overlay">
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
@@ -247,11 +247,11 @@
       width="100%"
       height="100%"
       loading="lazy"
-      onload="document.getElementById('loadingTab3').style.display = 'none'"></iframe>
+      onload="document.getElementById('loading-spreadsheet').style.display = 'none'"></iframe>
   </div>
 
-  <div id="Tab4" class="tabcontent" style="display: none">
-    <div id="loadingTab4" class="loading-overlay">
+  <div id="gallery" class="tabcontent" style="display: none">
+    <div id="loading-gallery" class="loading-overlay">
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
@@ -263,11 +263,11 @@
       width="100%"
       height="100%"
       loading="lazy"
-      onload="document.getElementById('loadingTab4').style.display = 'none'"></iframe>
+      onload="document.getElementById('loading-gallery').style.display = 'none'"></iframe>
   </div>
 
-  <div id="Tab5" class="tabcontent" style="display: none">
-    <div id="loadingTab5" class="loading-overlay">
+  <div id="scoring" class="tabcontent" style="display: none">
+    <div id="loading-scoring" class="loading-overlay">
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
@@ -276,11 +276,11 @@
       height="100%"
       src="https://docs.google.com/spreadsheets/d/1mNn-47yo6WEc3PGD6kE7-0omhY6zkJJAAPmIzchdJ8k/edit?usp=sharing?&amp;rm=minimal&amp;single=true&amp;"
       loading="lazy"
-      onload="document.getElementById('loadingTab5').style.display = 'none'"></iframe>
+      onload="document.getElementById('loading-scoring').style.display = 'none'"></iframe>
   </div>
 
-  <div id="Tab6" class="tabcontent" style="display: none">
-    <div id="loadingTab6" class="loading-overlay">
+  <div id="side-by-side" class="tabcontent" style="display: none">
+    <div id="loading-side-by-side" class="loading-overlay">
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
@@ -292,7 +292,7 @@
       width="33%"
       height="100%"
       loading="lazy"
-      onload="document.getElementById('loadingTab6').style.display = 'none'"></iframe>
+      onload="document.getElementById('loading-side-by-side').style.display = 'none'"></iframe>
     <iframe
       width="66%"
       height="100%"
@@ -300,8 +300,8 @@
       loading="lazy"></iframe>
   </div>
 
-  <div id="Tab7" class="tabcontent" style="display: none">
-    <div id="loadingTab7" class="loading-overlay">
+  <div id="results" class="tabcontent" style="display: none">
+    <div id="loading-results" class="loading-overlay">
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
@@ -311,7 +311,7 @@
       height="100%"
       src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRsALUr6NQxjJR78sHU6p3_wvOqNEXbmbMOnJihGl6LJgpheNxTCSrwJ1mrhy6p54C6Bq0ezpScJv5X/pubhtml?widget=true&amp;headers=false#gid=1731717600"
       loading="lazy"
-      onload="document.getElementById('loadingTab7').style.display = 'none'"></iframe>
+      onload="document.getElementById('loading-results').style.display = 'none'"></iframe>
   </div>
 </body>
 
@@ -319,13 +319,6 @@
   var tabConfig = {};
   var configPassword = '';
   var unlockedTabs = {};
-
-  fetch('config.json')
-    .then(function(r) { return r.json(); })
-    .then(function(config) {
-      tabConfig = config.tabs || {};
-      configPassword = config.password || '';
-    });
 
   function resizeContent() {
     var header = document.querySelector('.header');
@@ -338,7 +331,7 @@
     var iframes = document.querySelectorAll('.tabcontent iframe');
     for (var i = 0; i < iframes.length; i++) {
       // Don't override width on side-by-side tab iframes
-      if (!iframes[i].closest('#Tab6')) {
+      if (!iframes[i].closest('#side-by-side')) {
         iframes[i].style.width = '100%';
       }
       iframes[i].style.height = available + 'px';
@@ -413,11 +406,42 @@
       tablinks[i].className = tablinks[i].className.replace(' active', '')
     }
     document.getElementById(cityName).style.display = 'block'
-    evt.currentTarget.className += ' active'
+
+    // Set active button
+    if (evt) {
+      evt.currentTarget.className += ' active';
+    } else {
+      // Find the button for this tab and mark active
+      document.querySelectorAll('.tablinks').forEach(function(btn) {
+        if (btn.getAttribute('onclick').indexOf("'" + cityName + "'") !== -1) {
+          btn.className += ' active';
+        }
+      });
+    }
+
+    // Update URL hash
+    history.replaceState(null, null, '#' + cityName);
 
     // Show lock overlay if tab is locked
     if (tabConfig[cityName] && tabConfig[cityName].locked && !unlockedTabs[cityName]) {
       showLockOverlay(cityName);
     }
   }
+
+  // On page load, open tab from URL hash
+  function openTabFromHash() {
+    var hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById(hash)) {
+      openCity(null, hash);
+    }
+  }
+
+  // Run after config loads
+  fetch('config.json')
+    .then(function(r) { return r.json(); })
+    .then(function(config) {
+      tabConfig = config.tabs || {};
+      configPassword = config.password || '';
+    })
+    .then(openTabFromHash);
 </script>
