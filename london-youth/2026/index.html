@@ -65,21 +65,21 @@
   </div>
 
   <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Tab1')">Slides</button>
+    <!-- <button class="tablinks" onclick="openCity(event, 'Tab1')">Slides</button> -->
 
     <!-- <button class="tablinks" onclick="openCity(event, 'Tab2')">
       Attendees
     </button> -->
 
-    <button class="tablinks" onclick="openCity(event, 'Tab3')">Spreadsheet view</button>
+    <button class="tablinks active" onclick="openCity(event, 'Tab3')">Spreadsheet view</button>
 
     <button class="tablinks" onclick="openCity(event, 'Tab4')">Gallery view</button>
 
-    <button class="tablinks" onclick="openCity(event, 'Tab5')">Scoring view</button>
+    <!-- <button class="tablinks" onclick="openCity(event, 'Tab5')">Scoring view</button> -->
 
-    <button class="tablinks active" onclick="openCity(event, 'Tab6')">Side-by-side view</button>
+    <!-- <button class="tablinks active" onclick="openCity(event, 'Tab6')">Side-by-side view</button> -->
 
-    <button class="tablinks" onclick="openCity(event, 'Tab7')">Results view</button>
+    <!-- <button class="tablinks" onclick="openCity(event, 'Tab7')">Results view</button> -->
   </div>
 
   <div id="Tab1" class="tabcontent" style="display: none">
@@ -128,7 +128,7 @@
       onload="document.getElementById('loadingTab2').style.display = 'none'"></iframe>
   </div>
 
-  <div id="Tab3" class="tabcontent" style="display: none">
+  <div id="Tab3" class="tabcontent">
     <div id="loadingTab3" style="height: 100%; vertical-align: middle; background-color: white">
       <img
         src="../../assets/img/loading.gif"
@@ -191,7 +191,7 @@
       onload="document.getElementById('loadingTab5').style.display = 'none'"></iframe>
   </div>
 
-  <div id="Tab6" class="tabcontent">
+  <div id="Tab6" class="tabcontent" style="display: none">
     <div id="loadingTab6" style="height: 100%; vertical-align: middle; background-color: white">
       <img
         src="../../assets/img/loading.gif"
