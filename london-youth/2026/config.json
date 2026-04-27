@@ -1,11 +1,11 @@
 {
   "tabs": {
-    "slides": { "locked": true },
+    "slides": { "locked": false },
     "spreadsheet": { "locked": false },
     "gallery": { "locked": false },
-    "scoring": { "locked": true },
-    "side-by-side": { "locked": true },
-    "results": { "locked": true }
+    "scoring": { "locked": false },
+    "side-by-side": { "locked": false },
+    "results": { "locked": false }
   },
   "password": "cvc",
   "scoringSheetUrlCVC": "https://docs.google.com/spreadsheets/d/1mNn-47yo6WEc3PGD6kE7-0omhY6zkJJAAPmIzchdJ8k/edit?usp=sharing&rm=minimal&single=true",
