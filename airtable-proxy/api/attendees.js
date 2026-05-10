@@ -2,6 +2,7 @@ const BASE_ID = 'app6FvPARDKaDRKwu';
 const TABLE_ID = 'tbl3IO57DDarIXouQ';
 const GALLERY_VIEW_ID = 'viw0TqpGfrxD8bM2K';
 const ORG_FIELD_NAME = 'Organisation';
+const TYPE_FIELD_NAME = 'Attendee Type';
 
 const FIELD_WHITELIST = [
   'Name',
@@ -9,6 +10,7 @@ const FIELD_WHITELIST = [
   'Email',
   'Job Title',
   'Organisation',
+  'Attendee Type',
   'URL',
   'Attendance Status',
 ];
@@ -43,6 +45,7 @@ function shape(rec) {
     email: f['Email'] || '',
     jobTitle: f['Job Title'] || '',
     organisation: f['Organisation'] || [],
+    attendeeType: f['Attendee Type'] || '',
     url: f['URL'] || '',
     attending: !!f['Attendance Status'],
   };
@@ -64,6 +67,7 @@ export default async function handler(req, res) {
   const records = [];
   let offset;
   let orgs = [];
+  let types = [];
 
   try {
     const recordsPromise = (async () => {
@@ -89,9 +93,13 @@ export default async function handler(req, res) {
       if (!r.ok) return; // non-fatal — frontend can fall back to alphabetical
       const data = await r.json();
       const table = (data.tables || []).find((t) => t.id === TABLE_ID);
-      const field = table && (table.fields || []).find((f) => f.name === ORG_FIELD_NAME);
-      const choices = field && field.options && field.options.choices;
-      if (choices) orgs = choices.map((c) => c.name);
+      if (!table) return;
+      const orgField = (table.fields || []).find((f) => f.name === ORG_FIELD_NAME);
+      const orgChoices = orgField && orgField.options && orgField.options.choices;
+      if (orgChoices) orgs = orgChoices.map((c) => c.name);
+      const typeField = (table.fields || []).find((f) => f.name === TYPE_FIELD_NAME);
+      const typeChoices = typeField && typeField.options && typeField.options.choices;
+      if (typeChoices) types = typeChoices.map((c) => c.name);
     })();
 
     await Promise.all([recordsPromise, schemaPromise]);
@@ -100,5 +108,5 @@ export default async function handler(req, res) {
   }
 
   res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300');
-  res.json({ count: records.length, orgs, attendees: records.map(shape) });
+  res.json({ count: records.length, orgs, types, attendees: records.map(shape) });
 }

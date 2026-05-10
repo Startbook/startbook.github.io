@@ -623,6 +623,7 @@
     </div>
     <div id="attendees-error" class="pitch-error" style="display: none"></div>
     <div id="attendees-content" class="attendees-content" style="display: none">
+      <div id="attendees-type-filters" class="attendees-filters"></div>
       <div id="attendees-filters" class="attendees-filters"></div>
       <div id="attendees-grid" class="attendees-grid"></div>
     </div>
@@ -948,7 +949,7 @@
         attendeesLoaded = true;
         document.getElementById('loading-attendees').style.display = 'none';
         document.getElementById('attendees-content').style.display = 'block';
-        attendeesRender(list, data.orgs || []);
+        attendeesRender(list, data.orgs || [], data.types || []);
       })
       .catch(function(err) {
         attendeesShowError('Failed to load attendees: ' + err.message);
@@ -979,6 +980,7 @@
   }
 
   var attendeesActiveFilter = 'all';
+  var attendeesActiveTypeFilter = 'all';
   var attendeesFeaturedId = null;
 
   function attendeesReorder() {
@@ -1070,11 +1072,16 @@
     var cards = document.querySelectorAll('#attendees-grid .attendee-card');
     cards.forEach(function(card) {
       var orgs = (card.getAttribute('data-orgs') || '').split('|').filter(Boolean);
-      var match = attendeesActiveFilter === 'all' || orgs.indexOf(attendeesActiveFilter) !== -1;
-      card.classList.toggle('hidden', !match);
+      var type = card.getAttribute('data-type') || '';
+      var orgMatch = attendeesActiveFilter === 'all' || orgs.indexOf(attendeesActiveFilter) !== -1;
+      var typeMatch = attendeesActiveTypeFilter === 'all' || type === attendeesActiveTypeFilter;
+      card.classList.toggle('hidden', !(orgMatch && typeMatch));
     });
-    document.querySelectorAll('.attendees-filter-btn').forEach(function(btn) {
+    document.querySelectorAll('#attendees-filters .attendees-filter-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.getAttribute('data-org') === attendeesActiveFilter);
+    });
+    document.querySelectorAll('#attendees-type-filters .attendees-filter-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-type') === attendeesActiveTypeFilter);
     });
     if (attendeesFeaturedId) {
       var f = document.querySelector('#attendees-grid .attendee-card[data-id="' + attendeesFeaturedId + '"]');
@@ -1093,6 +1100,40 @@
     } else {
       attendeesApplyFilterRaw();
     }
+  }
+
+  function attendeesBuildTypeFilters(list, typeOrder) {
+    var counts = {};
+    list.forEach(function(a) {
+      if (a.attendeeType) counts[a.attendeeType] = (counts[a.attendeeType] || 0) + 1;
+    });
+    var types;
+    if (typeOrder && typeOrder.length) {
+      types = typeOrder.filter(function(t) { return counts[t]; });
+      Object.keys(counts).forEach(function(t) {
+        if (types.indexOf(t) === -1) types.push(t);
+      });
+    } else {
+      types = Object.keys(counts).sort();
+    }
+    var bar = document.getElementById('attendees-type-filters');
+    bar.innerHTML = '';
+    if (!types.length) return;
+
+    function makeBtn(label, key, count) {
+      var b = document.createElement('button');
+      b.className = 'attendees-filter-btn' + (key === attendeesActiveTypeFilter ? ' active' : '');
+      b.setAttribute('data-type', key);
+      b.innerHTML = label + ' <span class="attendees-filter-count">' + count + '</span>';
+      b.addEventListener('click', function() {
+        attendeesActiveTypeFilter = key;
+        attendeesApplyFilter();
+      });
+      return b;
+    }
+
+    bar.appendChild(makeBtn('All', 'all', list.length));
+    types.forEach(function(t) { bar.appendChild(makeBtn(t, t, counts[t])); });
   }
 
   function attendeesBuildFilters(list, orgOrder) {
@@ -1128,7 +1169,8 @@
     orgs.forEach(function(o) { bar.appendChild(makeBtn(o, o, counts[o])); });
   }
 
-  function attendeesRender(list, orgOrder) {
+  function attendeesRender(list, orgOrder, typeOrder) {
+    attendeesBuildTypeFilters(list, typeOrder);
     attendeesBuildFilters(list, orgOrder);
     var grid = document.getElementById('attendees-grid');
     grid.innerHTML = '';
@@ -1136,6 +1178,7 @@
       var card = document.createElement('div');
       card.className = 'attendee-card' + (a.attending ? '' : ' absent');
       card.setAttribute('data-orgs', (a.organisation || []).join('|'));
+      card.setAttribute('data-type', a.attendeeType || '');
       card.setAttribute('data-id', a.id);
       card.style.viewTransitionName = 'attendee-' + a.id;
       card.addEventListener('click', function(e) {
