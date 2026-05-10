@@ -1,1703 +1,2026 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Startbook - Summer Skills Grants 2026</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Startbook - Summer Skills Grants 2026</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet" />
+  </head>
 
-<style>
-  body {
-    font-family: Helvetica, Arial, sans-serif;
-  }
-
-  /* Style the tab */
-  .tab {
-    display: flex;
-    border: none;
-    background-color: #202023;
-  }
-
-  /* Style the buttons inside the tab */
-  .tab button {
-    background-color: inherit;
-    flex: 1;
-    border: 2px black solid;
-    border-top: 2px black solid;
-    outline: none;
-    cursor: pointer;
-    padding: 10px 10px;
-    transition: 0.3s;
-    font-size: 20px;
-    color: #efefef;
-  }
-
-  /* Change background color of buttons on hover */
-  .tab button:hover {
-    background-color: #00c6db;
-    color: 'white';
-  }
-
-  /* Create an active/current tablink class */
-  .tab button.active {
-    background-color: #482961;
-    color: 'white';
-    border: 2px white solid;
-    /* font-weight: bold; */
-  }
-
-  @media only screen and (max-width: 600px) {
-    .mobile-header {
-      text-align: center !important;
-      font-size: 10px !important;
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
     }
-    .mobile-header-text {
-      text-align: center !important;
-      font-size: 18px !important;
+
+    /* Style the tab */
+    .tab {
+      display: flex;
+      border: none;
+      background-color: #202023;
     }
-    .tab-label { display: none; }
-    .tab button { font-size: 18px !important; }
-    #side-by-side iframe { width: 100% !important; height: 50% !important; display: block; }
-  }
-
-  /* Style the tab content */
-  .tabcontent {
-    padding: 0;
-    border-top: none;
-    position: relative;
-  }
-
-  .tabcontent .loading-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    bottom: 0;
-    background-color: #202023;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .tabcontent .loading-overlay p {
-    color: #ccc;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-
-  .lock-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #202023;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-  }
-
-  .lock-box {
-    text-align: center;
-    color: white;
-    padding: 40px;
-    max-width: 400px;
-  }
-
-  .lock-box i {
-    font-size: 48px;
-    color: #888;
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  .lock-box h2 {
-    margin: 0 0 8px 0;
-    font-size: 22px;
-    font-weight: 600;
-  }
-
-  .lock-box p {
-    margin: 0 0 20px 0;
-    color: #aaa;
-    font-size: 14px;
-  }
-
-  .lock-box input {
-    padding: 10px 14px;
-    font-size: 16px;
-    border: 2px solid #555;
-    border-radius: 6px;
-    background: #2a2a2d;
-    color: white;
-    outline: none;
-    width: 200px;
-    max-width: 80vw;
-    text-align: center;
-    display: block;
-    margin: 0 auto 12px auto;
-  }
-
-  .lock-box input:focus {
-    border-color: #482961;
-  }
-
-  .lock-box button {
-    padding: 10px 30px;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    background: #482961;
-    color: white;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
-  }
-
-  .lock-box button:hover {
-    background: #5a3580;
-  }
-
-  .lock-box .error-msg {
-    color: #ff6b6b;
-    font-size: 13px;
-    margin-top: 12px;
-    min-height: 20px;
-  }
-
-  #side-by-side {
-    flex-direction: row;
-    overflow: hidden;
-  }
-
-  #side-by-side > iframe {
-    min-width: 0;
-    height: 100%;
-    border: 0;
-  }
-
-  .split-divider {
-    flex: 0 0 6px;
-    background: #482961;
-    cursor: col-resize;
-    position: relative;
-    z-index: 5;
-  }
-
-  .split-divider:hover,
-  .split-divider.dragging {
-    background: #5a3580;
-  }
-
-  body.split-dragging,
-  body.split-dragging * {
-    cursor: col-resize !important;
-    user-select: none;
-  }
-
-  body.split-dragging iframe {
-    pointer-events: none;
-  }
-
-  #pitch.tabcontent {
-    background: #fff;
-    color: #202023;
-    overflow: hidden;
-  }
-
-  .pitch-layout {
-    display: flex;
-    height: 100%;
-    width: 100%;
-  }
-
-  .pitch-card {
-    flex: 0 0 40%;
-    padding: 40px 50px;
-    overflow-y: auto;
-    border-right: 1px solid #e0e0e0;
-    box-sizing: border-box;
-  }
-
-  .pitch-logo-wrap {
-    height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    background: #fafafa;
-    border-radius: 8px;
-  }
-
-  .pitch-logo-wrap img {
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .pitch-name {
-    margin: 0 0 4px 0;
-    font-size: clamp(28px, 3vw, 40px);
-    font-weight: 700;
-  }
-
-  .pitch-borough {
-    color: #666;
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
-
-  .pitch-stat {
-    margin-bottom: 22px;
-  }
-
-  .pitch-stat-label {
-    display: block;
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
-
-  .pitch-stat-value {
-    display: block;
-    font-size: 22px;
-    font-weight: 600;
-  }
-
-  .pitch-age-pill {
-    display: inline-block;
-    background: #e8e3f3;
-    color: #482961;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 16px;
-    font-weight: 500;
-    margin-right: 6px;
-  }
-
-  .pitch-timer-pane {
-    flex: 1 1 auto;
-    background: #202023;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    box-sizing: border-box;
-  }
-
-  .pitch-counter {
-    color: #aaa;
-    font-size: 20px;
-    margin-bottom: 30px;
-    letter-spacing: 0.05em;
-  }
-
-  .pitch-timer {
-    font-family: 'SF Mono', Menlo, Consolas, monospace;
-    font-size: clamp(80px, 14vw, 200px);
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 10px;
-    font-variant-numeric: tabular-nums;
-    transition: color 0.2s ease;
-  }
-
-  .pitch-timer.over {
-    color: #ff6b6b;
-  }
-
-  .pitch-timer-label {
-    color: #888;
-    font-size: 16px;
-    margin-bottom: 50px;
-    min-height: 20px;
-  }
-
-  .pitch-controls {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .pitch-controls button {
-    background: #482961;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background 0.15s ease;
-  }
-
-  .pitch-controls button:hover {
-    background: #5a3580;
-  }
-
-  .pitch-controls button.secondary {
-    background: transparent;
-    border: 1px solid #555;
-  }
-
-  .pitch-controls button.secondary:hover {
-    background: #333;
-  }
-
-  .pitch-hint {
-    margin-top: 24px;
-    color: #666;
-    font-size: 13px;
-    text-align: center;
-  }
-
-  .pitch-error {
-    padding: 60px;
-    text-align: center;
-    color: #c00;
-    font-size: 16px;
-  }
-
-  #scoring.tabcontent {
-    background: #f5f5f7;
-    position: relative;
-  }
-
-  .scoring-picker {
-    position: absolute;
-    inset: 0;
-    background: #f5f5f7;
-    z-index: 8;
-    overflow-y: auto;
-    padding: 40px;
-    box-sizing: border-box;
-  }
-
-  .scoring-picker-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .scoring-picker h2 {
-    margin: 0 0 4px 0;
-    font-size: 24px;
-    color: #202023;
-  }
-
-  .scoring-picker p {
-    margin: 0 0 28px 0;
-    color: #666;
-  }
-
-  .scoring-picker-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 16px;
-  }
-
-  .scoring-picker-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid transparent;
-  }
-
-  .scoring-picker-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    border-color: #482961;
-  }
-
-  .scoring-picker-card img,
-  .scoring-picker-card .placeholder {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 12px;
-  }
-
-  .scoring-picker-card .placeholder {
-    background: #482961;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 28px;
-  }
-
-  .scoring-picker-card .picker-name {
-    font-weight: 600;
-    font-size: 15px;
-    color: #202023;
-  }
-
-  .scoring-picker-card .picker-org {
-    color: #666;
-    font-size: 12px;
-    margin-top: 4px;
-  }
-
-  .scoring-bar {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    z-index: 6;
-    background: rgba(255,255,255,0.95);
-    border-radius: 999px;
-    padding: 6px 10px 6px 14px;
-    font-size: 13px;
-    color: #202023;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .scoring-switch-btn {
-    background: #482961;
-    color: white;
-    border: none;
-    padding: 4px 12px;
-    font-size: 12px;
-    border-radius: 999px;
-    cursor: pointer;
-  }
-
-  .scoring-switch-btn:hover {
-    background: #5a3580;
-  }
-
-  #attendees.tabcontent {
-    background: #f5f5f7;
-    color: #202023;
-    overflow-y: auto;
-  }
-
-  .attendees-content {
-    padding: 30px;
-    --attendee-scale: 1;
-  }
-
-  .attendees-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
-    align-items: center;
-  }
-
-  .attendees-filter-btn {
-    background: white;
-    border: 1px solid #d1d5db;
-    color: #374151;
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .attendees-filter-btn:hover {
-    border-color: #482961;
-    color: #482961;
-  }
-
-  .attendees-filter-btn.active {
-    background: #482961;
-    border-color: #482961;
-    color: white;
-  }
-
-  .attendees-filter-count {
-    color: #9ca3af;
-    font-size: 12px;
-    margin-left: 4px;
-  }
-
-  .attendees-filter-btn.active .attendees-filter-count {
-    color: rgba(255,255,255,0.7);
-  }
-
-  .attendee-card.hidden {
-    display: none;
-  }
-
-  ::view-transition-group(*) {
-    animation-duration: 320ms;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
-
-  .attendees-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
-    gap: calc(24px * var(--attendee-scale, 1));
-    justify-content: center;
-    align-content: start;
-  }
-
-  .attendee-card {
-    --card-multiplier: 1;
-    background: white;
-    border-radius: 12px;
-    padding: calc(28px * var(--attendee-scale, 1) * var(--card-multiplier, 1)) calc(20px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    transition: box-shadow 0.15s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .attendee-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  .attendee-card.absent {
-    opacity: 0.45;
-  }
-
-  .attendee-card {
-    cursor: pointer;
-  }
-
-  .attendee-card.featured {
-    order: -1;
-    background: linear-gradient(135deg, #ffffff 0%, #f5f0fa 100%);
-    box-shadow: 0 10px 32px rgba(72, 41, 97, 0.28);
-    border: 2px solid #482961;
-  }
-
-  .attendee-card.featured.featured-spans {
-    grid-column: span 2;
-    grid-row: span 2;
-    --card-multiplier: 2;
-    justify-content: center;
-    width: var(--featured-w, auto);
-    height: var(--featured-h, auto);
-    box-sizing: border-box;
-  }
-
-  .attendee-photo {
-    width: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    height: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    border-radius: 50%;
-    object-fit: cover;
-    background: #ddd;
-    margin-bottom: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-  }
-
-  .attendee-photo-placeholder {
-    width: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    height: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    border-radius: 50%;
-    background: #482961;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(48px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    font-weight: 600;
-    margin-bottom: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-  }
-
-  .attendee-name {
-    font-size: calc(19px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    font-weight: 600;
-    margin: 0 0 calc(6px * var(--attendee-scale, 1) * var(--card-multiplier, 1)) 0;
-  }
-
-  .attendee-job {
-    color: #666;
-    font-size: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    margin-bottom: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    min-height: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-  }
-
-  .attendee-orgs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: calc(4px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    justify-content: center;
-    margin-bottom: calc(12px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-  }
-
-  .attendee-org-pill {
-    font-size: calc(10px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    font-weight: 600;
-    padding: calc(2px * var(--attendee-scale, 1) * var(--card-multiplier, 1)) calc(8px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    border-radius: 999px;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-
-  .attendee-org-CVC { background: #1e3a8a; color: white; }
-  .attendee-org-Infosys { background: #67e8f9; color: #134e5e; }
-  .attendee-org-LondonYouth { background: #5b21b6; color: white; }
-  .attendee-org-LSEGFoundation { background: #0ea5e9; color: white; }
-  .attendee-org-RDAS { background: #dc2626; color: white; }
-  .attendee-org-Startbook { background: #fbcfe8; color: #831843; }
-  .attendee-org-default { background: #e5e7eb; color: #374151; }
-
-  .attendee-links {
-    display: flex;
-    gap: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    justify-content: center;
-    margin-top: auto;
-    padding-top: calc(6px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-  }
-
-  .attendee-links a {
-    color: #666;
-    font-size: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  .attendee-links a:hover {
-    color: #482961;
-  }
-</style>
-
-<body style="margin: 0; height: 100%; width: 100%; background-color: black">
-  <div class="header" style="background-color: #482961; padding: 8px 15px; text-align: center; color: white;">
-    <h1 style="margin: 5px 0 0 0; font-size: clamp(20px, 3vw, 32px); font-weight: 600;" class="mobile-header-text">
-      <img
-        src="../../london-youth-summer-skills-grants/assets/img/london-youth-logo.png"
-        height="30px"
-        style="display: inline-block; margin: 0 10px; vertical-align: middle;"
-        alt="London Youth" />
-      Summer Skills Grants
-    </h1>
-    <div style="margin: 0 auto 8px auto; text-align: center; display: flex; align-items: center; justify-content: center; gap: 25px;">
-      <span style="font-size: clamp(10px, 1.5vw, 16px); font-weight: normal; font-style: italic; color: white;">Powered by</span>
-      <img src="../../assets/img/clients/cvc-logo-white-rectangle.png" height="32px" alt="CVC" />
-      <img src="../../london-youth-summer-skills-grants/assets/img/infosys-logo.png" height="32px" alt="Infosys" />
-      <img src="../../london-youth-summer-skills-grants/assets/img/lseg-logo.png" height="32px" alt="LSEG Foundation" />
-    </div>
-  </div>
-
-  <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'slides')"><i class="bi bi-easel"></i><span class="tab-label"> Slides</span></button>
-
-    <button class="tablinks" onclick="openCity(event, 'attendees')"><i class="bi bi-people"></i><span class="tab-label"> Attendees</span></button>
-
-    <button class="tablinks" onclick="openCity(event, 'pitch')"><i class="bi bi-stopwatch"></i><span class="tab-label"> Pitch</span></button>
-
-    <button class="tablinks" onclick="openCity(event, 'spreadsheet')"><i class="bi bi-table"></i><span class="tab-label"> Spreadsheet</span></button>
-
-    <button class="tablinks" onclick="openCity(event, 'gallery')"><i class="bi bi-grid"></i><span class="tab-label"> Gallery</span></button>
-
-    <button class="tablinks" onclick="openCity(event, 'scoring')"><i class="bi bi-pencil-square"></i><span class="tab-label"> Scoring</span></button>
-
-    <button class="tablinks" onclick="openCity(event, 'side-by-side')"><i class="bi bi-layout-split"></i><span class="tab-label"> Side-by-side</span></button>
-
-    <button class="tablinks" onclick="openCity(event, 'results')"><i class="bi bi-trophy"></i><span class="tab-label"> Results</span></button>
-  </div>
-
-  <div id="slides" class="tabcontent" style="display: none">
-    <div id="loading-slides" class="loading-overlay">
-      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
-      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
-    </div>
-    <iframe
-      src="https://docs.google.com/presentation/d/e/2PACX-1vQwRMN64Le2qPqYpBNhUz6dQqyohoxeaAFmyg2OZ4uJwzs0phUHzN7RkZwss4-uOkF5UkJ5OEUIvXHx/pubembed?start=false&loop=false&delayms=60000"
-      frameborder="0"
-      width="1440"
-      height="839"
-      style="display: block; margin: auto"
-      allowfullscreen="true"
-      mozallowfullscreen="true"
-      webkitallowfullscreen="true"
-      loading="lazy"
-      onload="document.getElementById('loading-slides').style.display = 'none'"></iframe>
-  </div>
-
-  <div id="attendees" class="tabcontent" style="display: none">
-    <div id="loading-attendees" class="loading-overlay">
-      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
-      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
-    </div>
-    <div id="attendees-error" class="pitch-error" style="display: none"></div>
-    <div id="attendees-content" class="attendees-content" style="display: none">
-      <div id="attendees-type-filters" class="attendees-filters"></div>
-      <div id="attendees-grid" class="attendees-grid"></div>
-    </div>
-  </div>
-
-  <div id="spreadsheet" class="tabcontent" style="display: none">
-    <div id="loading-spreadsheet" class="loading-overlay">
-      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
-      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
-    </div>
-    <iframe
-      class="airtable-embed"
-      src="https://airtable.com/embed/app6FvPARDKaDRKwu/shrx6AFbG5EOjOnNy?viewControls=on"
-      frameborder="0"
-      onmousewheel=""
-      width="100%"
-      height="100%"
-      loading="lazy"
-      onload="document.getElementById('loading-spreadsheet').style.display = 'none'"></iframe>
-  </div>
-
-  <div id="gallery" class="tabcontent" style="display: none">
-    <div id="loading-gallery" class="loading-overlay">
-      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
-      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
-    </div>
-    <iframe
-      class="airtable-embed"
-      src="https://airtable.com/embed/app6FvPARDKaDRKwu/shryveBBqgtRVj588/tblon7jDpWeYpLNE3?viewControls=on"
-      frameborder="0"
-      onmousewheel=""
-      width="100%"
-      height="100%"
-      loading="lazy"
-      onload="document.getElementById('loading-gallery').style.display = 'none'"></iframe>
-  </div>
-
-  <div id="scoring" class="tabcontent" style="display: none">
-    <div id="loading-scoring" class="loading-overlay">
-      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
-      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
-    </div>
-    <div id="scoring-picker" class="scoring-picker" style="display: none">
-      <div class="scoring-picker-inner">
-        <h2>Who are you?</h2>
-        <p>Pick your name to open your scoring sheet. We'll remember next time.</p>
-        <div id="scoring-picker-grid" class="scoring-picker-grid"></div>
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      background-color: inherit;
+      flex: 1;
+      border: 2px black solid;
+      border-top: 2px black solid;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 10px;
+      transition: 0.3s;
+      font-size: 20px;
+      color: #efefef;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #00c6db;
+      color: 'white';
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #482961;
+      color: 'white';
+      border: 2px white solid;
+      /* font-weight: bold; */
+    }
+
+    @media only screen and (max-width: 600px) {
+      .mobile-header {
+        text-align: center !important;
+        font-size: 10px !important;
+      }
+      .mobile-header-text {
+        text-align: center !important;
+        font-size: 18px !important;
+      }
+      .tab-label {
+        display: none;
+      }
+      .tab button {
+        font-size: 18px !important;
+      }
+      #side-by-side iframe {
+        width: 100% !important;
+        height: 50% !important;
+        display: block;
+      }
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      padding: 0;
+      border-top: none;
+      position: relative;
+    }
+
+    .tabcontent .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      background-color: #202023;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tabcontent .loading-overlay p {
+      color: #ccc;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .lock-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #202023;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .lock-box {
+      text-align: center;
+      color: white;
+      padding: 40px;
+      max-width: 400px;
+    }
+
+    .lock-box i {
+      font-size: 48px;
+      color: #888;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .lock-box h2 {
+      margin: 0 0 8px 0;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .lock-box p {
+      margin: 0 0 20px 0;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .lock-box input {
+      padding: 10px 14px;
+      font-size: 16px;
+      border: 2px solid #555;
+      border-radius: 6px;
+      background: #2a2a2d;
+      color: white;
+      outline: none;
+      width: 200px;
+      max-width: 80vw;
+      text-align: center;
+      display: block;
+      margin: 0 auto 12px auto;
+    }
+
+    .lock-box input:focus {
+      border-color: #482961;
+    }
+
+    .lock-box button {
+      padding: 10px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #482961;
+      color: white;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .lock-box button:hover {
+      background: #5a3580;
+    }
+
+    .lock-box .error-msg {
+      color: #ff6b6b;
+      font-size: 13px;
+      margin-top: 12px;
+      min-height: 20px;
+    }
+
+    #side-by-side {
+      flex-direction: row;
+      overflow: hidden;
+    }
+
+    #side-by-side > iframe {
+      min-width: 0;
+      height: 100%;
+      border: 0;
+    }
+
+    .split-divider {
+      flex: 0 0 6px;
+      background: #482961;
+      cursor: col-resize;
+      position: relative;
+      z-index: 5;
+    }
+
+    .split-divider:hover,
+    .split-divider.dragging {
+      background: #5a3580;
+    }
+
+    body.split-dragging,
+    body.split-dragging * {
+      cursor: col-resize !important;
+      user-select: none;
+    }
+
+    body.split-dragging iframe {
+      pointer-events: none;
+    }
+
+    #pitch.tabcontent {
+      background: #fff;
+      color: #202023;
+      overflow: hidden;
+    }
+
+    .pitch-layout {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+
+    .pitch-card {
+      flex: 0 0 40%;
+      padding: 40px 50px;
+      overflow-y: auto;
+      border-right: 1px solid #e0e0e0;
+      box-sizing: border-box;
+    }
+
+    .pitch-logo-wrap {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      background: #fafafa;
+      border-radius: 8px;
+    }
+
+    .pitch-logo-wrap img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .pitch-name {
+      margin: 0 0 4px 0;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700;
+    }
+
+    .pitch-borough {
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .pitch-stat {
+      margin-bottom: 22px;
+    }
+
+    .pitch-stat-label {
+      display: block;
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .pitch-stat-value {
+      display: block;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .pitch-age-pill {
+      display: inline-block;
+      background: #e8e3f3;
+      color: #482961;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 500;
+      margin-right: 6px;
+    }
+
+    .pitch-timer-pane {
+      flex: 1 1 auto;
+      background: #202023;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .pitch-counter {
+      color: #aaa;
+      font-size: 20px;
+      margin-bottom: 30px;
+      letter-spacing: 0.05em;
+    }
+
+    .pitch-timer {
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: clamp(80px, 14vw, 200px);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 10px;
+      font-variant-numeric: tabular-nums;
+      transition: color 0.2s ease;
+    }
+
+    .pitch-timer.over {
+      color: #ff6b6b;
+    }
+
+    .pitch-timer-label {
+      color: #888;
+      font-size: 16px;
+      margin-bottom: 50px;
+      min-height: 20px;
+    }
+
+    .pitch-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pitch-controls button {
+      background: #482961;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.15s ease;
+    }
+
+    .pitch-controls button:hover {
+      background: #5a3580;
+    }
+
+    .pitch-controls button.secondary {
+      background: transparent;
+      border: 1px solid #555;
+    }
+
+    .pitch-controls button.secondary:hover {
+      background: #333;
+    }
+
+    .pitch-hint {
+      margin-top: 24px;
+      color: #666;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .pitch-error {
+      padding: 60px;
+      text-align: center;
+      color: #c00;
+      font-size: 16px;
+    }
+
+    #scoring.tabcontent {
+      background: #f5f5f7;
+      position: relative;
+    }
+
+    .scoring-picker {
+      position: absolute;
+      inset: 0;
+      background: #f5f5f7;
+      z-index: 8;
+      overflow-y: auto;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .scoring-picker-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .scoring-picker h2 {
+      margin: 0 0 4px 0;
+      font-size: 24px;
+      color: #202023;
+    }
+
+    .scoring-picker p {
+      margin: 0 0 28px 0;
+      color: #666;
+    }
+
+    .scoring-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .scoring-picker-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid transparent;
+    }
+
+    .scoring-picker-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border-color: #482961;
+    }
+
+    .scoring-picker-card img,
+    .scoring-picker-card .placeholder {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+
+    .scoring-picker-card .placeholder {
+      background: #482961;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 28px;
+    }
+
+    .scoring-picker-card .picker-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: #202023;
+    }
+
+    .scoring-picker-card .picker-org {
+      color: #666;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .header-brand {
+      position: absolute;
+      top: 50%;
+      left: 44px;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      opacity: 0.9;
+      transition: opacity 0.15s ease;
+    }
+
+    .header-brand:hover {
+      opacity: 1;
+    }
+
+    .header-brand img {
+      height: 32px;
+      display: block;
+    }
+
+    .user-widget {
+      position: absolute;
+      top: 50%;
+      right: 44px;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.14);
+      padding: 4px 6px 4px 4px;
+      border-radius: 999px;
+      color: white;
+      font-size: 14px;
+      backdrop-filter: blur(6px);
+    }
+
+    .user-widget-photo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .user-widget-photo[src=''] {
+      display: none;
+    }
+
+    .user-widget-name-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .user-widget-name {
+      font-weight: 600;
+      color: white;
+      font-size: 15px;
+    }
+
+    .user-widget-sub {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .user-widget-logout {
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      font-weight: 500;
+    }
+
+    .user-widget-logout:hover {
+      background: rgba(255, 255, 255, 0.32);
+    }
+
+    .user-widget-logout i {
+      margin-right: 4px;
+    }
+
+    #attendees.tabcontent {
+      background: #f5f5f7;
+      color: #202023;
+      overflow-y: auto;
+    }
+
+    .attendees-content {
+      padding: 30px;
+      --attendee-scale: 1;
+    }
+
+    .attendees-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .attendees-filter-btn {
+      background: white;
+      border: 1px solid #d1d5db;
+      color: #374151;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .attendees-filter-btn:hover {
+      border-color: #482961;
+      color: #482961;
+    }
+
+    .attendees-filter-btn.active {
+      background: #482961;
+      border-color: #482961;
+      color: white;
+    }
+
+    .attendees-filter-count {
+      color: #9ca3af;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    .attendees-filter-btn.active .attendees-filter-count {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .attendee-card.hidden {
+      display: none;
+    }
+
+    ::view-transition-group(*) {
+      animation-duration: 320ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+    }
+
+    .attendees-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+      gap: calc(24px * var(--attendee-scale, 1));
+      justify-content: center;
+      align-content: start;
+    }
+
+    .attendee-card {
+      --card-multiplier: 1;
+      background: white;
+      border-radius: 12px;
+      padding: calc(28px * var(--attendee-scale, 1) * var(--card-multiplier, 1))
+        calc(20px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .attendee-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .attendee-card.absent {
+      opacity: 0.45;
+    }
+
+    .attendee-card {
+      cursor: pointer;
+    }
+
+    .attendee-card.featured {
+      order: -1;
+      background: linear-gradient(135deg, #ffffff 0%, #f5f0fa 100%);
+      box-shadow: 0 10px 32px rgba(72, 41, 97, 0.28);
+      border: 2px solid #482961;
+    }
+
+    .attendee-card.featured.featured-spans {
+      grid-column: span 2;
+      grid-row: span 2;
+      --card-multiplier: 2;
+      justify-content: center;
+      width: var(--featured-w, auto);
+      height: var(--featured-h, auto);
+      box-sizing: border-box;
+    }
+
+    .attendee-photo {
+      width: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      height: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      border-radius: 50%;
+      object-fit: cover;
+      background: #ddd;
+      margin-bottom: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    }
+
+    .attendee-photo-placeholder {
+      width: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      height: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      border-radius: 50%;
+      background: #482961;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(48px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      font-weight: 600;
+      margin-bottom: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    }
+
+    .attendee-name {
+      font-size: calc(19px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      font-weight: 600;
+      margin: 0 0 calc(6px * var(--attendee-scale, 1) * var(--card-multiplier, 1)) 0;
+    }
+
+    .attendee-job {
+      color: #666;
+      font-size: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      margin-bottom: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      min-height: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    }
+
+    .attendee-orgs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(4px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      justify-content: center;
+      margin-bottom: calc(12px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    }
+
+    .attendee-org-pill {
+      font-size: calc(10px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      font-weight: 600;
+      padding: calc(2px * var(--attendee-scale, 1) * var(--card-multiplier, 1))
+        calc(8px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .attendee-org-CVC {
+      background: #1e3a8a;
+      color: white;
+    }
+    .attendee-org-Infosys {
+      background: #67e8f9;
+      color: #134e5e;
+    }
+    .attendee-org-LondonYouth {
+      background: #5b21b6;
+      color: white;
+    }
+    .attendee-org-LSEGFoundation {
+      background: #0ea5e9;
+      color: white;
+    }
+    .attendee-org-RDAS {
+      background: #dc2626;
+      color: white;
+    }
+    .attendee-org-Startbook {
+      background: #fbcfe8;
+      color: #831843;
+    }
+    .attendee-org-default {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .attendee-links {
+      display: flex;
+      gap: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      justify-content: center;
+      margin-top: auto;
+      padding-top: calc(6px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    }
+
+    .attendee-links a {
+      color: #666;
+      font-size: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .attendee-links a:hover {
+      color: #482961;
+    }
+  </style>
+
+  <body style="margin: 0; height: 100%; width: 100%; background-color: black">
+    <div
+      class="header"
+      style="
+        background-color: #482961;
+        padding: 8px 15px;
+        text-align: center;
+        color: white;
+        position: relative;
+      ">
+      <a
+        href="https://startbook.app"
+        target="_blank"
+        rel="noopener"
+        class="header-brand"
+        title="Startbook">
+        <img src="../../assets/img/startbook-logo-word-white.png" alt="Startbook" />
+      </a>
+      <h1
+        style="margin: 5px 0 0 0; font-size: clamp(20px, 3vw, 32px); font-weight: 600"
+        class="mobile-header-text">
+        <img
+          src="../../london-youth-summer-skills-grants/assets/img/london-youth-logo.png"
+          height="30px"
+          style="display: inline-block; margin: 0 10px; vertical-align: middle"
+          alt="London Youth" />
+        Summer Skills Grants
+      </h1>
+      <div
+        style="
+          margin: 0 auto 8px auto;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 25px;
+        ">
+        <span
+          style="
+            font-size: clamp(10px, 1.5vw, 16px);
+            font-weight: normal;
+            font-style: italic;
+            color: white;
+          "
+          >Powered by</span
+        >
+        <img src="../../assets/img/clients/cvc-logo-white-rectangle.png" height="32px" alt="CVC" />
+        <img
+          src="../../london-youth-summer-skills-grants/assets/img/infosys-logo.png"
+          height="32px"
+          alt="Infosys" />
+        <img
+          src="../../london-youth-summer-skills-grants/assets/img/lseg-logo.png"
+          height="32px"
+          alt="LSEG Foundation" />
+      </div>
+      <div id="user-widget" class="user-widget" style="display: none">
+        <img id="user-widget-photo" class="user-widget-photo" alt="" />
+        <div class="user-widget-name-wrap">
+          <span id="user-widget-name" class="user-widget-name"></span>
+        </div>
+        <button id="user-widget-logout" class="user-widget-logout" title="Log out">
+          <i class="bi bi-box-arrow-right"></i> Log out
+        </button>
       </div>
     </div>
-    <div id="scoring-bar" class="scoring-bar" style="display: none">
-      <span id="scoring-bar-name"></span>
-      <button id="scoring-switch-btn" class="scoring-switch-btn">Switch judge</button>
-    </div>
-    <iframe
-      class="scoring-sheet-iframe"
-      width="100%"
-      height="100%"
-      loading="lazy"
-      onload="document.getElementById('loading-scoring').style.display = 'none'"></iframe>
-  </div>
 
-  <div id="side-by-side" class="tabcontent" style="display: none">
-    <div id="loading-side-by-side" class="loading-overlay">
-      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
-      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
-    </div>
-    <iframe
-      id="side-by-side-left"
-      class="airtable-embed"
-      src="https://airtable.com/embed/app6FvPARDKaDRKwu/shryveBBqgtRVj588/tblon7jDpWeYpLNE3?viewControls=on"
-      frameborder="0"
-      onmousewheel=""
-      style="flex: 0 0 33%"
-      height="100%"
-      loading="lazy"
-      onload="markSideBySideLoaded()"></iframe>
-    <div class="split-divider" id="side-by-side-divider" title="Drag to resize"></div>
-    <iframe
-      class="scoring-sheet-iframe"
-      style="flex: 1 1 auto"
-      height="100%"
-      loading="lazy"
-      onload="markSideBySideLoaded()"></iframe>
-  </div>
+    <div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'slides')">
+        <i class="bi bi-easel"></i><span class="tab-label"> Slides</span>
+      </button>
 
-  <div id="results" class="tabcontent" style="display: none">
-    <div id="loading-results" class="loading-overlay">
-      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
-      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
-    </div>
-    <!-- <p>Results will appear here once calculated.</p> -->
-    <iframe
-      class="results-sheet-iframe"
-      width="100%"
-      height="100%"
-      loading="lazy"
-      onload="document.getElementById('loading-results').style.display = 'none'"></iframe>
-  </div>
+      <button class="tablinks" onclick="openCity(event, 'attendees')">
+        <i class="bi bi-people"></i><span class="tab-label"> Attendees</span>
+      </button>
 
-  <div id="pitch" class="tabcontent" style="display: none">
-    <div id="loading-pitch" class="loading-overlay">
-      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
-      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
+      <button class="tablinks" onclick="openCity(event, 'pitch')">
+        <i class="bi bi-stopwatch"></i><span class="tab-label"> Pitch</span>
+      </button>
+
+      <button class="tablinks" onclick="openCity(event, 'spreadsheet')">
+        <i class="bi bi-table"></i><span class="tab-label"> Spreadsheet</span>
+      </button>
+
+      <button class="tablinks" onclick="openCity(event, 'gallery')">
+        <i class="bi bi-grid"></i><span class="tab-label"> Gallery</span>
+      </button>
+
+      <button class="tablinks" onclick="openCity(event, 'scoring')">
+        <i class="bi bi-pencil-square"></i><span class="tab-label"> Scoring</span>
+      </button>
+
+      <button class="tablinks" onclick="openCity(event, 'side-by-side')">
+        <i class="bi bi-layout-split"></i><span class="tab-label"> Side-by-side</span>
+      </button>
+
+      <button class="tablinks" onclick="openCity(event, 'results')">
+        <i class="bi bi-trophy"></i><span class="tab-label"> Results</span>
+      </button>
     </div>
-    <div id="pitch-error" class="pitch-error" style="display: none"></div>
-    <div id="pitch-content" class="pitch-layout" style="display: none">
-      <div class="pitch-card">
-        <div class="pitch-logo-wrap"><img id="pitch-logo" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" /></div>
-        <h2 id="pitch-name" class="pitch-name"></h2>
-        <div id="pitch-borough" class="pitch-borough"></div>
-        <div class="pitch-stat">
-          <span class="pitch-stat-label">No. of Young People Impacted</span>
-          <span id="pitch-young-people" class="pitch-stat-value"></span>
-        </div>
-        <div class="pitch-stat">
-          <span class="pitch-stat-label">Engagement (h per person)</span>
-          <span id="pitch-hours" class="pitch-stat-value"></span>
-        </div>
-        <div class="pitch-stat">
-          <span class="pitch-stat-label">Benefiting Age Ranges</span>
-          <span id="pitch-ages" class="pitch-stat-value"></span>
-        </div>
-        <div class="pitch-stat">
-          <span class="pitch-stat-label">Cost per Young Person</span>
-          <span id="pitch-cost" class="pitch-stat-value"></span>
-        </div>
+
+    <div id="slides" class="tabcontent" style="display: none">
+      <div id="loading-slides" class="loading-overlay">
+        <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+        <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
       </div>
-      <div class="pitch-timer-pane">
-        <div id="pitch-counter" class="pitch-counter">– / –</div>
-        <div id="pitch-timer" class="pitch-timer">1:40</div>
-        <div id="pitch-timer-label" class="pitch-timer-label"></div>
-        <div class="pitch-controls">
-          <button class="secondary" onclick="pitchPrev()"><i class="bi bi-chevron-left"></i> Prev</button>
-          <button onclick="pitchToggleTimer()" id="pitch-toggle-btn"><i class="bi bi-play-fill"></i> Start</button>
-          <button onclick="pitchNext()">Next <i class="bi bi-chevron-right"></i></button>
-          <button class="secondary" onclick="pitchReset()"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
-        </div>
-        <div class="pitch-hint">Space: start/pause · ←/→: prev/next · R: reset</div>
+      <iframe
+        src="https://docs.google.com/presentation/d/e/2PACX-1vQwRMN64Le2qPqYpBNhUz6dQqyohoxeaAFmyg2OZ4uJwzs0phUHzN7RkZwss4-uOkF5UkJ5OEUIvXHx/pubembed?start=false&loop=false&delayms=60000"
+        frameborder="0"
+        width="1440"
+        height="839"
+        style="display: block; margin: auto"
+        allowfullscreen="true"
+        mozallowfullscreen="true"
+        webkitallowfullscreen="true"
+        loading="lazy"
+        onload="document.getElementById('loading-slides').style.display = 'none'"></iframe>
+    </div>
+
+    <div id="attendees" class="tabcontent" style="display: none">
+      <div id="loading-attendees" class="loading-overlay">
+        <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+        <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
+      </div>
+      <div id="attendees-error" class="pitch-error" style="display: none"></div>
+      <div id="attendees-content" class="attendees-content" style="display: none">
+        <div id="attendees-type-filters" class="attendees-filters"></div>
+        <div id="attendees-grid" class="attendees-grid"></div>
       </div>
     </div>
-  </div>
 
-<script>
-  var tabConfig = {};
-  var configPassword = '';
-  var unlockedTabs = {};
+    <div id="spreadsheet" class="tabcontent" style="display: none">
+      <div id="loading-spreadsheet" class="loading-overlay">
+        <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+        <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
+      </div>
+      <iframe
+        class="airtable-embed"
+        src="https://airtable.com/embed/app6FvPARDKaDRKwu/shrx6AFbG5EOjOnNy?viewControls=on"
+        frameborder="0"
+        onmousewheel=""
+        width="100%"
+        height="100%"
+        loading="lazy"
+        onload="document.getElementById('loading-spreadsheet').style.display = 'none'"></iframe>
+    </div>
 
-  function resizeContent() {
-    var header = document.querySelector('.header');
-    var tab = document.querySelector('.tab');
-    var available = window.innerHeight - header.offsetHeight - tab.offsetHeight;
-    var contents = document.getElementsByClassName('tabcontent');
-    for (var i = 0; i < contents.length; i++) {
-      contents[i].style.height = available + 'px';
-    }
-    var iframes = document.querySelectorAll('.tabcontent iframe');
-    for (var i = 0; i < iframes.length; i++) {
-      // Don't override width on side-by-side tab iframes
-      if (!iframes[i].closest('#side-by-side')) {
-        iframes[i].style.width = '100%';
+    <div id="gallery" class="tabcontent" style="display: none">
+      <div id="loading-gallery" class="loading-overlay">
+        <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+        <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
+      </div>
+      <iframe
+        class="airtable-embed"
+        src="https://airtable.com/embed/app6FvPARDKaDRKwu/shryveBBqgtRVj588/tblon7jDpWeYpLNE3?viewControls=on"
+        frameborder="0"
+        onmousewheel=""
+        width="100%"
+        height="100%"
+        loading="lazy"
+        onload="document.getElementById('loading-gallery').style.display = 'none'"></iframe>
+    </div>
+
+    <div id="scoring" class="tabcontent" style="display: none">
+      <div id="loading-scoring" class="loading-overlay">
+        <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+        <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
+      </div>
+      <div id="scoring-picker" class="scoring-picker" style="display: none">
+        <div class="scoring-picker-inner">
+          <h2>Log in</h2>
+          <p>Pick your name to open your scoring sheet.</p>
+          <div id="scoring-picker-grid" class="scoring-picker-grid"></div>
+        </div>
+      </div>
+      <iframe
+        class="scoring-sheet-iframe"
+        width="100%"
+        height="100%"
+        loading="lazy"
+        onload="document.getElementById('loading-scoring').style.display = 'none'"></iframe>
+    </div>
+
+    <div id="side-by-side" class="tabcontent" style="display: none">
+      <div id="loading-side-by-side" class="loading-overlay">
+        <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+        <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
+      </div>
+      <iframe
+        id="side-by-side-left"
+        class="airtable-embed"
+        src="https://airtable.com/embed/app6FvPARDKaDRKwu/shryveBBqgtRVj588/tblon7jDpWeYpLNE3?viewControls=on"
+        frameborder="0"
+        onmousewheel=""
+        style="flex: 0 0 33%"
+        height="100%"
+        loading="lazy"
+        onload="markSideBySideLoaded()"></iframe>
+      <div class="split-divider" id="side-by-side-divider" title="Drag to resize"></div>
+      <iframe
+        class="scoring-sheet-iframe"
+        style="flex: 1 1 auto"
+        height="100%"
+        loading="lazy"
+        onload="markSideBySideLoaded()"></iframe>
+    </div>
+
+    <div id="results" class="tabcontent" style="display: none">
+      <div id="loading-results" class="loading-overlay">
+        <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+        <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
+      </div>
+      <!-- <p>Results will appear here once calculated.</p> -->
+      <iframe
+        class="results-sheet-iframe"
+        width="100%"
+        height="100%"
+        loading="lazy"
+        onload="document.getElementById('loading-results').style.display = 'none'"></iframe>
+    </div>
+
+    <div id="pitch" class="tabcontent" style="display: none">
+      <div id="loading-pitch" class="loading-overlay">
+        <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+        <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
+      </div>
+      <div id="pitch-error" class="pitch-error" style="display: none"></div>
+      <div id="pitch-content" class="pitch-layout" style="display: none">
+        <div class="pitch-card">
+          <div class="pitch-logo-wrap">
+            <img
+              id="pitch-logo"
+              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+              alt="" />
+          </div>
+          <h2 id="pitch-name" class="pitch-name"></h2>
+          <div id="pitch-borough" class="pitch-borough"></div>
+          <div class="pitch-stat">
+            <span class="pitch-stat-label">No. of Young People Impacted</span>
+            <span id="pitch-young-people" class="pitch-stat-value"></span>
+          </div>
+          <div class="pitch-stat">
+            <span class="pitch-stat-label">Engagement (h per person)</span>
+            <span id="pitch-hours" class="pitch-stat-value"></span>
+          </div>
+          <div class="pitch-stat">
+            <span class="pitch-stat-label">Benefiting Age Ranges</span>
+            <span id="pitch-ages" class="pitch-stat-value"></span>
+          </div>
+          <div class="pitch-stat">
+            <span class="pitch-stat-label">Cost per Young Person</span>
+            <span id="pitch-cost" class="pitch-stat-value"></span>
+          </div>
+        </div>
+        <div class="pitch-timer-pane">
+          <div id="pitch-counter" class="pitch-counter">– / –</div>
+          <div id="pitch-timer" class="pitch-timer">1:40</div>
+          <div id="pitch-timer-label" class="pitch-timer-label"></div>
+          <div class="pitch-controls">
+            <button class="secondary" onclick="pitchPrev()">
+              <i class="bi bi-chevron-left"></i> Prev
+            </button>
+            <button onclick="pitchToggleTimer()" id="pitch-toggle-btn">
+              <i class="bi bi-play-fill"></i> Start
+            </button>
+            <button onclick="pitchNext()">Next <i class="bi bi-chevron-right"></i></button>
+            <button class="secondary" onclick="pitchReset()">
+              <i class="bi bi-arrow-counterclockwise"></i> Reset
+            </button>
+          </div>
+          <div class="pitch-hint">Space: start/pause · ←/→: prev/next · R: reset</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var tabConfig = {}
+      var configPassword = ''
+      var unlockedTabs = {}
+
+      function resizeContent() {
+        var header = document.querySelector('.header')
+        var tab = document.querySelector('.tab')
+        var available = window.innerHeight - header.offsetHeight - tab.offsetHeight
+        var contents = document.getElementsByClassName('tabcontent')
+        for (var i = 0; i < contents.length; i++) {
+          contents[i].style.height = available + 'px'
+        }
+        var iframes = document.querySelectorAll('.tabcontent iframe')
+        for (var i = 0; i < iframes.length; i++) {
+          // Don't override width on side-by-side tab iframes
+          if (!iframes[i].closest('#side-by-side')) {
+            iframes[i].style.width = '100%'
+          }
+          iframes[i].style.height = available + 'px'
+        }
+        // Refocus password input if a lock overlay is visible
+        var activePw = document.querySelector(
+          '.lock-overlay:not([style*="display: none"]) input[type="password"]'
+        )
+        if (activePw) activePw.focus()
       }
-      iframes[i].style.height = available + 'px';
-    }
-    // Refocus password input if a lock overlay is visible
-    var activePw = document.querySelector('.lock-overlay:not([style*="display: none"]) input[type="password"]');
-    if (activePw) activePw.focus();
-  }
-  resizeContent();
-  window.addEventListener('load', resizeContent);
-  window.addEventListener('resize', function() { resizeContent(); attendeesLayout(); });
+      resizeContent()
+      window.addEventListener('load', resizeContent)
+      window.addEventListener('resize', function () {
+        resizeContent()
+        attendeesLayout()
+      })
 
-  var sideBySideLoaded = 0;
-  function markSideBySideLoaded() {
-    sideBySideLoaded++;
-    if (sideBySideLoaded >= 2) {
-      var el = document.getElementById('loading-side-by-side');
-      if (el) el.style.display = 'none';
-    }
-  }
-
-  (function setupSplitDivider() {
-    var divider = document.getElementById('side-by-side-divider');
-    var container = document.getElementById('side-by-side');
-    var left = document.getElementById('side-by-side-left');
-    if (!divider || !container || !left) return;
-
-    function startDrag(startX) {
-      var rect = container.getBoundingClientRect();
-      document.body.classList.add('split-dragging');
-      divider.classList.add('dragging');
-
-      function onMove(clientX) {
-        var pct = ((clientX - rect.left) / rect.width) * 100;
-        if (pct < 5) pct = 5;
-        if (pct > 95) pct = 95;
-        left.style.flex = '0 0 ' + pct + '%';
-      }
-
-      function onMouseMove(e) { onMove(e.clientX); }
-      function onTouchMove(e) {
-        if (e.touches.length) { onMove(e.touches[0].clientX); e.preventDefault(); }
-      }
-      function stop() {
-        document.body.classList.remove('split-dragging');
-        divider.classList.remove('dragging');
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', stop);
-        document.removeEventListener('touchmove', onTouchMove);
-        document.removeEventListener('touchend', stop);
-      }
-
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', stop);
-      document.addEventListener('touchmove', onTouchMove, { passive: false });
-      document.addEventListener('touchend', stop);
-    }
-
-    divider.addEventListener('mousedown', function(e) { e.preventDefault(); startDrag(e.clientX); });
-    divider.addEventListener('touchstart', function(e) {
-      if (e.touches.length) { e.preventDefault(); startDrag(e.touches[0].clientX); }
-    }, { passive: false });
-  })();
-
-  // Prevent iframes from stealing focus when lock overlay is showing
-  window.addEventListener('blur', function() {
-    var activePw = document.querySelector('.lock-overlay input[type="password"]');
-    if (activePw && activePw.closest('.tabcontent').style.display !== 'none') {
-      setTimeout(function() { activePw.focus(); }, 0);
-    }
-  });
-
-  function showLockOverlay(tabId) {
-    // Remove any existing overlay
-    var existing = document.getElementById('lock-' + tabId);
-    if (existing) { existing.remove(); }
-
-    var tabEl = document.getElementById(tabId);
-    var overlay = document.createElement('div');
-    overlay.className = 'lock-overlay';
-    overlay.id = 'lock-' + tabId;
-    overlay.innerHTML =
-      '<div class="lock-box">' +
-        '<i class="bi bi-lock-fill"></i>' +
-        '<h2>This tab is locked</h2>' +
-        '<p>Enter the password to view this content</p>' +
-        '<div>' +
-          '<input type="password" id="pw-' + tabId + '" placeholder="Password" onkeydown="if(event.key===\'Enter\')unlockTab(\'' + tabId + '\')" />' +
-          '<button onclick="unlockTab(\'' + tabId + '\')">Unlock</button>' +
-        '</div>' +
-        '<div class="error-msg" id="err-' + tabId + '"></div>' +
-      '</div>';
-    tabEl.appendChild(overlay);
-    setTimeout(function() { document.getElementById('pw-' + tabId).focus(); }, 50);
-  }
-
-  function unlockTab(tabId) {
-    var input = document.getElementById('pw-' + tabId);
-    var error = document.getElementById('err-' + tabId);
-    if (input.value.toLowerCase() === configPassword.toLowerCase()) {
-      // Unlock all locked tabs
-      for (var id in tabConfig) {
-        if (tabConfig[id].locked) {
-          unlockedTabs[id] = true;
-          var overlay = document.getElementById('lock-' + id);
-          if (overlay) overlay.remove();
+      var sideBySideLoaded = 0
+      function markSideBySideLoaded() {
+        sideBySideLoaded++
+        if (sideBySideLoaded >= 2) {
+          var el = document.getElementById('loading-side-by-side')
+          if (el) el.style.display = 'none'
         }
       }
-    } else {
-      error.textContent = 'Incorrect password. Please try again.';
-      input.value = '';
-      input.focus();
-    }
-  }
 
-  function openCity(evt, cityName) {
-    var i, tabcontent, tablinks
-    tabcontent = document.getElementsByClassName('tabcontent')
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = 'none'
-    }
-    tablinks = document.getElementsByClassName('tablinks')
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(' active', '')
-    }
-    document.getElementById(cityName).style.display = (cityName === 'side-by-side') ? 'flex' : 'block'
+      ;(function setupSplitDivider() {
+        var divider = document.getElementById('side-by-side-divider')
+        var container = document.getElementById('side-by-side')
+        var left = document.getElementById('side-by-side-left')
+        if (!divider || !container || !left) return
 
-    if (cityName === 'pitch') { pitchInit(); }
-    if (cityName === 'attendees') { attendeesInit(); requestAnimationFrame(attendeesLayout); }
-    if (cityName === 'scoring') { scoringInit(); }
+        function startDrag(startX) {
+          var rect = container.getBoundingClientRect()
+          document.body.classList.add('split-dragging')
+          divider.classList.add('dragging')
 
-    // Set active button
-    if (evt) {
-      evt.currentTarget.className += ' active';
-    } else {
-      // Find the button for this tab and mark active
-      document.querySelectorAll('.tablinks').forEach(function(btn) {
-        if (btn.getAttribute('onclick').indexOf("'" + cityName + "'") !== -1) {
-          btn.className += ' active';
-        }
-      });
-    }
+          function onMove(clientX) {
+            var pct = ((clientX - rect.left) / rect.width) * 100
+            if (pct < 5) pct = 5
+            if (pct > 95) pct = 95
+            left.style.flex = '0 0 ' + pct + '%'
+          }
 
-    // Update URL hash
-    history.replaceState(null, null, '#' + cityName);
-
-    // Show lock overlay if tab is locked
-    if (tabConfig[cityName] && tabConfig[cityName].locked && !unlockedTabs[cityName]) {
-      showLockOverlay(cityName);
-    }
-  }
-
-  var attendeesApiUrl = '';
-  var attendeesEmailSubject = 'Connecting from London Youth Summer Skills Grants 2026';
-  var attendeesLoaded = false;
-  var attendeesLoading = false;
-  var attendeesData = [];
-  var attendeesFetchPromise = null;
-  var defaultScoringSheetUrl = '';
-
-  function fetchAttendeesData() {
-    if (attendeesFetchPromise) return attendeesFetchPromise;
-    if (!attendeesApiUrl) return Promise.reject(new Error('Attendees API not configured'));
-    attendeesFetchPromise = fetch(attendeesApiUrl)
-      .then(function(r) {
-        if (!r.ok) return r.text().then(function(t) { throw new Error('HTTP ' + r.status + ': ' + t); });
-        return r.json();
-      })
-      .then(function(data) {
-        attendeesData = data.attendees || [];
-        return data;
-      });
-    return attendeesFetchPromise;
-  }
-
-  function setScoringIframes(url) {
-    document.querySelectorAll('.scoring-sheet-iframe').forEach(function(iframe) {
-      if (iframe.src !== url) iframe.src = url;
-    });
-  }
-
-  function scoringInit() {
-    var picker = document.getElementById('scoring-picker');
-    var bar = document.getElementById('scoring-bar');
-    if (!picker || !bar) return;
-
-    var apply = function() {
-      var savedId = localStorage.getItem('scoring-judge-id');
-      var judge = savedId && attendeesData.find(function(a) { return a.id === savedId; });
-      if (judge && judge.judgingUrl) {
-        picker.style.display = 'none';
-        bar.style.display = 'flex';
-        document.getElementById('scoring-bar-name').textContent = judge.name;
-        setScoringIframes(judge.judgingUrl);
-      } else {
-        bar.style.display = 'none';
-        scoringRenderPicker();
-        picker.style.display = 'block';
-      }
-    };
-
-    if (attendeesData.length) {
-      apply();
-    } else {
-      fetchAttendeesData().then(apply).catch(function(err) {
-        console.warn('attendees fetch failed', err);
-        bar.style.display = 'none';
-        picker.style.display = 'none';
-      });
-    }
-  }
-
-  function scoringRenderPicker() {
-    var grid = document.getElementById('scoring-picker-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    var judges = attendeesData
-      .filter(function(a) { return a.judgingUrl; })
-      .sort(function(a, b) { return a.name.localeCompare(b.name); });
-
-    if (judges.length === 0) {
-      grid.innerHTML = '<p style="color:#666">No judges with scoring URLs configured yet.</p>';
-      return;
-    }
-
-    judges.forEach(function(j) {
-      var card = document.createElement('div');
-      card.className = 'scoring-picker-card';
-      if (j.photo) {
-        var img = document.createElement('img');
-        img.src = j.photo;
-        img.alt = j.name;
-        img.loading = 'lazy';
-        card.appendChild(img);
-      } else {
-        var ph = document.createElement('div');
-        ph.className = 'placeholder';
-        ph.textContent = (j.name || '?').split(/\s+/).map(function(p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
-        card.appendChild(ph);
-      }
-      var name = document.createElement('div');
-      name.className = 'picker-name';
-      name.textContent = j.name;
-      card.appendChild(name);
-      if (j.organisation && j.organisation.length) {
-        var org = document.createElement('div');
-        org.className = 'picker-org';
-        org.textContent = j.organisation.join(', ');
-        card.appendChild(org);
-      }
-      card.addEventListener('click', function() {
-        localStorage.setItem('scoring-judge-id', j.id);
-        scoringInit();
-      });
-      grid.appendChild(card);
-    });
-  }
-
-  document.addEventListener('click', function(e) {
-    if (e.target && e.target.id === 'scoring-switch-btn') {
-      localStorage.removeItem('scoring-judge-id');
-      if (defaultScoringSheetUrl) setScoringIframes(defaultScoringSheetUrl);
-      scoringInit();
-    }
-  });
-
-  function attendeesInit() {
-    if (attendeesLoaded || attendeesLoading) return;
-    if (!attendeesApiUrl) {
-      attendeesShowError('Attendees API not configured. Set "attendeesApi" in config.json.');
-      return;
-    }
-    attendeesLoading = true;
-    fetch(attendeesApiUrl)
-      .then(function(r) {
-        if (!r.ok) return r.text().then(function(t) { throw new Error('HTTP ' + r.status + ': ' + t); });
-        return r.json();
-      })
-      .then(function(data) {
-        var list = data.attendees || [];
-        if (list.length === 0) {
-          attendeesShowError('No attendees found.');
-          return;
-        }
-        attendeesLoaded = true;
-        document.getElementById('loading-attendees').style.display = 'none';
-        document.getElementById('attendees-content').style.display = 'block';
-        attendeesRender(list, data.orgs || [], data.types || []);
-      })
-      .catch(function(err) {
-        attendeesShowError('Failed to load attendees: ' + err.message);
-      })
-      .then(function() { attendeesLoading = false; });
-  }
-
-  function attendeesShowError(msg) {
-    document.getElementById('loading-attendees').style.display = 'none';
-    document.getElementById('attendees-content').style.display = 'none';
-    var el = document.getElementById('attendees-error');
-    el.textContent = msg;
-    el.style.display = 'block';
-  }
-
-  function attendeesInitials(name) {
-    if (!name) return '?';
-    var parts = name.trim().split(/\s+/);
-    var first = parts[0] || '';
-    var last = parts.length > 1 ? parts[parts.length - 1] : '';
-    return ((first[0] || '') + (last[0] || '')).toUpperCase();
-  }
-
-  function attendeesOrgClass(org) {
-    var key = (org || '').replace(/\s+/g, '');
-    var known = ['CVC', 'Infosys', 'LondonYouth', 'LSEGFoundation', 'RDAS', 'Startbook'];
-    return 'attendee-org-' + (known.indexOf(key) !== -1 ? key : 'default');
-  }
-
-  var attendeesActiveFilter = 'all';
-  var attendeesActiveTypeFilter = 'all';
-  var attendeesFeaturedId = null;
-
-  function attendeesReorder() {
-    var grid = document.getElementById('attendees-grid');
-    if (!grid) return;
-    var visibleCount = grid.querySelectorAll('.attendee-card:not(.hidden)').length;
-    var spans = !!attendeesFeaturedId && visibleCount >= 1;
-    grid.querySelectorAll('.attendee-card').forEach(function(c) {
-      var isFeatured = c.getAttribute('data-id') === attendeesFeaturedId;
-      c.classList.toggle('featured', isFeatured);
-      c.classList.toggle('featured-spans', isFeatured && spans);
-    });
-  }
-
-  function attendeesToggleFeatured(id) {
-    attendeesFeaturedId = (attendeesFeaturedId === id) ? null : id;
-    var update = function() { attendeesReorder(); attendeesLayout(); };
-    if (document.startViewTransition) {
-      document.startViewTransition(update);
-    } else {
-      update();
-    }
-  }
-
-  function attendeesLayout() {
-    var grid = document.getElementById('attendees-grid');
-    var content = document.getElementById('attendees-content');
-    var tab = document.getElementById('attendees');
-    if (!grid || !content || !tab || tab.style.display === 'none') return;
-
-    var visible = Array.prototype.filter.call(
-      grid.querySelectorAll('.attendee-card'),
-      function(c) { return !c.classList.contains('hidden'); }
-    );
-    var n = visible.length;
-    if (n === 0) return;
-
-    var W = grid.clientWidth;
-    var gridRect = grid.getBoundingClientRect();
-    var tabRect = tab.getBoundingClientRect();
-    var H = tabRect.bottom - gridRect.top - 30;
-    if (W < 100 || H < 100) return;
-
-    var gap = 20;
-    var aspect = 1.3;
-    var maxSize = 260;
-    var hasFeaturedSpans = !!grid.querySelector('.attendee-card.featured-spans:not(.hidden)');
-    var slotCount = n + (hasFeaturedSpans ? 3 : 0);
-    var best = { cols: hasFeaturedSpans ? 2 : 1, size: 0, rowH: 0 };
-    var minCols = hasFeaturedSpans ? 2 : 1;
-    for (var cols = minCols; cols <= slotCount; cols++) {
-      var rows = Math.ceil(slotCount / cols);
-      if (hasFeaturedSpans && rows < 2) continue;
-      var cardW = (W - (cols - 1) * gap) / cols;
-      var cardH = (H - (rows - 1) * gap) / rows;
-      var effective = Math.min(cardW, cardH / aspect);
-      var capped = Math.min(effective, maxSize);
-      if (capped > best.size) {
-        best = { cols: cols, rows: rows, size: capped, rowH: cardH };
-      }
-    }
-
-    var size = Math.max(140, best.size);
-    var rowH = Math.max(140, Math.min(size * aspect, best.rowH));
-    var scale = Math.max(0.55, Math.min(1.25, size / 260));
-    grid.style.gridTemplateColumns = 'repeat(' + best.cols + ', minmax(0, ' + size + 'px))';
-    grid.style.gridAutoRows = rowH + 'px';
-    content.style.setProperty('--attendee-scale', scale);
-    content.style.setProperty('--featured-w', (2 * size + gap) + 'px');
-    content.style.setProperty('--featured-h', (2 * rowH + gap) + 'px');
-
-    console.log('[attendees layout]', {
-      visibleN: n,
-      hasFeaturedSpans: hasFeaturedSpans,
-      slotCount: slotCount,
-      containerW: W,
-      containerH: H,
-      pickedCols: best.cols,
-      pickedRows: best.rows,
-      cardSize: size,
-      rowHeight: rowH,
-      scale: scale.toFixed(3),
-      featuredW: hasFeaturedSpans ? (2 * size + gap) : null,
-      featuredH: hasFeaturedSpans ? (2 * rowH + gap) : null,
-    });
-  }
-
-  function attendeesApplyFilterRaw() {
-    var cards = document.querySelectorAll('#attendees-grid .attendee-card');
-    cards.forEach(function(card) {
-      var orgs = (card.getAttribute('data-orgs') || '').split('|').filter(Boolean);
-      var type = card.getAttribute('data-type') || '';
-      var orgMatch = attendeesActiveFilter === 'all' || orgs.indexOf(attendeesActiveFilter) !== -1;
-      var typeMatch = attendeesActiveTypeFilter === 'all' || type === attendeesActiveTypeFilter;
-      card.classList.toggle('hidden', !(orgMatch && typeMatch));
-    });
-    document.querySelectorAll('#attendees-filters .attendees-filter-btn').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-org') === attendeesActiveFilter);
-    });
-    document.querySelectorAll('#attendees-type-filters .attendees-filter-btn').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-type') === attendeesActiveTypeFilter);
-    });
-    if (attendeesFeaturedId) {
-      var f = document.querySelector('#attendees-grid .attendee-card[data-id="' + attendeesFeaturedId + '"]');
-      if (!f || f.classList.contains('hidden')) {
-        attendeesFeaturedId = null;
-        if (f) f.classList.remove('featured');
-      }
-    }
-    attendeesReorder();
-    attendeesLayout();
-  }
-
-  function attendeesApplyFilter() {
-    if (document.startViewTransition) {
-      document.startViewTransition(attendeesApplyFilterRaw);
-    } else {
-      attendeesApplyFilterRaw();
-    }
-  }
-
-  function attendeesBuildTypeFilters(list, typeOrder) {
-    var counts = {};
-    list.forEach(function(a) {
-      if (a.attendeeType) counts[a.attendeeType] = (counts[a.attendeeType] || 0) + 1;
-    });
-    var types;
-    if (typeOrder && typeOrder.length) {
-      types = typeOrder.filter(function(t) { return counts[t]; });
-      Object.keys(counts).forEach(function(t) {
-        if (types.indexOf(t) === -1) types.push(t);
-      });
-    } else {
-      types = Object.keys(counts).sort();
-    }
-    var bar = document.getElementById('attendees-type-filters');
-    bar.innerHTML = '';
-    if (!types.length) return;
-
-    function makeBtn(label, key, count) {
-      var b = document.createElement('button');
-      b.className = 'attendees-filter-btn' + (key === attendeesActiveTypeFilter ? ' active' : '');
-      b.setAttribute('data-type', key);
-      b.innerHTML = label + ' <span class="attendees-filter-count">' + count + '</span>';
-      b.addEventListener('click', function() {
-        attendeesActiveTypeFilter = key;
-        attendeesApplyFilter();
-      });
-      return b;
-    }
-
-    bar.appendChild(makeBtn('All', 'all', list.length));
-    types.forEach(function(t) { bar.appendChild(makeBtn(t, t, counts[t])); });
-  }
-
-  function attendeesBuildFilters(list, orgOrder) {
-    var counts = {};
-    list.forEach(function(a) {
-      (a.organisation || []).forEach(function(o) { counts[o] = (counts[o] || 0) + 1; });
-    });
-    var orgs;
-    if (orgOrder && orgOrder.length) {
-      orgs = orgOrder.filter(function(o) { return counts[o]; });
-      Object.keys(counts).forEach(function(o) {
-        if (orgs.indexOf(o) === -1) orgs.push(o);
-      });
-    } else {
-      orgs = Object.keys(counts).sort();
-    }
-    var bar = document.getElementById('attendees-filters');
-    bar.innerHTML = '';
-
-    function makeBtn(label, key, count) {
-      var b = document.createElement('button');
-      b.className = 'attendees-filter-btn' + (key === attendeesActiveFilter ? ' active' : '');
-      b.setAttribute('data-org', key);
-      b.innerHTML = label + ' <span class="attendees-filter-count">' + count + '</span>';
-      b.addEventListener('click', function() {
-        attendeesActiveFilter = key;
-        attendeesApplyFilter();
-      });
-      return b;
-    }
-
-    bar.appendChild(makeBtn('All', 'all', list.length));
-    orgs.forEach(function(o) { bar.appendChild(makeBtn(o, o, counts[o])); });
-  }
-
-  function attendeesRender(list, orgOrder, typeOrder) {
-    attendeesBuildTypeFilters(list, typeOrder);
-    var grid = document.getElementById('attendees-grid');
-    grid.innerHTML = '';
-    list.forEach(function(a) {
-      var card = document.createElement('div');
-      card.className = 'attendee-card' + (a.attending ? '' : ' absent');
-      card.setAttribute('data-orgs', (a.organisation || []).join('|'));
-      card.setAttribute('data-type', a.attendeeType || '');
-      card.setAttribute('data-id', a.id);
-      card.style.viewTransitionName = 'attendee-' + a.id;
-      card.addEventListener('click', function(e) {
-        if (e.target.closest('a')) return;
-        attendeesToggleFeatured(a.id);
-      });
-
-      if (a.photo) {
-        var img = document.createElement('img');
-        img.className = 'attendee-photo';
-        img.src = a.photo;
-        img.alt = a.name;
-        img.loading = 'lazy';
-        card.appendChild(img);
-      } else {
-        var ph = document.createElement('div');
-        ph.className = 'attendee-photo-placeholder';
-        ph.textContent = attendeesInitials(a.name);
-        card.appendChild(ph);
-      }
-
-      var name = document.createElement('div');
-      name.className = 'attendee-name';
-      name.textContent = a.name || '(no name)';
-      card.appendChild(name);
-
-      var job = document.createElement('div');
-      job.className = 'attendee-job';
-      job.textContent = a.jobTitle || '';
-      card.appendChild(job);
-
-      if (a.organisation && a.organisation.length) {
-        var orgs = document.createElement('div');
-        orgs.className = 'attendee-orgs';
-        a.organisation.forEach(function(org) {
-          var pill = document.createElement('span');
-          pill.className = 'attendee-org-pill ' + attendeesOrgClass(org);
-          pill.textContent = org;
-          orgs.appendChild(pill);
-        });
-        card.appendChild(orgs);
-      }
-
-      var links = document.createElement('div');
-      links.className = 'attendee-links';
-      if (a.email) {
-        var em = document.createElement('a');
-        em.href = 'mailto:' + a.email + '?subject=' + encodeURIComponent(attendeesEmailSubject);
-        em.title = a.email;
-        em.target = '_blank';
-        em.rel = 'noopener';
-        em.innerHTML = '<i class="bi bi-envelope"></i>';
-        links.appendChild(em);
-      }
-      if (a.url) {
-        var ln = document.createElement('a');
-        ln.href = a.url;
-        ln.target = '_blank';
-        ln.rel = 'noopener';
-        ln.title = a.url;
-        ln.innerHTML = '<i class="bi bi-link-45deg"></i>';
-        links.appendChild(ln);
-      }
-      if (links.children.length) card.appendChild(links);
-
-      grid.appendChild(card);
-    });
-    attendeesLayout();
-  }
-
-  var pitchApiUrl = '';
-  var pitchDuration = 100;
-  var pitchApplicants = [];
-  var pitchIndex = 0;
-  var pitchTimerId = null;
-  var pitchRemaining = 100;
-  var pitchRunning = false;
-  var pitchLoaded = false;
-  var pitchLoading = false;
-
-  function pitchInit() {
-    if (pitchLoaded || pitchLoading) return;
-    if (!pitchApiUrl) {
-      pitchShowError('Pitch API not configured. Set "applicantsApi" in config.json to your Vercel proxy URL.');
-      return;
-    }
-    pitchLoading = true;
-    fetch(pitchApiUrl + (pitchApiUrl.indexOf('?') === -1 ? '?year=2026' : '&year=2026'))
-      .then(function(r) {
-        if (!r.ok) return r.text().then(function(t) { throw new Error('HTTP ' + r.status + ': ' + t); });
-        return r.json();
-      })
-      .then(function(data) {
-        pitchApplicants = data.applicants || [];
-        if (pitchApplicants.length === 0) {
-          pitchShowError('No applicants found for 2026.');
-          return;
-        }
-        pitchLoaded = true;
-        document.getElementById('loading-pitch').style.display = 'none';
-        document.getElementById('pitch-content').style.display = 'flex';
-        pitchIndex = 0;
-        pitchRender();
-        pitchResetTimer(false);
-      })
-      .catch(function(err) {
-        pitchShowError('Failed to load applicants: ' + err.message);
-      })
-      .then(function() { pitchLoading = false; });
-  }
-
-  function pitchShowError(msg) {
-    document.getElementById('loading-pitch').style.display = 'none';
-    document.getElementById('pitch-content').style.display = 'none';
-    var el = document.getElementById('pitch-error');
-    el.textContent = msg;
-    el.style.display = 'block';
-  }
-
-  function pitchRender() {
-    var a = pitchApplicants[pitchIndex];
-    if (!a) return;
-    var logoEl = document.getElementById('pitch-logo');
-    if (a.logo) { logoEl.src = a.logo; logoEl.style.display = ''; }
-    else { logoEl.style.display = 'none'; }
-    document.getElementById('pitch-name').textContent = a.project || '(no name)';
-    document.getElementById('pitch-borough').textContent = a.borough || '';
-    document.getElementById('pitch-young-people').textContent = (a.youngPeopleImpacted == null) ? '—' : a.youngPeopleImpacted;
-    document.getElementById('pitch-hours').textContent = (a.hoursPerPerson == null) ? '—' : a.hoursPerPerson;
-    var ages = (a.benefitingAgeRanges && a.benefitingAgeRanges.length) ? a.benefitingAgeRanges : (a.ageRange ? [a.ageRange] : []);
-    var agesEl = document.getElementById('pitch-ages');
-    agesEl.innerHTML = '';
-    if (ages.length === 0) {
-      agesEl.textContent = '—';
-    } else {
-      ages.forEach(function(r) {
-        var pill = document.createElement('span');
-        pill.className = 'pitch-age-pill';
-        pill.textContent = r;
-        agesEl.appendChild(pill);
-      });
-    }
-    var cost = a.costPerYoungPerson;
-    document.getElementById('pitch-cost').textContent = (cost == null) ? '—' :
-      '£' + Number(cost).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    var counterText = (a.number != null ? '#' + a.number + '  ·  ' : '') + (pitchIndex + 1) + ' / ' + pitchApplicants.length;
-    document.getElementById('pitch-counter').textContent = counterText;
-  }
-
-  function pitchFmt(seconds) {
-    var sign = seconds < 0 ? '-' : '';
-    var s = Math.abs(seconds);
-    var m = Math.floor(s / 60);
-    var sec = s % 60;
-    return sign + m + ':' + (sec < 10 ? '0' : '') + sec;
-  }
-
-  function pitchUpdateTimerDisplay() {
-    var t = document.getElementById('pitch-timer');
-    t.textContent = pitchFmt(pitchRemaining);
-    if (pitchRemaining < 0) {
-      t.classList.add('over');
-      document.getElementById('pitch-timer-label').textContent = 'Over time';
-    } else {
-      t.classList.remove('over');
-      document.getElementById('pitch-timer-label').textContent = pitchRunning ? '' : 'Paused';
-    }
-  }
-
-  function pitchTick() {
-    pitchRemaining -= 1;
-    pitchUpdateTimerDisplay();
-  }
-
-  function pitchStartTimer() {
-    if (pitchTimerId) return;
-    pitchRunning = true;
-    pitchTimerId = setInterval(pitchTick, 1000);
-    var btn = document.getElementById('pitch-toggle-btn');
-    btn.innerHTML = '<i class="bi bi-pause-fill"></i> Pause';
-    pitchUpdateTimerDisplay();
-  }
-
-  function pitchStopTimer() {
-    if (pitchTimerId) { clearInterval(pitchTimerId); pitchTimerId = null; }
-    pitchRunning = false;
-    var btn = document.getElementById('pitch-toggle-btn');
-    if (btn) btn.innerHTML = '<i class="bi bi-play-fill"></i> Start';
-    pitchUpdateTimerDisplay();
-  }
-
-  function pitchToggleTimer() {
-    if (pitchRunning) pitchStopTimer(); else pitchStartTimer();
-  }
-
-  function pitchResetTimer(autoStart) {
-    pitchStopTimer();
-    pitchRemaining = pitchDuration;
-    pitchUpdateTimerDisplay();
-    if (autoStart) pitchStartTimer();
-  }
-
-  function pitchNext() {
-    if (!pitchApplicants.length) return;
-    pitchIndex = (pitchIndex + 1) % pitchApplicants.length;
-    pitchRender();
-    pitchResetTimer(true);
-  }
-
-  function pitchPrev() {
-    if (!pitchApplicants.length) return;
-    pitchIndex = (pitchIndex - 1 + pitchApplicants.length) % pitchApplicants.length;
-    pitchRender();
-    pitchResetTimer(true);
-  }
-
-  function pitchReset() {
-    pitchResetTimer(false);
-  }
-
-  document.addEventListener('keydown', function(e) {
-    if (document.getElementById('pitch').style.display === 'none') return;
-    var tag = (e.target && e.target.tagName) || '';
-    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-    if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); pitchToggleTimer(); }
-    else if (e.key === 'ArrowRight') { e.preventDefault(); pitchNext(); }
-    else if (e.key === 'ArrowLeft') { e.preventDefault(); pitchPrev(); }
-    else if (e.key === 'r' || e.key === 'R') { e.preventDefault(); pitchReset(); }
-  });
-
-  // On page load, open tab from URL hash
-  var defaultTab = 'spreadsheet';
-
-  function openTabFromHash() {
-    var hash = window.location.hash.replace('#', '');
-    if (hash && document.getElementById(hash)) {
-      openCity(null, hash);
-    } else {
-      openCity(null, defaultTab);
-    }
-  }
-
-  // Run after config loads
-  fetch('config.json')
-    .then(function(r) { return r.json(); })
-    .then(function(config) {
-      tabConfig = config.tabs || {};
-      configPassword = config.password || '';
-      if (config.defaultTab && document.getElementById(config.defaultTab)) {
-        defaultTab = config.defaultTab;
-      }
-      // Set scoring sheet iframe URLs from config
-      if (config.scoringSheetUrl) {
-        defaultScoringSheetUrl = config.scoringSheetUrl;
-        var savedId = localStorage.getItem('scoring-judge-id');
-        if (!savedId) {
-          document.querySelectorAll('.scoring-sheet-iframe').forEach(function(iframe) {
-            iframe.src = config.scoringSheetUrl;
-          });
-        } else if (attendeesApiUrl) {
-          fetchAttendeesData().then(function() {
-            var judge = attendeesData.find(function(a) { return a.id === savedId; });
-            if (judge && judge.judgingUrl) {
-              setScoringIframes(judge.judgingUrl);
-            } else {
-              setScoringIframes(config.scoringSheetUrl);
+          function onMouseMove(e) {
+            onMove(e.clientX)
+          }
+          function onTouchMove(e) {
+            if (e.touches.length) {
+              onMove(e.touches[0].clientX)
+              e.preventDefault()
             }
-          });
+          }
+          function stop() {
+            document.body.classList.remove('split-dragging')
+            divider.classList.remove('dragging')
+            document.removeEventListener('mousemove', onMouseMove)
+            document.removeEventListener('mouseup', stop)
+            document.removeEventListener('touchmove', onTouchMove)
+            document.removeEventListener('touchend', stop)
+          }
+
+          document.addEventListener('mousemove', onMouseMove)
+          document.addEventListener('mouseup', stop)
+          document.addEventListener('touchmove', onTouchMove, { passive: false })
+          document.addEventListener('touchend', stop)
+        }
+
+        divider.addEventListener('mousedown', function (e) {
+          e.preventDefault()
+          startDrag(e.clientX)
+        })
+        divider.addEventListener(
+          'touchstart',
+          function (e) {
+            if (e.touches.length) {
+              e.preventDefault()
+              startDrag(e.touches[0].clientX)
+            }
+          },
+          { passive: false }
+        )
+      })()
+
+      // Prevent iframes from stealing focus when lock overlay is showing
+      window.addEventListener('blur', function () {
+        var activePw = document.querySelector('.lock-overlay input[type="password"]')
+        if (activePw && activePw.closest('.tabcontent').style.display !== 'none') {
+          setTimeout(function () {
+            activePw.focus()
+          }, 0)
+        }
+      })
+
+      function showLockOverlay(tabId) {
+        // Remove any existing overlay
+        var existing = document.getElementById('lock-' + tabId)
+        if (existing) {
+          existing.remove()
+        }
+
+        var tabEl = document.getElementById(tabId)
+        var overlay = document.createElement('div')
+        overlay.className = 'lock-overlay'
+        overlay.id = 'lock-' + tabId
+        overlay.innerHTML =
+          '<div class="lock-box">' +
+          '<i class="bi bi-lock-fill"></i>' +
+          '<h2>This tab is locked</h2>' +
+          '<p>Enter the password to view this content</p>' +
+          '<div>' +
+          '<input type="password" id="pw-' +
+          tabId +
+          '" placeholder="Password" onkeydown="if(event.key===\'Enter\')unlockTab(\'' +
+          tabId +
+          '\')" />' +
+          '<button onclick="unlockTab(\'' +
+          tabId +
+          '\')">Unlock</button>' +
+          '</div>' +
+          '<div class="error-msg" id="err-' +
+          tabId +
+          '"></div>' +
+          '</div>'
+        tabEl.appendChild(overlay)
+        setTimeout(function () {
+          document.getElementById('pw-' + tabId).focus()
+        }, 50)
+      }
+
+      function unlockTab(tabId) {
+        var input = document.getElementById('pw-' + tabId)
+        var error = document.getElementById('err-' + tabId)
+        if (input.value.toLowerCase() === configPassword.toLowerCase()) {
+          // Unlock all locked tabs
+          for (var id in tabConfig) {
+            if (tabConfig[id].locked) {
+              unlockedTabs[id] = true
+              var overlay = document.getElementById('lock-' + id)
+              if (overlay) overlay.remove()
+            }
+          }
+        } else {
+          error.textContent = 'Incorrect password. Please try again.'
+          input.value = ''
+          input.focus()
         }
       }
-      if (config.resultsSheetUrl) {
-        document.querySelectorAll('.results-sheet-iframe').forEach(function(iframe) {
-          iframe.src = config.resultsSheetUrl;
-        });
-      }
-      if (config.applicantsApi) { pitchApiUrl = config.applicantsApi; }
-      if (typeof config.pitchSeconds === 'number') { pitchDuration = config.pitchSeconds; }
-      if (config.attendeesApi) { attendeesApiUrl = config.attendeesApi; }
-      if (config.attendeesEmailSubject) { attendeesEmailSubject = config.attendeesEmailSubject; }
-    })
-    .then(openTabFromHash);
-</script>
 
-</body>
+      function openCity(evt, cityName) {
+        var i, tabcontent, tablinks
+        tabcontent = document.getElementsByClassName('tabcontent')
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = 'none'
+        }
+        tablinks = document.getElementsByClassName('tablinks')
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(' active', '')
+        }
+        document.getElementById(cityName).style.display =
+          cityName === 'side-by-side' ? 'flex' : 'block'
+
+        if (cityName === 'pitch') {
+          pitchInit()
+        }
+        if (cityName === 'attendees') {
+          attendeesInit()
+          requestAnimationFrame(attendeesLayout)
+        }
+        if (cityName === 'scoring') {
+          scoringInit()
+        }
+
+        // Set active button
+        if (evt) {
+          evt.currentTarget.className += ' active'
+        } else {
+          // Find the button for this tab and mark active
+          document.querySelectorAll('.tablinks').forEach(function (btn) {
+            if (btn.getAttribute('onclick').indexOf("'" + cityName + "'") !== -1) {
+              btn.className += ' active'
+            }
+          })
+        }
+
+        // Update URL hash
+        history.replaceState(null, null, '#' + cityName)
+
+        // Show lock overlay if tab is locked
+        if (tabConfig[cityName] && tabConfig[cityName].locked && !unlockedTabs[cityName]) {
+          showLockOverlay(cityName)
+        }
+      }
+
+      var attendeesApiUrl = ''
+      var attendeesEmailSubject = 'Connecting from London Youth Summer Skills Grants 2026'
+      var attendeesLoaded = false
+      var attendeesLoading = false
+      var attendeesData = []
+      var attendeesFetchPromise = null
+      var defaultScoringSheetUrl = ''
+
+      function fetchAttendeesData() {
+        if (attendeesFetchPromise) return attendeesFetchPromise
+        if (!attendeesApiUrl) return Promise.reject(new Error('Attendees API not configured'))
+        attendeesFetchPromise = fetch(attendeesApiUrl)
+          .then(function (r) {
+            if (!r.ok)
+              return r.text().then(function (t) {
+                throw new Error('HTTP ' + r.status + ': ' + t)
+              })
+            return r.json()
+          })
+          .then(function (data) {
+            attendeesData = data.attendees || []
+            return data
+          })
+        return attendeesFetchPromise
+      }
+
+      function setScoringIframes(url) {
+        document.querySelectorAll('.scoring-sheet-iframe').forEach(function (iframe) {
+          if (iframe.src !== url) iframe.src = url
+        })
+      }
+
+      function applyUserWidget() {
+        var widget = document.getElementById('user-widget')
+        if (!widget) return
+        var savedId = localStorage.getItem('scoring-judge-id')
+        var judge =
+          savedId &&
+          attendeesData.find(function (a) {
+            return a.id === savedId
+          })
+        if (judge) {
+          widget.style.display = 'flex'
+          var photoEl = document.getElementById('user-widget-photo')
+          photoEl.src = judge.photo || ''
+          photoEl.alt = judge.name
+          document.getElementById('user-widget-name').textContent = judge.name
+        } else {
+          widget.style.display = 'none'
+        }
+      }
+
+      function scoringInit() {
+        var picker = document.getElementById('scoring-picker')
+        if (!picker) return
+
+        var apply = function () {
+          var savedId = localStorage.getItem('scoring-judge-id')
+          var judge =
+            savedId &&
+            attendeesData.find(function (a) {
+              return a.id === savedId
+            })
+          if (judge) {
+            picker.style.display = 'none'
+            setScoringIframes(judge.judgingUrl || defaultScoringSheetUrl)
+          } else {
+            scoringRenderPicker()
+            picker.style.display = 'block'
+          }
+          applyUserWidget()
+        }
+
+        if (attendeesData.length) {
+          apply()
+        } else {
+          fetchAttendeesData()
+            .then(apply)
+            .catch(function (err) {
+              console.warn('attendees fetch failed', err)
+              picker.style.display = 'none'
+            })
+        }
+      }
+
+      function scoringRenderPicker() {
+        var grid = document.getElementById('scoring-picker-grid')
+        if (!grid) return
+        grid.innerHTML = ''
+        var judges = attendeesData.slice().sort(function (a, b) {
+          return a.name.localeCompare(b.name)
+        })
+
+        if (judges.length === 0) {
+          grid.innerHTML = '<p style="color:#666">No attendees configured yet.</p>'
+          return
+        }
+
+        judges.forEach(function (j) {
+          var card = document.createElement('div')
+          card.className = 'scoring-picker-card'
+          if (j.photo) {
+            var img = document.createElement('img')
+            img.src = j.photo
+            img.alt = j.name
+            img.loading = 'lazy'
+            card.appendChild(img)
+          } else {
+            var ph = document.createElement('div')
+            ph.className = 'placeholder'
+            ph.textContent = (j.name || '?')
+              .split(/\s+/)
+              .map(function (p) {
+                return p[0]
+              })
+              .slice(0, 2)
+              .join('')
+              .toUpperCase()
+            card.appendChild(ph)
+          }
+          var name = document.createElement('div')
+          name.className = 'picker-name'
+          name.textContent = j.name
+          card.appendChild(name)
+          if (j.organisation && j.organisation.length) {
+            var org = document.createElement('div')
+            org.className = 'picker-org'
+            org.textContent = j.organisation.join(', ')
+            card.appendChild(org)
+          }
+          card.addEventListener('click', function () {
+            localStorage.setItem('scoring-judge-id', j.id)
+            scoringInit()
+          })
+          grid.appendChild(card)
+        })
+      }
+
+      document.addEventListener('click', function (e) {
+        if (e.target && e.target.closest && e.target.closest('#user-widget-logout')) {
+          localStorage.removeItem('scoring-judge-id')
+          if (defaultScoringSheetUrl) setScoringIframes(defaultScoringSheetUrl)
+          applyUserWidget()
+          var scoringEl = document.getElementById('scoring')
+          if (scoringEl && scoringEl.style.display !== 'none') scoringInit()
+        }
+      })
+
+      function attendeesInit() {
+        if (attendeesLoaded || attendeesLoading) return
+        if (!attendeesApiUrl) {
+          attendeesShowError('Attendees API not configured. Set "attendeesApi" in config.json.')
+          return
+        }
+        attendeesLoading = true
+        fetch(attendeesApiUrl)
+          .then(function (r) {
+            if (!r.ok)
+              return r.text().then(function (t) {
+                throw new Error('HTTP ' + r.status + ': ' + t)
+              })
+            return r.json()
+          })
+          .then(function (data) {
+            var list = data.attendees || []
+            if (list.length === 0) {
+              attendeesShowError('No attendees found.')
+              return
+            }
+            attendeesLoaded = true
+            document.getElementById('loading-attendees').style.display = 'none'
+            document.getElementById('attendees-content').style.display = 'block'
+            attendeesRender(list, data.orgs || [], data.types || [])
+          })
+          .catch(function (err) {
+            attendeesShowError('Failed to load attendees: ' + err.message)
+          })
+          .then(function () {
+            attendeesLoading = false
+          })
+      }
+
+      function attendeesShowError(msg) {
+        document.getElementById('loading-attendees').style.display = 'none'
+        document.getElementById('attendees-content').style.display = 'none'
+        var el = document.getElementById('attendees-error')
+        el.textContent = msg
+        el.style.display = 'block'
+      }
+
+      function attendeesInitials(name) {
+        if (!name) return '?'
+        var parts = name.trim().split(/\s+/)
+        var first = parts[0] || ''
+        var last = parts.length > 1 ? parts[parts.length - 1] : ''
+        return ((first[0] || '') + (last[0] || '')).toUpperCase()
+      }
+
+      function attendeesOrgClass(org) {
+        var key = (org || '').replace(/\s+/g, '')
+        var known = ['CVC', 'Infosys', 'LondonYouth', 'LSEGFoundation', 'RDAS', 'Startbook']
+        return 'attendee-org-' + (known.indexOf(key) !== -1 ? key : 'default')
+      }
+
+      var attendeesActiveFilter = 'all'
+      var attendeesActiveTypeFilter = 'all'
+      var attendeesFeaturedId = null
+
+      function attendeesReorder() {
+        var grid = document.getElementById('attendees-grid')
+        if (!grid) return
+        var visibleCount = grid.querySelectorAll('.attendee-card:not(.hidden)').length
+        var spans = !!attendeesFeaturedId && visibleCount >= 1
+        grid.querySelectorAll('.attendee-card').forEach(function (c) {
+          var isFeatured = c.getAttribute('data-id') === attendeesFeaturedId
+          c.classList.toggle('featured', isFeatured)
+          c.classList.toggle('featured-spans', isFeatured && spans)
+        })
+      }
+
+      function attendeesToggleFeatured(id) {
+        attendeesFeaturedId = attendeesFeaturedId === id ? null : id
+        var update = function () {
+          attendeesReorder()
+          attendeesLayout()
+        }
+        if (document.startViewTransition) {
+          document.startViewTransition(update)
+        } else {
+          update()
+        }
+      }
+
+      function attendeesLayout() {
+        var grid = document.getElementById('attendees-grid')
+        var content = document.getElementById('attendees-content')
+        var tab = document.getElementById('attendees')
+        if (!grid || !content || !tab || tab.style.display === 'none') return
+
+        var visible = Array.prototype.filter.call(
+          grid.querySelectorAll('.attendee-card'),
+          function (c) {
+            return !c.classList.contains('hidden')
+          }
+        )
+        var n = visible.length
+        if (n === 0) return
+
+        var W = grid.clientWidth
+        var gridRect = grid.getBoundingClientRect()
+        var tabRect = tab.getBoundingClientRect()
+        var H = tabRect.bottom - gridRect.top - 30
+        if (W < 100 || H < 100) return
+
+        var gap = 20
+        var aspect = 1.3
+        var maxSize = 260
+        var hasFeaturedSpans = !!grid.querySelector('.attendee-card.featured-spans:not(.hidden)')
+        var slotCount = n + (hasFeaturedSpans ? 3 : 0)
+        var best = { cols: hasFeaturedSpans ? 2 : 1, size: 0, rowH: 0 }
+        var minCols = hasFeaturedSpans ? 2 : 1
+        for (var cols = minCols; cols <= slotCount; cols++) {
+          var rows = Math.ceil(slotCount / cols)
+          if (hasFeaturedSpans && rows < 2) continue
+          var cardW = (W - (cols - 1) * gap) / cols
+          var cardH = (H - (rows - 1) * gap) / rows
+          var effective = Math.min(cardW, cardH / aspect)
+          var capped = Math.min(effective, maxSize)
+          if (capped > best.size) {
+            best = { cols: cols, rows: rows, size: capped, rowH: cardH }
+          }
+        }
+
+        var size = Math.max(140, best.size)
+        var rowH = Math.max(140, Math.min(size * aspect, best.rowH))
+        var scale = Math.max(0.55, Math.min(1.25, size / 260))
+        grid.style.gridTemplateColumns = 'repeat(' + best.cols + ', minmax(0, ' + size + 'px))'
+        grid.style.gridAutoRows = rowH + 'px'
+        content.style.setProperty('--attendee-scale', scale)
+        content.style.setProperty('--featured-w', 2 * size + gap + 'px')
+        content.style.setProperty('--featured-h', 2 * rowH + gap + 'px')
+
+        console.log('[attendees layout]', {
+          visibleN: n,
+          hasFeaturedSpans: hasFeaturedSpans,
+          slotCount: slotCount,
+          containerW: W,
+          containerH: H,
+          pickedCols: best.cols,
+          pickedRows: best.rows,
+          cardSize: size,
+          rowHeight: rowH,
+          scale: scale.toFixed(3),
+          featuredW: hasFeaturedSpans ? 2 * size + gap : null,
+          featuredH: hasFeaturedSpans ? 2 * rowH + gap : null
+        })
+      }
+
+      function attendeesApplyFilterRaw() {
+        var cards = document.querySelectorAll('#attendees-grid .attendee-card')
+        cards.forEach(function (card) {
+          var orgs = (card.getAttribute('data-orgs') || '').split('|').filter(Boolean)
+          var type = card.getAttribute('data-type') || ''
+          var orgMatch =
+            attendeesActiveFilter === 'all' || orgs.indexOf(attendeesActiveFilter) !== -1
+          var typeMatch = attendeesActiveTypeFilter === 'all' || type === attendeesActiveTypeFilter
+          card.classList.toggle('hidden', !(orgMatch && typeMatch))
+        })
+        document
+          .querySelectorAll('#attendees-filters .attendees-filter-btn')
+          .forEach(function (btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-org') === attendeesActiveFilter)
+          })
+        document
+          .querySelectorAll('#attendees-type-filters .attendees-filter-btn')
+          .forEach(function (btn) {
+            btn.classList.toggle(
+              'active',
+              btn.getAttribute('data-type') === attendeesActiveTypeFilter
+            )
+          })
+        if (attendeesFeaturedId) {
+          var f = document.querySelector(
+            '#attendees-grid .attendee-card[data-id="' + attendeesFeaturedId + '"]'
+          )
+          if (!f || f.classList.contains('hidden')) {
+            attendeesFeaturedId = null
+            if (f) f.classList.remove('featured')
+          }
+        }
+        attendeesReorder()
+        attendeesLayout()
+      }
+
+      function attendeesApplyFilter() {
+        if (document.startViewTransition) {
+          document.startViewTransition(attendeesApplyFilterRaw)
+        } else {
+          attendeesApplyFilterRaw()
+        }
+      }
+
+      function attendeesBuildTypeFilters(list, typeOrder) {
+        var counts = {}
+        list.forEach(function (a) {
+          if (a.attendeeType) counts[a.attendeeType] = (counts[a.attendeeType] || 0) + 1
+        })
+        var types
+        if (typeOrder && typeOrder.length) {
+          types = typeOrder.filter(function (t) {
+            return counts[t]
+          })
+          Object.keys(counts).forEach(function (t) {
+            if (types.indexOf(t) === -1) types.push(t)
+          })
+        } else {
+          types = Object.keys(counts).sort()
+        }
+        var bar = document.getElementById('attendees-type-filters')
+        bar.innerHTML = ''
+        if (!types.length) return
+
+        function makeBtn(label, key, count) {
+          var b = document.createElement('button')
+          b.className =
+            'attendees-filter-btn' + (key === attendeesActiveTypeFilter ? ' active' : '')
+          b.setAttribute('data-type', key)
+          b.innerHTML = label + ' <span class="attendees-filter-count">' + count + '</span>'
+          b.addEventListener('click', function () {
+            attendeesActiveTypeFilter = key
+            attendeesApplyFilter()
+          })
+          return b
+        }
+
+        bar.appendChild(makeBtn('All', 'all', list.length))
+        types.forEach(function (t) {
+          bar.appendChild(makeBtn(t, t, counts[t]))
+        })
+      }
+
+      function attendeesBuildFilters(list, orgOrder) {
+        var counts = {}
+        list.forEach(function (a) {
+          ;(a.organisation || []).forEach(function (o) {
+            counts[o] = (counts[o] || 0) + 1
+          })
+        })
+        var orgs
+        if (orgOrder && orgOrder.length) {
+          orgs = orgOrder.filter(function (o) {
+            return counts[o]
+          })
+          Object.keys(counts).forEach(function (o) {
+            if (orgs.indexOf(o) === -1) orgs.push(o)
+          })
+        } else {
+          orgs = Object.keys(counts).sort()
+        }
+        var bar = document.getElementById('attendees-filters')
+        bar.innerHTML = ''
+
+        function makeBtn(label, key, count) {
+          var b = document.createElement('button')
+          b.className = 'attendees-filter-btn' + (key === attendeesActiveFilter ? ' active' : '')
+          b.setAttribute('data-org', key)
+          b.innerHTML = label + ' <span class="attendees-filter-count">' + count + '</span>'
+          b.addEventListener('click', function () {
+            attendeesActiveFilter = key
+            attendeesApplyFilter()
+          })
+          return b
+        }
+
+        bar.appendChild(makeBtn('All', 'all', list.length))
+        orgs.forEach(function (o) {
+          bar.appendChild(makeBtn(o, o, counts[o]))
+        })
+      }
+
+      function attendeesRender(list, orgOrder, typeOrder) {
+        attendeesBuildTypeFilters(list, typeOrder)
+        var grid = document.getElementById('attendees-grid')
+        grid.innerHTML = ''
+        list.forEach(function (a) {
+          var card = document.createElement('div')
+          card.className = 'attendee-card' + (a.attending ? '' : ' absent')
+          card.setAttribute('data-orgs', (a.organisation || []).join('|'))
+          card.setAttribute('data-type', a.attendeeType || '')
+          card.setAttribute('data-id', a.id)
+          card.style.viewTransitionName = 'attendee-' + a.id
+          card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return
+            attendeesToggleFeatured(a.id)
+          })
+
+          if (a.photo) {
+            var img = document.createElement('img')
+            img.className = 'attendee-photo'
+            img.src = a.photo
+            img.alt = a.name
+            img.loading = 'lazy'
+            card.appendChild(img)
+          } else {
+            var ph = document.createElement('div')
+            ph.className = 'attendee-photo-placeholder'
+            ph.textContent = attendeesInitials(a.name)
+            card.appendChild(ph)
+          }
+
+          var name = document.createElement('div')
+          name.className = 'attendee-name'
+          name.textContent = a.name || '(no name)'
+          card.appendChild(name)
+
+          var job = document.createElement('div')
+          job.className = 'attendee-job'
+          job.textContent = a.jobTitle || ''
+          card.appendChild(job)
+
+          if (a.organisation && a.organisation.length) {
+            var orgs = document.createElement('div')
+            orgs.className = 'attendee-orgs'
+            a.organisation.forEach(function (org) {
+              var pill = document.createElement('span')
+              pill.className = 'attendee-org-pill ' + attendeesOrgClass(org)
+              pill.textContent = org
+              orgs.appendChild(pill)
+            })
+            card.appendChild(orgs)
+          }
+
+          var links = document.createElement('div')
+          links.className = 'attendee-links'
+          if (a.email) {
+            var em = document.createElement('a')
+            em.href = 'mailto:' + a.email + '?subject=' + encodeURIComponent(attendeesEmailSubject)
+            em.title = a.email
+            em.target = '_blank'
+            em.rel = 'noopener'
+            em.innerHTML = '<i class="bi bi-envelope"></i>'
+            links.appendChild(em)
+          }
+          if (a.url) {
+            var ln = document.createElement('a')
+            ln.href = a.url
+            ln.target = '_blank'
+            ln.rel = 'noopener'
+            ln.title = a.url
+            ln.innerHTML = '<i class="bi bi-link-45deg"></i>'
+            links.appendChild(ln)
+          }
+          if (links.children.length) card.appendChild(links)
+
+          grid.appendChild(card)
+        })
+        attendeesLayout()
+      }
+
+      var pitchApiUrl = ''
+      var pitchDuration = 100
+      var pitchApplicants = []
+      var pitchIndex = 0
+      var pitchTimerId = null
+      var pitchRemaining = 100
+      var pitchRunning = false
+      var pitchLoaded = false
+      var pitchLoading = false
+
+      function pitchInit() {
+        if (pitchLoaded || pitchLoading) return
+        if (!pitchApiUrl) {
+          pitchShowError(
+            'Pitch API not configured. Set "applicantsApi" in config.json to your Vercel proxy URL.'
+          )
+          return
+        }
+        pitchLoading = true
+        fetch(pitchApiUrl + (pitchApiUrl.indexOf('?') === -1 ? '?year=2026' : '&year=2026'))
+          .then(function (r) {
+            if (!r.ok)
+              return r.text().then(function (t) {
+                throw new Error('HTTP ' + r.status + ': ' + t)
+              })
+            return r.json()
+          })
+          .then(function (data) {
+            pitchApplicants = data.applicants || []
+            if (pitchApplicants.length === 0) {
+              pitchShowError('No applicants found for 2026.')
+              return
+            }
+            pitchLoaded = true
+            document.getElementById('loading-pitch').style.display = 'none'
+            document.getElementById('pitch-content').style.display = 'flex'
+            pitchIndex = 0
+            pitchRender()
+            pitchResetTimer(false)
+          })
+          .catch(function (err) {
+            pitchShowError('Failed to load applicants: ' + err.message)
+          })
+          .then(function () {
+            pitchLoading = false
+          })
+      }
+
+      function pitchShowError(msg) {
+        document.getElementById('loading-pitch').style.display = 'none'
+        document.getElementById('pitch-content').style.display = 'none'
+        var el = document.getElementById('pitch-error')
+        el.textContent = msg
+        el.style.display = 'block'
+      }
+
+      function pitchRender() {
+        var a = pitchApplicants[pitchIndex]
+        if (!a) return
+        var logoEl = document.getElementById('pitch-logo')
+        if (a.logo) {
+          logoEl.src = a.logo
+          logoEl.style.display = ''
+        } else {
+          logoEl.style.display = 'none'
+        }
+        document.getElementById('pitch-name').textContent = a.project || '(no name)'
+        document.getElementById('pitch-borough').textContent = a.borough || ''
+        document.getElementById('pitch-young-people').textContent =
+          a.youngPeopleImpacted == null ? '—' : a.youngPeopleImpacted
+        document.getElementById('pitch-hours').textContent =
+          a.hoursPerPerson == null ? '—' : a.hoursPerPerson
+        var ages =
+          a.benefitingAgeRanges && a.benefitingAgeRanges.length
+            ? a.benefitingAgeRanges
+            : a.ageRange
+              ? [a.ageRange]
+              : []
+        var agesEl = document.getElementById('pitch-ages')
+        agesEl.innerHTML = ''
+        if (ages.length === 0) {
+          agesEl.textContent = '—'
+        } else {
+          ages.forEach(function (r) {
+            var pill = document.createElement('span')
+            pill.className = 'pitch-age-pill'
+            pill.textContent = r
+            agesEl.appendChild(pill)
+          })
+        }
+        var cost = a.costPerYoungPerson
+        document.getElementById('pitch-cost').textContent =
+          cost == null
+            ? '—'
+            : '£' +
+              Number(cost).toLocaleString('en-GB', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })
+        var counterText =
+          (a.number != null ? '#' + a.number + '  ·  ' : '') +
+          (pitchIndex + 1) +
+          ' / ' +
+          pitchApplicants.length
+        document.getElementById('pitch-counter').textContent = counterText
+      }
+
+      function pitchFmt(seconds) {
+        var sign = seconds < 0 ? '-' : ''
+        var s = Math.abs(seconds)
+        var m = Math.floor(s / 60)
+        var sec = s % 60
+        return sign + m + ':' + (sec < 10 ? '0' : '') + sec
+      }
+
+      function pitchUpdateTimerDisplay() {
+        var t = document.getElementById('pitch-timer')
+        t.textContent = pitchFmt(pitchRemaining)
+        if (pitchRemaining < 0) {
+          t.classList.add('over')
+          document.getElementById('pitch-timer-label').textContent = 'Over time'
+        } else {
+          t.classList.remove('over')
+          document.getElementById('pitch-timer-label').textContent = pitchRunning ? '' : 'Paused'
+        }
+      }
+
+      function pitchTick() {
+        pitchRemaining -= 1
+        pitchUpdateTimerDisplay()
+      }
+
+      function pitchStartTimer() {
+        if (pitchTimerId) return
+        pitchRunning = true
+        pitchTimerId = setInterval(pitchTick, 1000)
+        var btn = document.getElementById('pitch-toggle-btn')
+        btn.innerHTML = '<i class="bi bi-pause-fill"></i> Pause'
+        pitchUpdateTimerDisplay()
+      }
+
+      function pitchStopTimer() {
+        if (pitchTimerId) {
+          clearInterval(pitchTimerId)
+          pitchTimerId = null
+        }
+        pitchRunning = false
+        var btn = document.getElementById('pitch-toggle-btn')
+        if (btn) btn.innerHTML = '<i class="bi bi-play-fill"></i> Start'
+        pitchUpdateTimerDisplay()
+      }
+
+      function pitchToggleTimer() {
+        if (pitchRunning) pitchStopTimer()
+        else pitchStartTimer()
+      }
+
+      function pitchResetTimer(autoStart) {
+        pitchStopTimer()
+        pitchRemaining = pitchDuration
+        pitchUpdateTimerDisplay()
+        if (autoStart) pitchStartTimer()
+      }
+
+      function pitchNext() {
+        if (!pitchApplicants.length) return
+        pitchIndex = (pitchIndex + 1) % pitchApplicants.length
+        pitchRender()
+        pitchResetTimer(true)
+      }
+
+      function pitchPrev() {
+        if (!pitchApplicants.length) return
+        pitchIndex = (pitchIndex - 1 + pitchApplicants.length) % pitchApplicants.length
+        pitchRender()
+        pitchResetTimer(true)
+      }
+
+      function pitchReset() {
+        pitchResetTimer(false)
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (document.getElementById('pitch').style.display === 'none') return
+        var tag = (e.target && e.target.tagName) || ''
+        if (tag === 'INPUT' || tag === 'TEXTAREA') return
+        if (e.key === ' ' || e.code === 'Space') {
+          e.preventDefault()
+          pitchToggleTimer()
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault()
+          pitchNext()
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault()
+          pitchPrev()
+        } else if (e.key === 'r' || e.key === 'R') {
+          e.preventDefault()
+          pitchReset()
+        }
+      })
+
+      // On page load, open tab from URL hash
+      var defaultTab = 'spreadsheet'
+
+      function openTabFromHash() {
+        var hash = window.location.hash.replace('#', '')
+        if (hash && document.getElementById(hash)) {
+          openCity(null, hash)
+        } else {
+          openCity(null, defaultTab)
+        }
+      }
+
+      // Run after config loads
+      fetch('config.json')
+        .then(function (r) {
+          return r.json()
+        })
+        .then(function (config) {
+          tabConfig = config.tabs || {}
+          configPassword = config.password || ''
+          if (config.defaultTab && document.getElementById(config.defaultTab)) {
+            defaultTab = config.defaultTab
+          }
+          // Set scoring sheet iframe URLs from config
+          if (config.scoringSheetUrl) {
+            defaultScoringSheetUrl = config.scoringSheetUrl
+            var savedId = localStorage.getItem('scoring-judge-id')
+            if (!savedId) {
+              document.querySelectorAll('.scoring-sheet-iframe').forEach(function (iframe) {
+                iframe.src = config.scoringSheetUrl
+              })
+            } else if (attendeesApiUrl) {
+              fetchAttendeesData().then(function () {
+                var judge = attendeesData.find(function (a) {
+                  return a.id === savedId
+                })
+                setScoringIframes((judge && judge.judgingUrl) || config.scoringSheetUrl)
+                applyUserWidget()
+              })
+            }
+          }
+          if (config.resultsSheetUrl) {
+            document.querySelectorAll('.results-sheet-iframe').forEach(function (iframe) {
+              iframe.src = config.resultsSheetUrl
+            })
+          }
+          if (config.applicantsApi) {
+            pitchApiUrl = config.applicantsApi
+          }
+          if (typeof config.pitchSeconds === 'number') {
+            pitchDuration = config.pitchSeconds
+          }
+          if (config.attendeesApi) {
+            attendeesApiUrl = config.attendeesApi
+          }
+          if (config.attendeesEmailSubject) {
+            attendeesEmailSubject = config.attendeesEmailSubject
+          }
+        })
+        .then(openTabFromHash)
+    </script>
+  </body>
 </html>
