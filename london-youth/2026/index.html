@@ -365,6 +365,124 @@
     font-size: 16px;
   }
 
+  #scoring.tabcontent {
+    background: #f5f5f7;
+    position: relative;
+  }
+
+  .scoring-picker {
+    position: absolute;
+    inset: 0;
+    background: #f5f5f7;
+    z-index: 8;
+    overflow-y: auto;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  .scoring-picker-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .scoring-picker h2 {
+    margin: 0 0 4px 0;
+    font-size: 24px;
+    color: #202023;
+  }
+
+  .scoring-picker p {
+    margin: 0 0 28px 0;
+    color: #666;
+  }
+
+  .scoring-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .scoring-picker-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid transparent;
+  }
+
+  .scoring-picker-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    border-color: #482961;
+  }
+
+  .scoring-picker-card img,
+  .scoring-picker-card .placeholder {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+  }
+
+  .scoring-picker-card .placeholder {
+    background: #482961;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 28px;
+  }
+
+  .scoring-picker-card .picker-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #202023;
+  }
+
+  .scoring-picker-card .picker-org {
+    color: #666;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .scoring-bar {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    z-index: 6;
+    background: rgba(255,255,255,0.95);
+    border-radius: 999px;
+    padding: 6px 10px 6px 14px;
+    font-size: 13px;
+    color: #202023;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .scoring-switch-btn {
+    background: #482961;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .scoring-switch-btn:hover {
+    background: #5a3580;
+  }
+
   #attendees.tabcontent {
     background: #f5f5f7;
     color: #202023;
@@ -665,6 +783,17 @@
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
+    <div id="scoring-picker" class="scoring-picker" style="display: none">
+      <div class="scoring-picker-inner">
+        <h2>Who are you?</h2>
+        <p>Pick your name to open your scoring sheet. We'll remember next time.</p>
+        <div id="scoring-picker-grid" class="scoring-picker-grid"></div>
+      </div>
+    </div>
+    <div id="scoring-bar" class="scoring-bar" style="display: none">
+      <span id="scoring-bar-name"></span>
+      <button id="scoring-switch-btn" class="scoring-switch-btn">Switch judge</button>
+    </div>
     <iframe
       class="scoring-sheet-iframe"
       width="100%"
@@ -900,6 +1029,7 @@
 
     if (cityName === 'pitch') { pitchInit(); }
     if (cityName === 'attendees') { attendeesInit(); requestAnimationFrame(attendeesLayout); }
+    if (cityName === 'scoring') { scoringInit(); }
 
     // Set active button
     if (evt) {
@@ -926,6 +1056,115 @@
   var attendeesEmailSubject = 'Connecting from London Youth Summer Skills Grants 2026';
   var attendeesLoaded = false;
   var attendeesLoading = false;
+  var attendeesData = [];
+  var attendeesFetchPromise = null;
+  var defaultScoringSheetUrl = '';
+
+  function fetchAttendeesData() {
+    if (attendeesFetchPromise) return attendeesFetchPromise;
+    if (!attendeesApiUrl) return Promise.reject(new Error('Attendees API not configured'));
+    attendeesFetchPromise = fetch(attendeesApiUrl)
+      .then(function(r) {
+        if (!r.ok) return r.text().then(function(t) { throw new Error('HTTP ' + r.status + ': ' + t); });
+        return r.json();
+      })
+      .then(function(data) {
+        attendeesData = data.attendees || [];
+        return data;
+      });
+    return attendeesFetchPromise;
+  }
+
+  function setScoringIframes(url) {
+    document.querySelectorAll('.scoring-sheet-iframe').forEach(function(iframe) {
+      if (iframe.src !== url) iframe.src = url;
+    });
+  }
+
+  function scoringInit() {
+    var picker = document.getElementById('scoring-picker');
+    var bar = document.getElementById('scoring-bar');
+    if (!picker || !bar) return;
+
+    var apply = function() {
+      var savedId = localStorage.getItem('scoring-judge-id');
+      var judge = savedId && attendeesData.find(function(a) { return a.id === savedId; });
+      if (judge && judge.judgingUrl) {
+        picker.style.display = 'none';
+        bar.style.display = 'flex';
+        document.getElementById('scoring-bar-name').textContent = judge.name;
+        setScoringIframes(judge.judgingUrl);
+      } else {
+        bar.style.display = 'none';
+        scoringRenderPicker();
+        picker.style.display = 'block';
+      }
+    };
+
+    if (attendeesData.length) {
+      apply();
+    } else {
+      fetchAttendeesData().then(apply).catch(function(err) {
+        console.warn('attendees fetch failed', err);
+        bar.style.display = 'none';
+        picker.style.display = 'none';
+      });
+    }
+  }
+
+  function scoringRenderPicker() {
+    var grid = document.getElementById('scoring-picker-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    var judges = attendeesData
+      .filter(function(a) { return a.judgingUrl; })
+      .sort(function(a, b) { return a.name.localeCompare(b.name); });
+
+    if (judges.length === 0) {
+      grid.innerHTML = '<p style="color:#666">No judges with scoring URLs configured yet.</p>';
+      return;
+    }
+
+    judges.forEach(function(j) {
+      var card = document.createElement('div');
+      card.className = 'scoring-picker-card';
+      if (j.photo) {
+        var img = document.createElement('img');
+        img.src = j.photo;
+        img.alt = j.name;
+        img.loading = 'lazy';
+        card.appendChild(img);
+      } else {
+        var ph = document.createElement('div');
+        ph.className = 'placeholder';
+        ph.textContent = (j.name || '?').split(/\s+/).map(function(p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+        card.appendChild(ph);
+      }
+      var name = document.createElement('div');
+      name.className = 'picker-name';
+      name.textContent = j.name;
+      card.appendChild(name);
+      if (j.organisation && j.organisation.length) {
+        var org = document.createElement('div');
+        org.className = 'picker-org';
+        org.textContent = j.organisation.join(', ');
+        card.appendChild(org);
+      }
+      card.addEventListener('click', function() {
+        localStorage.setItem('scoring-judge-id', j.id);
+        scoringInit();
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'scoring-switch-btn') {
+      localStorage.removeItem('scoring-judge-id');
+      if (defaultScoringSheetUrl) setScoringIframes(defaultScoringSheetUrl);
+      scoringInit();
+    }
+  });
 
   function attendeesInit() {
     if (attendeesLoaded || attendeesLoading) return;
@@ -1430,9 +1669,22 @@
       }
       // Set scoring sheet iframe URLs from config
       if (config.scoringSheetUrl) {
-        document.querySelectorAll('.scoring-sheet-iframe').forEach(function(iframe) {
-          iframe.src = config.scoringSheetUrl;
-        });
+        defaultScoringSheetUrl = config.scoringSheetUrl;
+        var savedId = localStorage.getItem('scoring-judge-id');
+        if (!savedId) {
+          document.querySelectorAll('.scoring-sheet-iframe').forEach(function(iframe) {
+            iframe.src = config.scoringSheetUrl;
+          });
+        } else if (attendeesApiUrl) {
+          fetchAttendeesData().then(function() {
+            var judge = attendeesData.find(function(a) { return a.id === savedId; });
+            if (judge && judge.judgingUrl) {
+              setScoringIframes(judge.judgingUrl);
+            } else {
+              setScoringIframes(config.scoringSheetUrl);
+            }
+          });
+        }
       }
       if (config.resultsSheetUrl) {
         document.querySelectorAll('.results-sheet-iframe').forEach(function(iframe) {

@@ -12,6 +12,7 @@ const FIELD_WHITELIST = [
   'Organisation',
   'Attendee Type',
   'URL',
+  'Judging URL',
   'Attendance Status',
 ];
 
@@ -47,6 +48,7 @@ function shape(rec) {
     organisation: f['Organisation'] || [],
     attendeeType: f['Attendee Type'] || '',
     url: f['URL'] || '',
+    judgingUrl: f['Judging URL'] || '',
     attending: !!f['Attendance Status'],
   };
 }
