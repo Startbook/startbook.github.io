@@ -191,6 +191,8 @@
   <div class="tab">
     <button class="tablinks" onclick="openCity(event, 'slides')"><i class="bi bi-easel"></i><span class="tab-label"> Slides</span></button>
 
+    <button class="tablinks" onclick="openCity(event, 'attendees')"><i class="bi bi-people"></i><span class="tab-label"> Attendees</span></button>
+
     <button class="tablinks" onclick="openCity(event, 'spreadsheet')"><i class="bi bi-table"></i><span class="tab-label"> Spreadsheet</span></button>
 
     <button class="tablinks" onclick="openCity(event, 'gallery')"><i class="bi bi-grid"></i><span class="tab-label"> Gallery</span></button>
@@ -227,7 +229,7 @@
     </div>
     <iframe
       class="airtable-embed"
-      src="https://airtable.com/embed/app6FvPARDKaDRKwu/shrUDIiVMoAoRLw4I?viewControls=on"
+      src="https://airtable.com/embed/app6FvPARDKaDRKwu/shrUDIiVMoAoRLw4I/tbl3IO57DDarIXouQ?viewControls=on"
       frameborder="0"
       onmousewheel=""
       width="100%"
@@ -430,12 +432,14 @@
   }
 
   // On page load, open tab from URL hash
+  var defaultTab = 'spreadsheet';
+
   function openTabFromHash() {
     var hash = window.location.hash.replace('#', '');
     if (hash && document.getElementById(hash)) {
       openCity(null, hash);
     } else {
-      openCity(null, 'spreadsheet');
+      openCity(null, defaultTab);
     }
   }
 
@@ -445,6 +449,9 @@
     .then(function(config) {
       tabConfig = config.tabs || {};
       configPassword = config.password || '';
+      if (config.defaultTab && document.getElementById(config.defaultTab)) {
+        defaultTab = config.defaultTab;
+      }
       // Set scoring sheet iframe URLs from config
       if (config.scoringSheetUrl) {
         document.querySelectorAll('.scoring-sheet-iframe').forEach(function(iframe) {

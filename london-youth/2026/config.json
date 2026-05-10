@@ -1,12 +1,14 @@
 {
   "tabs": {
-    "slides": { "locked": false },
-    "spreadsheet": { "locked": false },
-    "gallery": { "locked": false },
-    "scoring": { "locked": false },
-    "side-by-side": { "locked": false },
-    "results": { "locked": false }
+    "slides": { "locked": true },
+    "attendees": { "locked": true },
+    "spreadsheet": { "locked": true },
+    "gallery": { "locked": true },
+    "scoring": { "locked": true },
+    "side-by-side": { "locked": true },
+    "results": { "locked": true }
   },
+  "defaultTab": "scoring",
   "password": "cvc",
   "scoringSheetUrlCVC": "https://docs.google.com/spreadsheets/d/1mNn-47yo6WEc3PGD6kE7-0omhY6zkJJAAPmIzchdJ8k/edit?usp=sharing&rm=minimal&single=true",
   "scoringSheetUrlLY": "https://docs.google.com/spreadsheets/d/16SfA-RwbD3qolnMbuZsZx5mHOvoi2J3zTaqAZBg56XQ/edit??usp=sharing&rm=minimal&single=true",
