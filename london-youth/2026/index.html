@@ -1452,6 +1452,8 @@
       })
 
       function showLockOverlay(tabId) {
+        // Login overlay handles auth — per-tab lock disabled when attendeesApi is configured
+        if (attendeesApiUrl) return;
         // Remove any existing overlay
         var existing = document.getElementById('lock-' + tabId)
         if (existing) {
@@ -1604,7 +1606,11 @@
       })
       .catch(function(err) {
         console.warn('login attendees fetch failed', err);
-        hideLoginOverlay();
+        showLoginOverlay();
+        var grid = document.getElementById('login-grid');
+        if (grid) {
+          grid.innerHTML = '<div class="login-empty">Could not load attendees: ' + (err.message || err) + '. Please refresh in a moment.</div>';
+        }
       });
   }
 

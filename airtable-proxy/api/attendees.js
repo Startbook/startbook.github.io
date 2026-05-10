@@ -5,7 +5,9 @@ const ORG_FIELD_NAME = 'Organisation';
 const TYPE_FIELD_NAME = 'Attendee Type';
 
 const FIELD_WHITELIST = [
-  'Name',
+  'Attendee Name',
+  'First Name',
+  'Last Name',
   'Profile Picture',
   'Email',
   'Job Title',
@@ -41,7 +43,9 @@ function shape(rec) {
     : null;
   return {
     id: rec.id,
-    name: f['Name'] || '',
+    name: f['Attendee Name'] || [f['First Name'], f['Last Name']].filter(Boolean).join(' '),
+    firstName: f['First Name'] || '',
+    lastName: f['Last Name'] || '',
     photo,
     email: f['Email'] || '',
     jobTitle: f['Job Title'] || '',
