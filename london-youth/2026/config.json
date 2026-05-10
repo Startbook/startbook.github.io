@@ -13,6 +13,7 @@
   "password": "cvc",
   "applicantsApi": "https://airtable-proxy-startbook.vercel.app/api/applicants",
   "attendeesApi": "https://airtable-proxy-startbook.vercel.app/api/attendees",
+  "attendeesEmailSubject": "Connecting from London Youth Summer Skills Grants 2026",
   "pitchSeconds": 100,
   "scoringSheetUrlCVC": "https://docs.google.com/spreadsheets/d/1mNn-47yo6WEc3PGD6kE7-0omhY6zkJJAAPmIzchdJ8k/edit?usp=sharing&rm=minimal&single=true",
   "scoringSheetUrlLY": "https://docs.google.com/spreadsheets/d/16SfA-RwbD3qolnMbuZsZx5mHOvoi2J3zTaqAZBg56XQ/edit??usp=sharing&rm=minimal&single=true",

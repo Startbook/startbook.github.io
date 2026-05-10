@@ -373,6 +373,7 @@
 
   .attendees-content {
     padding: 30px;
+    --attendee-scale: 1;
   }
 
   .attendees-filters {
@@ -420,20 +421,31 @@
     display: none;
   }
 
+  ::view-transition-group(*) {
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
   .attendees-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
-    gap: 24px;
+    gap: calc(24px * var(--attendee-scale, 1));
     justify-content: center;
+    align-content: start;
   }
 
   .attendee-card {
+    --card-multiplier: 1;
     background: white;
     border-radius: 12px;
-    padding: 28px 20px;
+    padding: calc(28px * var(--attendee-scale, 1) * var(--card-multiplier, 1)) calc(20px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     text-align: center;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: box-shadow 0.15s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -448,57 +460,78 @@
     opacity: 0.45;
   }
 
+  .attendee-card {
+    cursor: pointer;
+  }
+
+  .attendee-card.featured {
+    order: -1;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f0fa 100%);
+    box-shadow: 0 10px 32px rgba(72, 41, 97, 0.28);
+    border: 2px solid #482961;
+  }
+
+  .attendee-card.featured.featured-spans {
+    grid-column: span 2;
+    grid-row: span 2;
+    --card-multiplier: 2;
+    justify-content: center;
+    width: var(--featured-w, auto);
+    height: var(--featured-h, auto);
+    box-sizing: border-box;
+  }
+
   .attendee-photo {
-    width: 150px;
-    height: 150px;
+    width: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    height: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     border-radius: 50%;
     object-fit: cover;
     background: #ddd;
-    margin-bottom: 18px;
+    margin-bottom: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
   }
 
   .attendee-photo-placeholder {
-    width: 150px;
-    height: 150px;
+    width: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    height: calc(150px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     border-radius: 50%;
     background: #482961;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48px;
+    font-size: calc(48px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     font-weight: 600;
-    margin-bottom: 18px;
+    margin-bottom: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
   }
 
   .attendee-name {
-    font-size: 19px;
+    font-size: calc(19px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     font-weight: 600;
-    margin: 0 0 6px 0;
+    margin: 0 0 calc(6px * var(--attendee-scale, 1) * var(--card-multiplier, 1)) 0;
   }
 
   .attendee-job {
     color: #666;
-    font-size: 14px;
-    margin-bottom: 14px;
-    min-height: 18px;
+    font-size: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    margin-bottom: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
+    min-height: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
   }
 
   .attendee-orgs {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: calc(4px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: calc(12px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
   }
 
   .attendee-org-pill {
-    font-size: 11px;
+    font-size: calc(10px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     font-weight: 600;
-    padding: 3px 10px;
+    padding: calc(2px * var(--attendee-scale, 1) * var(--card-multiplier, 1)) calc(8px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     border-radius: 999px;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
   }
 
   .attendee-org-CVC { background: #1e3a8a; color: white; }
@@ -511,15 +544,15 @@
 
   .attendee-links {
     display: flex;
-    gap: 14px;
+    gap: calc(14px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     justify-content: center;
     margin-top: auto;
-    padding-top: 6px;
+    padding-top: calc(6px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
   }
 
   .attendee-links a {
     color: #666;
-    font-size: 18px;
+    font-size: calc(18px * var(--attendee-scale, 1) * var(--card-multiplier, 1));
     text-decoration: none;
     transition: color 0.15s ease;
   }
@@ -748,7 +781,7 @@
   }
   resizeContent();
   window.addEventListener('load', resizeContent);
-  window.addEventListener('resize', resizeContent);
+  window.addEventListener('resize', function() { resizeContent(); attendeesLayout(); });
 
   var sideBySideLoaded = 0;
   function markSideBySideLoaded() {
@@ -866,7 +899,7 @@
     document.getElementById(cityName).style.display = (cityName === 'side-by-side') ? 'flex' : 'block'
 
     if (cityName === 'pitch') { pitchInit(); }
-    if (cityName === 'attendees') { attendeesInit(); }
+    if (cityName === 'attendees') { attendeesInit(); requestAnimationFrame(attendeesLayout); }
 
     // Set active button
     if (evt) {
@@ -890,6 +923,7 @@
   }
 
   var attendeesApiUrl = '';
+  var attendeesEmailSubject = 'Connecting from London Youth Summer Skills Grants 2026';
   var attendeesLoaded = false;
   var attendeesLoading = false;
 
@@ -914,7 +948,7 @@
         attendeesLoaded = true;
         document.getElementById('loading-attendees').style.display = 'none';
         document.getElementById('attendees-content').style.display = 'block';
-        attendeesRender(list);
+        attendeesRender(list, data.orgs || []);
       })
       .catch(function(err) {
         attendeesShowError('Failed to load attendees: ' + err.message);
@@ -945,8 +979,94 @@
   }
 
   var attendeesActiveFilter = 'all';
+  var attendeesFeaturedId = null;
 
-  function attendeesApplyFilter() {
+  function attendeesReorder() {
+    var grid = document.getElementById('attendees-grid');
+    if (!grid) return;
+    var visibleCount = grid.querySelectorAll('.attendee-card:not(.hidden)').length;
+    var spans = !!attendeesFeaturedId && visibleCount >= 1;
+    grid.querySelectorAll('.attendee-card').forEach(function(c) {
+      var isFeatured = c.getAttribute('data-id') === attendeesFeaturedId;
+      c.classList.toggle('featured', isFeatured);
+      c.classList.toggle('featured-spans', isFeatured && spans);
+    });
+  }
+
+  function attendeesToggleFeatured(id) {
+    attendeesFeaturedId = (attendeesFeaturedId === id) ? null : id;
+    var update = function() { attendeesReorder(); attendeesLayout(); };
+    if (document.startViewTransition) {
+      document.startViewTransition(update);
+    } else {
+      update();
+    }
+  }
+
+  function attendeesLayout() {
+    var grid = document.getElementById('attendees-grid');
+    var content = document.getElementById('attendees-content');
+    var tab = document.getElementById('attendees');
+    if (!grid || !content || !tab || tab.style.display === 'none') return;
+
+    var visible = Array.prototype.filter.call(
+      grid.querySelectorAll('.attendee-card'),
+      function(c) { return !c.classList.contains('hidden'); }
+    );
+    var n = visible.length;
+    if (n === 0) return;
+
+    var W = grid.clientWidth;
+    var gridRect = grid.getBoundingClientRect();
+    var tabRect = tab.getBoundingClientRect();
+    var H = tabRect.bottom - gridRect.top - 30;
+    if (W < 100 || H < 100) return;
+
+    var gap = 20;
+    var aspect = 1.3;
+    var maxSize = 260;
+    var hasFeaturedSpans = !!grid.querySelector('.attendee-card.featured-spans:not(.hidden)');
+    var slotCount = n + (hasFeaturedSpans ? 3 : 0);
+    var best = { cols: hasFeaturedSpans ? 2 : 1, size: 0, rowH: 0 };
+    var minCols = hasFeaturedSpans ? 2 : 1;
+    for (var cols = minCols; cols <= slotCount; cols++) {
+      var rows = Math.ceil(slotCount / cols);
+      if (hasFeaturedSpans && rows < 2) continue;
+      var cardW = (W - (cols - 1) * gap) / cols;
+      var cardH = (H - (rows - 1) * gap) / rows;
+      var effective = Math.min(cardW, cardH / aspect);
+      var capped = Math.min(effective, maxSize);
+      if (capped > best.size) {
+        best = { cols: cols, rows: rows, size: capped, rowH: cardH };
+      }
+    }
+
+    var size = Math.max(140, best.size);
+    var rowH = Math.max(140, Math.min(size * aspect, best.rowH));
+    var scale = Math.max(0.55, Math.min(1.25, size / 260));
+    grid.style.gridTemplateColumns = 'repeat(' + best.cols + ', minmax(0, ' + size + 'px))';
+    grid.style.gridAutoRows = rowH + 'px';
+    content.style.setProperty('--attendee-scale', scale);
+    content.style.setProperty('--featured-w', (2 * size + gap) + 'px');
+    content.style.setProperty('--featured-h', (2 * rowH + gap) + 'px');
+
+    console.log('[attendees layout]', {
+      visibleN: n,
+      hasFeaturedSpans: hasFeaturedSpans,
+      slotCount: slotCount,
+      containerW: W,
+      containerH: H,
+      pickedCols: best.cols,
+      pickedRows: best.rows,
+      cardSize: size,
+      rowHeight: rowH,
+      scale: scale.toFixed(3),
+      featuredW: hasFeaturedSpans ? (2 * size + gap) : null,
+      featuredH: hasFeaturedSpans ? (2 * rowH + gap) : null,
+    });
+  }
+
+  function attendeesApplyFilterRaw() {
     var cards = document.querySelectorAll('#attendees-grid .attendee-card');
     cards.forEach(function(card) {
       var orgs = (card.getAttribute('data-orgs') || '').split('|').filter(Boolean);
@@ -956,14 +1076,39 @@
     document.querySelectorAll('.attendees-filter-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.getAttribute('data-org') === attendeesActiveFilter);
     });
+    if (attendeesFeaturedId) {
+      var f = document.querySelector('#attendees-grid .attendee-card[data-id="' + attendeesFeaturedId + '"]');
+      if (!f || f.classList.contains('hidden')) {
+        attendeesFeaturedId = null;
+        if (f) f.classList.remove('featured');
+      }
+    }
+    attendeesReorder();
+    attendeesLayout();
   }
 
-  function attendeesBuildFilters(list) {
+  function attendeesApplyFilter() {
+    if (document.startViewTransition) {
+      document.startViewTransition(attendeesApplyFilterRaw);
+    } else {
+      attendeesApplyFilterRaw();
+    }
+  }
+
+  function attendeesBuildFilters(list, orgOrder) {
     var counts = {};
     list.forEach(function(a) {
       (a.organisation || []).forEach(function(o) { counts[o] = (counts[o] || 0) + 1; });
     });
-    var orgs = Object.keys(counts).sort();
+    var orgs;
+    if (orgOrder && orgOrder.length) {
+      orgs = orgOrder.filter(function(o) { return counts[o]; });
+      Object.keys(counts).forEach(function(o) {
+        if (orgs.indexOf(o) === -1) orgs.push(o);
+      });
+    } else {
+      orgs = Object.keys(counts).sort();
+    }
     var bar = document.getElementById('attendees-filters');
     bar.innerHTML = '';
 
@@ -983,14 +1128,20 @@
     orgs.forEach(function(o) { bar.appendChild(makeBtn(o, o, counts[o])); });
   }
 
-  function attendeesRender(list) {
-    attendeesBuildFilters(list);
+  function attendeesRender(list, orgOrder) {
+    attendeesBuildFilters(list, orgOrder);
     var grid = document.getElementById('attendees-grid');
     grid.innerHTML = '';
     list.forEach(function(a) {
       var card = document.createElement('div');
       card.className = 'attendee-card' + (a.attending ? '' : ' absent');
       card.setAttribute('data-orgs', (a.organisation || []).join('|'));
+      card.setAttribute('data-id', a.id);
+      card.style.viewTransitionName = 'attendee-' + a.id;
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('a')) return;
+        attendeesToggleFeatured(a.id);
+      });
 
       if (a.photo) {
         var img = document.createElement('img');
@@ -1032,8 +1183,10 @@
       links.className = 'attendee-links';
       if (a.email) {
         var em = document.createElement('a');
-        em.href = 'mailto:' + a.email;
+        em.href = 'mailto:' + a.email + '?subject=' + encodeURIComponent(attendeesEmailSubject);
         em.title = a.email;
+        em.target = '_blank';
+        em.rel = 'noopener';
         em.innerHTML = '<i class="bi bi-envelope"></i>';
         links.appendChild(em);
       }
@@ -1050,6 +1203,7 @@
 
       grid.appendChild(card);
     });
+    attendeesLayout();
   }
 
   var pitchApiUrl = '';
@@ -1246,6 +1400,7 @@
       if (config.applicantsApi) { pitchApiUrl = config.applicantsApi; }
       if (typeof config.pitchSeconds === 'number') { pitchDuration = config.pitchSeconds; }
       if (config.attendeesApi) { attendeesApiUrl = config.attendeesApi; }
+      if (config.attendeesEmailSubject) { attendeesEmailSubject = config.attendeesEmailSubject; }
     })
     .then(openTabFromHash);
 </script>

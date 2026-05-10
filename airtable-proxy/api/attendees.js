@@ -1,6 +1,7 @@
 const BASE_ID = 'app6FvPARDKaDRKwu';
 const TABLE_ID = 'tbl3IO57DDarIXouQ';
 const GALLERY_VIEW_ID = 'viw0TqpGfrxD8bM2K';
+const ORG_FIELD_NAME = 'Organisation';
 
 const FIELD_WHITELIST = [
   'Name',
@@ -62,25 +63,42 @@ export default async function handler(req, res) {
   const baseUrl = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`;
   const records = [];
   let offset;
+  let orgs = [];
 
   try {
-    do {
-      const url = offset
-        ? `${baseUrl}?${params.toString()}&offset=${encodeURIComponent(offset)}`
-        : `${baseUrl}?${params.toString()}`;
-      const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-      if (!r.ok) {
-        const detail = await r.text();
-        return res.status(r.status).json({ error: 'Airtable error', detail });
-      }
+    const recordsPromise = (async () => {
+      do {
+        const url = offset
+          ? `${baseUrl}?${params.toString()}&offset=${encodeURIComponent(offset)}`
+          : `${baseUrl}?${params.toString()}`;
+        const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+        if (!r.ok) {
+          const detail = await r.text();
+          throw new Error(`records ${r.status}: ${detail}`);
+        }
+        const data = await r.json();
+        records.push(...(data.records || []));
+        offset = data.offset;
+      } while (offset);
+    })();
+
+    const schemaPromise = (async () => {
+      const r = await fetch(`https://api.airtable.com/v0/meta/bases/${BASE_ID}/tables`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!r.ok) return; // non-fatal — frontend can fall back to alphabetical
       const data = await r.json();
-      records.push(...(data.records || []));
-      offset = data.offset;
-    } while (offset);
+      const table = (data.tables || []).find((t) => t.id === TABLE_ID);
+      const field = table && (table.fields || []).find((f) => f.name === ORG_FIELD_NAME);
+      const choices = field && field.options && field.options.choices;
+      if (choices) orgs = choices.map((c) => c.name);
+    })();
+
+    await Promise.all([recordsPromise, schemaPromise]);
   } catch (err) {
     return res.status(502).json({ error: 'Upstream fetch failed', detail: String(err) });
   }
 
   res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300');
-  res.json({ count: records.length, attendees: records.map(shape) });
+  res.json({ count: records.length, orgs, attendees: records.map(shape) });
 }
