@@ -3,7 +3,6 @@ const TABLE_ID = 'tblon7jDpWeYpLNE3';
 const PRESENTATION_VIEW_ID = 'viwz7TBu1WYr4AbOt';
 
 const FIELD_WHITELIST = [
-  'No.',
   'Project',
   'Logo',
   'Borough',

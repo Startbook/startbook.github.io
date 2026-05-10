@@ -487,6 +487,251 @@
       display: block;
     }
 
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #f5f0fa 0%, #ede5f5 100%);
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 880px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(72, 41, 97, 0.18);
+      padding: 40px 48px;
+      box-sizing: border-box;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .login-logo {
+      height: 32px;
+      margin-bottom: 16px;
+    }
+
+    .login-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+      color: #202023;
+    }
+
+    .login-header p {
+      color: #666;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .login-search {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      background: #fafafa;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      font-family: inherit;
+    }
+
+    .login-search:focus {
+      border-color: #482961;
+      background: white;
+    }
+
+    .login-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      max-height: 50vh;
+      overflow-y: auto;
+      padding: 4px;
+    }
+
+    .login-card {
+      background: white;
+      border: 2px solid #ececef;
+      border-radius: 10px;
+      padding: 16px 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: inherit;
+    }
+
+    .login-card:hover {
+      border-color: #482961;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(72, 41, 97, 0.12);
+    }
+
+    .login-card img,
+    .login-card .login-card-placeholder {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      background: #ddd;
+    }
+
+    .login-card .login-card-placeholder {
+      background: #482961;
+      color: white;
+      font-weight: 600;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #202023;
+    }
+
+    .login-card-org {
+      font-size: 11px;
+      color: #888;
+      margin-top: 3px;
+    }
+
+    .login-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: #888;
+      padding: 32px;
+      font-size: 14px;
+    }
+
+    .login-password-area {
+      text-align: center;
+    }
+
+    .login-selected {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .login-selected img,
+    .login-selected .placeholder {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      background: #ddd;
+    }
+
+    .login-selected .placeholder {
+      background: #482961;
+      color: white;
+      font-weight: 600;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-selected-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #202023;
+    }
+
+    .login-selected-org {
+      color: #666;
+      font-size: 14px;
+      margin-top: 3px;
+    }
+
+    .login-form {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .login-password {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+      text-align: center;
+      background: #fafafa;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      font-family: inherit;
+    }
+
+    .login-password:focus {
+      border-color: #482961;
+      background: white;
+    }
+
+    .login-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .login-btn-primary,
+    .login-btn-secondary {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s ease;
+      font-family: inherit;
+    }
+
+    .login-btn-primary {
+      background: #482961;
+      color: white;
+    }
+
+    .login-btn-primary:hover {
+      background: #5a3580;
+    }
+
+    .login-btn-secondary {
+      background: transparent;
+      color: #482961;
+      border: 1px solid #d1d5db;
+    }
+
+    .login-btn-secondary:hover {
+      background: #f3f3f5;
+    }
+
+    .login-error {
+      color: #c00;
+      font-size: 13px;
+      margin-top: 12px;
+      min-height: 18px;
+    }
+
     .user-widget {
       position: absolute;
       top: 50%;
@@ -776,6 +1021,34 @@
   </style>
 
   <body style="margin: 0; height: 100%; width: 100%; background-color: black">
+
+    <div id="login-overlay" class="login-overlay" style="display: none">
+      <div class="login-container">
+        <div class="login-header">
+          <img class="login-logo" src="../../assets/img/startbook-logo-word-dark-colour.png" alt="Startbook" />
+          <h1>Summer Skills Grants 2026</h1>
+          <p>Sign in to continue</p>
+        </div>
+
+        <div id="login-pick-area">
+          <input id="login-search" class="login-search" type="search" placeholder="Search by name or organisation…" autocomplete="off" />
+          <div id="login-grid" class="login-grid"></div>
+        </div>
+
+        <div id="login-password-area" class="login-password-area" style="display: none">
+          <div id="login-selected" class="login-selected"></div>
+          <form id="login-form" class="login-form" autocomplete="off">
+            <input id="login-password" class="login-password" type="password" placeholder="Password" autocomplete="current-password" />
+            <div class="login-buttons">
+              <button type="button" id="login-back" class="login-btn-secondary">Back</button>
+              <button type="submit" id="login-submit" class="login-btn-primary">Sign in</button>
+            </div>
+            <div id="login-error" class="login-error"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div
       class="header"
       style="
@@ -1293,7 +1566,185 @@
         })
       }
 
-      function applyUserWidget() {
+      var loginSelectedAttendee = null;
+
+  function loginInit() {
+    var savedId = localStorage.getItem('scoring-judge-id');
+    var loggedIn = localStorage.getItem('login-unlocked') === 'true';
+    if (savedId && loggedIn) {
+      Object.keys(tabConfig).forEach(function(id) { unlockedTabs[id] = true; });
+      hideLoginOverlay();
+      return Promise.resolve();
+    }
+    if (!attendeesApiUrl) {
+      hideLoginOverlay();
+      return Promise.resolve();
+    }
+    return fetchAttendeesData()
+      .then(function() {
+        showLoginOverlay();
+      })
+      .catch(function(err) {
+        console.warn('login attendees fetch failed', err);
+        hideLoginOverlay();
+      });
+  }
+
+  function showLoginOverlay() {
+    var overlay = document.getElementById('login-overlay');
+    if (!overlay) return;
+    overlay.style.display = 'flex';
+    document.getElementById('login-pick-area').style.display = 'block';
+    document.getElementById('login-password-area').style.display = 'none';
+    var search = document.getElementById('login-search');
+    if (search) {
+      search.value = '';
+      setTimeout(function() { search.focus(); }, 50);
+    }
+    loginRenderGrid('');
+  }
+
+  function hideLoginOverlay() {
+    var overlay = document.getElementById('login-overlay');
+    if (overlay) overlay.style.display = 'none';
+  }
+
+  function loginInitials(name) {
+    if (!name) return '?';
+    var parts = name.trim().split(/\s+/);
+    return ((parts[0] || '')[0] + (parts[parts.length - 1] || '')[0] || '?').toUpperCase();
+  }
+
+  function loginRenderGrid(query) {
+    var grid = document.getElementById('login-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    var q = (query || '').toLowerCase().trim();
+    var list = attendeesData.slice().sort(function(a, b) { return a.name.localeCompare(b.name); });
+    if (q) {
+      list = list.filter(function(a) {
+        if (a.name.toLowerCase().indexOf(q) !== -1) return true;
+        if ((a.organisation || []).some(function(o) { return o.toLowerCase().indexOf(q) !== -1; })) return true;
+        if ((a.attendeeType || '').toLowerCase().indexOf(q) !== -1) return true;
+        return false;
+      });
+    }
+    if (list.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'login-empty';
+      empty.textContent = 'No matches';
+      grid.appendChild(empty);
+      return;
+    }
+    list.forEach(function(a) {
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'login-card';
+      if (a.photo) {
+        var img = document.createElement('img');
+        img.src = a.photo;
+        img.alt = a.name;
+        img.loading = 'lazy';
+        card.appendChild(img);
+      } else {
+        var ph = document.createElement('div');
+        ph.className = 'login-card-placeholder';
+        ph.textContent = loginInitials(a.name);
+        card.appendChild(ph);
+      }
+      var nm = document.createElement('div');
+      nm.className = 'login-card-name';
+      nm.textContent = a.name;
+      card.appendChild(nm);
+      if (a.organisation && a.organisation.length) {
+        var org = document.createElement('div');
+        org.className = 'login-card-org';
+        org.textContent = a.organisation.join(', ');
+        card.appendChild(org);
+      }
+      card.addEventListener('click', function() { loginSelect(a); });
+      grid.appendChild(card);
+    });
+  }
+
+  function loginSelect(attendee) {
+    loginSelectedAttendee = attendee;
+    document.getElementById('login-pick-area').style.display = 'none';
+    document.getElementById('login-password-area').style.display = 'block';
+    var sel = document.getElementById('login-selected');
+    sel.innerHTML = '';
+    if (attendee.photo) {
+      var img = document.createElement('img');
+      img.src = attendee.photo;
+      img.alt = attendee.name;
+      sel.appendChild(img);
+    } else {
+      var ph = document.createElement('div');
+      ph.className = 'placeholder';
+      ph.textContent = loginInitials(attendee.name);
+      sel.appendChild(ph);
+    }
+    var nm = document.createElement('div');
+    nm.className = 'login-selected-name';
+    nm.textContent = attendee.name;
+    sel.appendChild(nm);
+    if (attendee.organisation && attendee.organisation.length) {
+      var org = document.createElement('div');
+      org.className = 'login-selected-org';
+      org.textContent = attendee.organisation.join(', ');
+      sel.appendChild(org);
+    }
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-error').textContent = '';
+    setTimeout(function() { document.getElementById('login-password').focus(); }, 50);
+  }
+
+  function loginBack() {
+    loginSelectedAttendee = null;
+    document.getElementById('login-password-area').style.display = 'none';
+    document.getElementById('login-pick-area').style.display = 'block';
+    setTimeout(function() {
+      var search = document.getElementById('login-search');
+      if (search) search.focus();
+    }, 50);
+  }
+
+  function loginSubmit() {
+    if (!loginSelectedAttendee) return;
+    var pw = document.getElementById('login-password').value || '';
+    if (pw.toLowerCase() !== (configPassword || '').toLowerCase()) {
+      document.getElementById('login-error').textContent = 'Incorrect password — try again';
+      return;
+    }
+    localStorage.setItem('scoring-judge-id', loginSelectedAttendee.id);
+    localStorage.setItem('login-unlocked', 'true');
+    Object.keys(tabConfig).forEach(function(id) { unlockedTabs[id] = true; });
+    document.querySelectorAll('.lock-overlay').forEach(function(el) { el.remove(); });
+    setScoringIframes(loginSelectedAttendee.judgingUrl || defaultScoringSheetUrl);
+    applyUserWidget();
+    hideLoginOverlay();
+  }
+
+  document.addEventListener('input', function(e) {
+    if (e.target && e.target.id === 'login-search') {
+      loginRenderGrid(e.target.value);
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.closest && e.target.closest('#login-back')) {
+      loginBack();
+    }
+  });
+
+  document.addEventListener('submit', function(e) {
+    if (e.target && e.target.id === 'login-form') {
+      e.preventDefault();
+      loginSubmit();
+    }
+  });
+
+  function applyUserWidget() {
         var widget = document.getElementById('user-widget')
         if (!widget) return
         var savedId = localStorage.getItem('scoring-judge-id')
@@ -1402,10 +1853,11 @@
       document.addEventListener('click', function (e) {
         if (e.target && e.target.closest && e.target.closest('#user-widget-logout')) {
           localStorage.removeItem('scoring-judge-id')
+          localStorage.removeItem('login-unlocked')
+          Object.keys(tabConfig).forEach(function (id) { delete unlockedTabs[id] })
           if (defaultScoringSheetUrl) setScoringIframes(defaultScoringSheetUrl)
           applyUserWidget()
-          var scoringEl = document.getElementById('scoring')
-          if (scoringEl && scoringEl.style.display !== 'none') scoringInit()
+          showLoginOverlay()
         }
       })
 
@@ -2021,6 +2473,7 @@
           }
         })
         .then(openTabFromHash)
+        .then(loginInit)
     </script>
   </body>
 </html>
