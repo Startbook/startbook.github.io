@@ -20,6 +20,8 @@ const FIELD_WHITELIST = [
 
 const ALLOWED_ORIGINS = [
   'https://startbook.github.io',
+  'https://startbook.co.uk',
+  'https://www.startbook.co.uk',
   'http://127.0.0.1:5500',
   'http://localhost:5500',
   'http://127.0.0.1:5501',
