@@ -1054,7 +1054,7 @@
         <div id="login-password-area" class="login-password-area" style="display: none">
           <div id="login-selected" class="login-selected"></div>
           <form id="login-form" class="login-form" autocomplete="off">
-            <input id="login-password" class="login-password" type="password" placeholder="Password" autocomplete="current-password" />
+            <input id="login-password" class="login-password" type="email" placeholder="Confirm your email address" autocomplete="email" />
             <div class="login-buttons">
               <button type="button" id="login-back" class="login-btn-secondary">Back</button>
               <button type="submit" id="login-submit" class="login-btn-primary">Sign in</button>
@@ -1132,35 +1132,35 @@
     </div>
 
     <div class="tab">
-      <button class="tablinks" onclick="openCity(event, 'slides')">
+      <button class="tablinks" onclick="openTab(event, 'slides')">
         <i class="bi bi-easel"></i><span class="tab-label"> Slides</span>
       </button>
 
-      <button class="tablinks" onclick="openCity(event, 'attendees')">
+      <button class="tablinks" onclick="openTab(event, 'attendees')">
         <i class="bi bi-people"></i><span class="tab-label"> Attendees</span>
       </button>
 
-      <button class="tablinks" onclick="openCity(event, 'pitch')">
+      <button class="tablinks" onclick="openTab(event, 'pitch')">
         <i class="bi bi-stopwatch"></i><span class="tab-label"> Pitch</span>
       </button>
 
-      <button class="tablinks" onclick="openCity(event, 'spreadsheet')">
+      <button class="tablinks" onclick="openTab(event, 'spreadsheet')">
         <i class="bi bi-table"></i><span class="tab-label"> Spreadsheet</span>
       </button>
 
-      <button class="tablinks" onclick="openCity(event, 'gallery')">
+      <button class="tablinks" onclick="openTab(event, 'gallery')">
         <i class="bi bi-grid"></i><span class="tab-label"> Gallery</span>
       </button>
 
-      <button class="tablinks" onclick="openCity(event, 'scoring')">
+      <button class="tablinks" onclick="openTab(event, 'scoring')">
         <i class="bi bi-pencil-square"></i><span class="tab-label"> Scoring</span>
       </button>
 
-      <button class="tablinks" onclick="openCity(event, 'side-by-side')">
+      <button class="tablinks" onclick="openTab(event, 'side-by-side')">
         <i class="bi bi-layout-split"></i><span class="tab-label"> Side-by-side</span>
       </button>
 
-      <button class="tablinks" onclick="openCity(event, 'results')">
+      <button class="tablinks" onclick="openTab(event, 'results')">
         <i class="bi bi-trophy"></i><span class="tab-label"> Results</span>
       </button>
     </div>
@@ -1231,13 +1231,6 @@
       <div id="loading-scoring" class="loading-overlay">
         <img src="../../assets/img/loading.gif" height="50px" width="50px" />
         <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0">Loading...</p>
-      </div>
-      <div id="scoring-picker" class="scoring-picker" style="display: none">
-        <div class="scoring-picker-inner">
-          <h2>Log in</h2>
-          <p>Pick your name to open your scoring sheet.</p>
-          <div id="scoring-picker-grid" class="scoring-picker-grid"></div>
-        </div>
       </div>
       <iframe
         class="scoring-sheet-iframe"
@@ -1508,7 +1501,7 @@
         }
       }
 
-      function openCity(evt, cityName) {
+      function openTab(evt, tabId) {
         var i, tabcontent, tablinks
         tabcontent = document.getElementsByClassName('tabcontent')
         for (i = 0; i < tabcontent.length; i++) {
@@ -1518,18 +1511,15 @@
         for (i = 0; i < tablinks.length; i++) {
           tablinks[i].className = tablinks[i].className.replace(' active', '')
         }
-        document.getElementById(cityName).style.display =
-          cityName === 'side-by-side' ? 'flex' : 'block'
+        document.getElementById(tabId).style.display =
+          tabId === 'side-by-side' ? 'flex' : 'block'
 
-        if (cityName === 'pitch') {
+        if (tabId === 'pitch') {
           pitchInit()
         }
-        if (cityName === 'attendees') {
+        if (tabId === 'attendees') {
           attendeesInit()
           requestAnimationFrame(attendeesLayout)
-        }
-        if (cityName === 'scoring') {
-          scoringInit()
         }
 
         // Set active button
@@ -1538,18 +1528,18 @@
         } else {
           // Find the button for this tab and mark active
           document.querySelectorAll('.tablinks').forEach(function (btn) {
-            if (btn.getAttribute('onclick').indexOf("'" + cityName + "'") !== -1) {
+            if (btn.getAttribute('onclick').indexOf("'" + tabId + "'") !== -1) {
               btn.className += ' active'
             }
           })
         }
 
         // Update URL hash
-        history.replaceState(null, null, '#' + cityName)
+        history.replaceState(null, null, '#' + tabId)
 
         // Show lock overlay if tab is locked
-        if (tabConfig[cityName] && tabConfig[cityName].locked && !unlockedTabs[cityName]) {
-          showLockOverlay(cityName)
+        if (tabConfig[tabId] && tabConfig[tabId].locked && !unlockedTabs[tabId]) {
+          showLockOverlay(tabId)
         }
       }
 
@@ -1746,9 +1736,14 @@
 
   function loginSubmit() {
     if (!loginSelectedAttendee) return;
-    var pw = document.getElementById('login-password').value || '';
-    if (pw.toLowerCase() !== (configPassword || '').toLowerCase()) {
-      document.getElementById('login-error').textContent = 'Incorrect password — try again';
+    var entered = (document.getElementById('login-password').value || '').trim().toLowerCase();
+    var expected = (loginSelectedAttendee.email || '').trim().toLowerCase();
+    if (!expected) {
+      document.getElementById('login-error').textContent = 'No email on file for this attendee — contact the organiser.';
+      return;
+    }
+    if (entered !== expected) {
+      document.getElementById('login-error').textContent = 'That email doesn\'t match our records — try again.';
       return;
     }
     localStorage.setItem('scoring-judge-id', loginSelectedAttendee.id);
@@ -2454,9 +2449,9 @@
       function openTabFromHash() {
         var hash = window.location.hash.replace('#', '')
         if (hash && document.getElementById(hash)) {
-          openCity(null, hash)
+          openTab(null, hash)
         } else {
-          openCity(null, defaultTab)
+          openTab(null, defaultTab)
         }
       }
 
