@@ -9,7 +9,7 @@
     "results": { "locked": true },
     "pitch": { "locked": true }
   },
-  "defaultTab": "side-by-side",
+  "defaultTab": "slides",
   "password": "cvc",
   "applicantsApi": "https://airtable-proxy-startbook.vercel.app/api/applicants",
   "attendeesApi": "https://airtable-proxy-startbook.vercel.app/api/attendees",

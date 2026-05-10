@@ -585,6 +585,8 @@
 
     <button class="tablinks" onclick="openCity(event, 'attendees')"><i class="bi bi-people"></i><span class="tab-label"> Attendees</span></button>
 
+    <button class="tablinks" onclick="openCity(event, 'pitch')"><i class="bi bi-stopwatch"></i><span class="tab-label"> Pitch</span></button>
+
     <button class="tablinks" onclick="openCity(event, 'spreadsheet')"><i class="bi bi-table"></i><span class="tab-label"> Spreadsheet</span></button>
 
     <button class="tablinks" onclick="openCity(event, 'gallery')"><i class="bi bi-grid"></i><span class="tab-label"> Gallery</span></button>
@@ -594,8 +596,6 @@
     <button class="tablinks" onclick="openCity(event, 'side-by-side')"><i class="bi bi-layout-split"></i><span class="tab-label"> Side-by-side</span></button>
 
     <button class="tablinks" onclick="openCity(event, 'results')"><i class="bi bi-trophy"></i><span class="tab-label"> Results</span></button>
-
-    <button class="tablinks" onclick="openCity(event, 'pitch')"><i class="bi bi-stopwatch"></i><span class="tab-label"> Pitch</span></button>
   </div>
 
   <div id="slides" class="tabcontent" style="display: none">
@@ -624,7 +624,6 @@
     <div id="attendees-error" class="pitch-error" style="display: none"></div>
     <div id="attendees-content" class="attendees-content" style="display: none">
       <div id="attendees-type-filters" class="attendees-filters"></div>
-      <div id="attendees-filters" class="attendees-filters"></div>
       <div id="attendees-grid" class="attendees-grid"></div>
     </div>
   </div>
@@ -1171,7 +1170,6 @@
 
   function attendeesRender(list, orgOrder, typeOrder) {
     attendeesBuildTypeFilters(list, typeOrder);
-    attendeesBuildFilters(list, orgOrder);
     var grid = document.getElementById('attendees-grid');
     grid.innerHTML = '';
     list.forEach(function(a) {
