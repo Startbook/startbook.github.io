@@ -168,6 +168,40 @@
     margin-top: 12px;
     min-height: 20px;
   }
+
+  #side-by-side {
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  #side-by-side > iframe {
+    min-width: 0;
+    height: 100%;
+    border: 0;
+  }
+
+  .split-divider {
+    flex: 0 0 6px;
+    background: #482961;
+    cursor: col-resize;
+    position: relative;
+    z-index: 5;
+  }
+
+  .split-divider:hover,
+  .split-divider.dragging {
+    background: #5a3580;
+  }
+
+  body.split-dragging,
+  body.split-dragging * {
+    cursor: col-resize !important;
+    user-select: none;
+  }
+
+  body.split-dragging iframe {
+    pointer-events: none;
+  }
 </style>
 
 <body style="margin: 0; height: 100%; width: 100%; background-color: black">
@@ -289,17 +323,19 @@
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
     <iframe
+      id="side-by-side-left"
       class="airtable-embed"
       src="https://airtable.com/embed/app6FvPARDKaDRKwu/shryveBBqgtRVj588/tblon7jDpWeYpLNE3?viewControls=on"
       frameborder="0"
       onmousewheel=""
-      width="33%"
+      style="flex: 0 0 33%"
       height="100%"
       loading="lazy"
       onload="document.getElementById('loading-side-by-side').style.display = 'none'"></iframe>
+    <div class="split-divider" id="side-by-side-divider" title="Drag to resize"></div>
     <iframe
       class="scoring-sheet-iframe"
-      width="66%"
+      style="flex: 1 1 auto"
       height="100%"
       loading="lazy"></iframe>
   </div>
@@ -346,6 +382,49 @@
   resizeContent();
   window.addEventListener('load', resizeContent);
   window.addEventListener('resize', resizeContent);
+
+  (function setupSplitDivider() {
+    var divider = document.getElementById('side-by-side-divider');
+    var container = document.getElementById('side-by-side');
+    var left = document.getElementById('side-by-side-left');
+    if (!divider || !container || !left) return;
+
+    function startDrag(startX) {
+      var rect = container.getBoundingClientRect();
+      document.body.classList.add('split-dragging');
+      divider.classList.add('dragging');
+
+      function onMove(clientX) {
+        var pct = ((clientX - rect.left) / rect.width) * 100;
+        if (pct < 5) pct = 5;
+        if (pct > 95) pct = 95;
+        left.style.flex = '0 0 ' + pct + '%';
+      }
+
+      function onMouseMove(e) { onMove(e.clientX); }
+      function onTouchMove(e) {
+        if (e.touches.length) { onMove(e.touches[0].clientX); e.preventDefault(); }
+      }
+      function stop() {
+        document.body.classList.remove('split-dragging');
+        divider.classList.remove('dragging');
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', stop);
+        document.removeEventListener('touchmove', onTouchMove);
+        document.removeEventListener('touchend', stop);
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', stop);
+      document.addEventListener('touchmove', onTouchMove, { passive: false });
+      document.addEventListener('touchend', stop);
+    }
+
+    divider.addEventListener('mousedown', function(e) { e.preventDefault(); startDrag(e.clientX); });
+    divider.addEventListener('touchstart', function(e) {
+      if (e.touches.length) { e.preventDefault(); startDrag(e.touches[0].clientX); }
+    }, { passive: false });
+  })();
 
   // Prevent iframes from stealing focus when lock overlay is showing
   window.addEventListener('blur', function() {
@@ -408,7 +487,7 @@
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(' active', '')
     }
-    document.getElementById(cityName).style.display = 'block'
+    document.getElementById(cityName).style.display = (cityName === 'side-by-side') ? 'flex' : 'block'
 
     // Set active button
     if (evt) {
