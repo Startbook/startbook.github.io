@@ -3,6 +3,7 @@ const TABLE_ID = 'tblon7jDpWeYpLNE3';
 const PRESENTATION_VIEW_ID = 'viwz7TBu1WYr4AbOt';
 
 const FIELD_WHITELIST = [
+  'No.',
   'Project',
   'Logo',
   'Borough',
@@ -44,6 +45,7 @@ function shape(rec) {
   const logo = Array.isArray(f['Logo']) && f['Logo'][0] ? f['Logo'][0].url : null;
   return {
     id: rec.id,
+    number: f['No.'] ?? null,
     project: f['Project'] || '',
     logo,
     borough: f['Borough'] || '',

@@ -1322,7 +1322,8 @@
     var cost = a.costPerYoungPerson;
     document.getElementById('pitch-cost').textContent = (cost == null) ? '—' :
       '£' + Number(cost).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    document.getElementById('pitch-counter').textContent = (pitchIndex + 1) + ' / ' + pitchApplicants.length;
+    var counterText = (a.number != null ? '#' + a.number + '  ·  ' : '') + (pitchIndex + 1) + ' / ' + pitchApplicants.length;
+    document.getElementById('pitch-counter').textContent = counterText;
   }
 
   function pitchFmt(seconds) {
