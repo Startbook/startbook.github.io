@@ -2517,9 +2517,10 @@
               var wrap = document.createElement('div')
               wrap.className = 'pitch-attachment'
               var type = (att.type || '').toLowerCase()
+              var viewerUrl = 'https://docs.google.com/viewer?url=' + encodeURIComponent(att.url) + '&embedded=true'
               if (type === 'application/pdf') {
                 var ifr = document.createElement('iframe')
-                ifr.src = att.url
+                ifr.src = viewerUrl
                 ifr.title = att.filename || 'Attachment'
                 wrap.appendChild(ifr)
               } else if (type.indexOf('image/') === 0) {
@@ -2534,7 +2535,7 @@
               name.textContent = att.filename || 'Attachment'
               cap.appendChild(name)
               var open = document.createElement('a')
-              open.href = att.url
+              open.href = type === 'application/pdf' ? viewerUrl.replace('&embedded=true', '') : att.url
               open.textContent = 'Open in new tab ↗'
               open.target = '_blank'
               open.rel = 'noopener'
