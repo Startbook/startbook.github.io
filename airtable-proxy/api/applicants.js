@@ -64,7 +64,12 @@ function shape(rec) {
   const f = rec.fields || {};
   const logo = Array.isArray(f['Logo']) && f['Logo'][0] ? f['Logo'][0].url : null;
   const financial = Array.isArray(f['Financial Breakdown'])
-    ? f['Financial Breakdown'].map((att) => ({ url: att.url, filename: att.filename }))
+    ? f['Financial Breakdown'].map((att) => ({
+        url: att.url,
+        filename: att.filename,
+        type: att.type || '',
+        thumbnailUrl: att.thumbnails?.large?.url || att.thumbnails?.full?.url || '',
+      }))
     : [];
   return {
     id: rec.id,

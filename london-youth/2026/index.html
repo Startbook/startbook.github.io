@@ -337,6 +337,51 @@
       margin-bottom: 4px;
     }
 
+    .pitch-attachment {
+      margin-top: 8px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8f8f8;
+    }
+
+    .pitch-attachment iframe,
+    .pitch-attachment img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: 480px;
+      border: 0;
+    }
+
+    .pitch-attachment img {
+      height: auto;
+      max-height: 600px;
+      object-fit: contain;
+    }
+
+    .pitch-attachment-caption {
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #666;
+      background: #fff;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pitch-attachment-caption a {
+      color: #482961;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .pitch-attachment-caption a:hover {
+      text-decoration: underline;
+    }
+
     .pitch-timer-pane {
       flex: 1 1 auto;
       background: #202023;
@@ -2468,14 +2513,34 @@
             link.rel = 'noopener'
             body.appendChild(link)
           } else if (s.kind === 'attachments') {
-            v.forEach(function (att, i) {
-              if (i > 0) body.appendChild(document.createTextNode(' · '))
-              var link = document.createElement('a')
-              link.href = att.url
-              link.textContent = att.filename || 'Download'
-              link.target = '_blank'
-              link.rel = 'noopener'
-              body.appendChild(link)
+            v.forEach(function (att) {
+              var wrap = document.createElement('div')
+              wrap.className = 'pitch-attachment'
+              var type = (att.type || '').toLowerCase()
+              if (type === 'application/pdf') {
+                var ifr = document.createElement('iframe')
+                ifr.src = att.url
+                ifr.title = att.filename || 'Attachment'
+                wrap.appendChild(ifr)
+              } else if (type.indexOf('image/') === 0) {
+                var img = document.createElement('img')
+                img.src = att.url
+                img.alt = att.filename || 'Attachment'
+                wrap.appendChild(img)
+              }
+              var cap = document.createElement('div')
+              cap.className = 'pitch-attachment-caption'
+              var name = document.createElement('span')
+              name.textContent = att.filename || 'Attachment'
+              cap.appendChild(name)
+              var open = document.createElement('a')
+              open.href = att.url
+              open.textContent = 'Open in new tab ↗'
+              open.target = '_blank'
+              open.rel = 'noopener'
+              cap.appendChild(open)
+              wrap.appendChild(cap)
+              body.appendChild(wrap)
             })
           } else if (Array.isArray(v)) {
             var ul = document.createElement('ul')
