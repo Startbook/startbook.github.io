@@ -364,6 +364,123 @@
     color: #c00;
     font-size: 16px;
   }
+
+  #attendees.tabcontent {
+    background: #f5f5f7;
+    color: #202023;
+    overflow-y: auto;
+  }
+
+  .attendees-content {
+    padding: 30px;
+  }
+
+  .attendees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .attendee-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .attendee-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .attendee-card.absent {
+    opacity: 0.45;
+  }
+
+  .attendee-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ddd;
+    margin-bottom: 14px;
+  }
+
+  .attendee-photo-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #482961;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  .attendee-name {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+  }
+
+  .attendee-job {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 10px;
+    min-height: 16px;
+  }
+
+  .attendee-orgs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .attendee-org-pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .attendee-org-CVC { background: #1e3a8a; color: white; }
+  .attendee-org-Infosys { background: #67e8f9; color: #134e5e; }
+  .attendee-org-LondonYouth { background: #5b21b6; color: white; }
+  .attendee-org-LSEGFoundation { background: #0ea5e9; color: white; }
+  .attendee-org-RDAS { background: #dc2626; color: white; }
+  .attendee-org-Startbook { background: #fbcfe8; color: #831843; }
+  .attendee-org-default { background: #e5e7eb; color: #374151; }
+
+  .attendee-links {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+
+  .attendee-links a {
+    color: #666;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .attendee-links a:hover {
+    color: #482961;
+  }
 </style>
 
 <body style="margin: 0; height: 100%; width: 100%; background-color: black">
@@ -425,15 +542,10 @@
       <img src="../../assets/img/loading.gif" height="50px" width="50px" />
       <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
     </div>
-    <iframe
-      class="airtable-embed"
-      src="https://airtable.com/embed/app6FvPARDKaDRKwu/shrUDIiVMoAoRLw4I/tbl3IO57DDarIXouQ?viewControls=on"
-      frameborder="0"
-      onmousewheel=""
-      width="100%"
-      height="100%"
-      loading="lazy"
-      onload="document.getElementById('loading-attendees').style.display = 'none'"></iframe>
+    <div id="attendees-error" class="pitch-error" style="display: none"></div>
+    <div id="attendees-content" class="attendees-content" style="display: none">
+      <div id="attendees-grid" class="attendees-grid"></div>
+    </div>
   </div>
 
   <div id="spreadsheet" class="tabcontent" style="display: none">
@@ -707,6 +819,7 @@
     document.getElementById(cityName).style.display = (cityName === 'side-by-side') ? 'flex' : 'block'
 
     if (cityName === 'pitch') { pitchInit(); }
+    if (cityName === 'attendees') { attendeesInit(); }
 
     // Set active button
     if (evt) {
@@ -727,6 +840,128 @@
     if (tabConfig[cityName] && tabConfig[cityName].locked && !unlockedTabs[cityName]) {
       showLockOverlay(cityName);
     }
+  }
+
+  var attendeesApiUrl = '';
+  var attendeesLoaded = false;
+  var attendeesLoading = false;
+
+  function attendeesInit() {
+    if (attendeesLoaded || attendeesLoading) return;
+    if (!attendeesApiUrl) {
+      attendeesShowError('Attendees API not configured. Set "attendeesApi" in config.json.');
+      return;
+    }
+    attendeesLoading = true;
+    fetch(attendeesApiUrl)
+      .then(function(r) {
+        if (!r.ok) return r.text().then(function(t) { throw new Error('HTTP ' + r.status + ': ' + t); });
+        return r.json();
+      })
+      .then(function(data) {
+        var list = data.attendees || [];
+        if (list.length === 0) {
+          attendeesShowError('No attendees found.');
+          return;
+        }
+        attendeesLoaded = true;
+        document.getElementById('loading-attendees').style.display = 'none';
+        document.getElementById('attendees-content').style.display = 'block';
+        attendeesRender(list);
+      })
+      .catch(function(err) {
+        attendeesShowError('Failed to load attendees: ' + err.message);
+      })
+      .then(function() { attendeesLoading = false; });
+  }
+
+  function attendeesShowError(msg) {
+    document.getElementById('loading-attendees').style.display = 'none';
+    document.getElementById('attendees-content').style.display = 'none';
+    var el = document.getElementById('attendees-error');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function attendeesInitials(name) {
+    if (!name) return '?';
+    var parts = name.trim().split(/\s+/);
+    var first = parts[0] || '';
+    var last = parts.length > 1 ? parts[parts.length - 1] : '';
+    return ((first[0] || '') + (last[0] || '')).toUpperCase();
+  }
+
+  function attendeesOrgClass(org) {
+    var key = (org || '').replace(/\s+/g, '');
+    var known = ['CVC', 'Infosys', 'LondonYouth', 'LSEGFoundation', 'RDAS', 'Startbook'];
+    return 'attendee-org-' + (known.indexOf(key) !== -1 ? key : 'default');
+  }
+
+  function attendeesRender(list) {
+    var grid = document.getElementById('attendees-grid');
+    grid.innerHTML = '';
+    list.forEach(function(a) {
+      var card = document.createElement('div');
+      card.className = 'attendee-card' + (a.attending ? '' : ' absent');
+
+      if (a.photo) {
+        var img = document.createElement('img');
+        img.className = 'attendee-photo';
+        img.src = a.photo;
+        img.alt = a.name;
+        img.loading = 'lazy';
+        card.appendChild(img);
+      } else {
+        var ph = document.createElement('div');
+        ph.className = 'attendee-photo-placeholder';
+        ph.textContent = attendeesInitials(a.name);
+        card.appendChild(ph);
+      }
+
+      var name = document.createElement('div');
+      name.className = 'attendee-name';
+      name.textContent = a.name || '(no name)';
+      card.appendChild(name);
+
+      var job = document.createElement('div');
+      job.className = 'attendee-job';
+      job.textContent = a.jobTitle || '';
+      card.appendChild(job);
+
+      if (a.organisation && a.organisation.length) {
+        var orgs = document.createElement('div');
+        orgs.className = 'attendee-orgs';
+        a.organisation.forEach(function(org) {
+          var pill = document.createElement('span');
+          pill.className = 'attendee-org-pill ' + attendeesOrgClass(org);
+          pill.textContent = org;
+          orgs.appendChild(pill);
+        });
+        card.appendChild(orgs);
+      }
+
+      var links = document.createElement('div');
+      links.className = 'attendee-links';
+      if (a.email) {
+        var em = document.createElement('a');
+        em.href = 'mailto:' + a.email;
+        em.title = a.email;
+        em.innerHTML = '<i class="bi bi-envelope"></i>';
+        links.appendChild(em);
+      }
+      if (a.url) {
+        var ln = document.createElement('a');
+        ln.href = a.url;
+        ln.target = '_blank';
+        ln.rel = 'noopener';
+        ln.title = a.url;
+        ln.innerHTML = '<i class="bi bi-link-45deg"></i>';
+        links.appendChild(ln);
+      }
+      if (links.children.length) card.appendChild(links);
+
+      grid.appendChild(card);
+    });
   }
 
   var pitchApiUrl = '';
@@ -922,6 +1157,7 @@
       }
       if (config.applicantsApi) { pitchApiUrl = config.applicantsApi; }
       if (typeof config.pitchSeconds === 'number') { pitchDuration = config.pitchSeconds; }
+      if (config.attendeesApi) { attendeesApiUrl = config.attendeesApi; }
     })
     .then(openTabFromHash);
 </script>
