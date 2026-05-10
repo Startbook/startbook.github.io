@@ -202,6 +202,168 @@
   body.split-dragging iframe {
     pointer-events: none;
   }
+
+  #pitch.tabcontent {
+    background: #fff;
+    color: #202023;
+    overflow: hidden;
+  }
+
+  .pitch-layout {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+
+  .pitch-card {
+    flex: 0 0 40%;
+    padding: 40px 50px;
+    overflow-y: auto;
+    border-right: 1px solid #e0e0e0;
+    box-sizing: border-box;
+  }
+
+  .pitch-logo-wrap {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    background: #fafafa;
+    border-radius: 8px;
+  }
+
+  .pitch-logo-wrap img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .pitch-name {
+    margin: 0 0 4px 0;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 700;
+  }
+
+  .pitch-borough {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .pitch-stat {
+    margin-bottom: 22px;
+  }
+
+  .pitch-stat-label {
+    display: block;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .pitch-stat-value {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .pitch-age-pill {
+    display: inline-block;
+    background: #e8e3f3;
+    color: #482961;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 6px;
+  }
+
+  .pitch-timer-pane {
+    flex: 1 1 auto;
+    background: #202023;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  .pitch-counter {
+    color: #aaa;
+    font-size: 20px;
+    margin-bottom: 30px;
+    letter-spacing: 0.05em;
+  }
+
+  .pitch-timer {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: clamp(80px, 14vw, 200px);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 10px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s ease;
+  }
+
+  .pitch-timer.over {
+    color: #ff6b6b;
+  }
+
+  .pitch-timer-label {
+    color: #888;
+    font-size: 16px;
+    margin-bottom: 50px;
+    min-height: 20px;
+  }
+
+  .pitch-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pitch-controls button {
+    background: #482961;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.15s ease;
+  }
+
+  .pitch-controls button:hover {
+    background: #5a3580;
+  }
+
+  .pitch-controls button.secondary {
+    background: transparent;
+    border: 1px solid #555;
+  }
+
+  .pitch-controls button.secondary:hover {
+    background: #333;
+  }
+
+  .pitch-hint {
+    margin-top: 24px;
+    color: #666;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .pitch-error {
+    padding: 60px;
+    text-align: center;
+    color: #c00;
+    font-size: 16px;
+  }
 </style>
 
 <body style="margin: 0; height: 100%; width: 100%; background-color: black">
@@ -236,6 +398,8 @@
     <button class="tablinks" onclick="openCity(event, 'side-by-side')"><i class="bi bi-layout-split"></i><span class="tab-label"> Side-by-side</span></button>
 
     <button class="tablinks" onclick="openCity(event, 'results')"><i class="bi bi-trophy"></i><span class="tab-label"> Results</span></button>
+
+    <button class="tablinks" onclick="openCity(event, 'pitch')"><i class="bi bi-stopwatch"></i><span class="tab-label"> Pitch</span></button>
   </div>
 
   <div id="slides" class="tabcontent" style="display: none">
@@ -353,6 +517,49 @@
       height="100%"
       loading="lazy"
       onload="document.getElementById('loading-results').style.display = 'none'"></iframe>
+  </div>
+
+  <div id="pitch" class="tabcontent" style="display: none">
+    <div id="loading-pitch" class="loading-overlay">
+      <img src="../../assets/img/loading.gif" height="50px" width="50px" />
+      <p style="color: #ccc; font-size: 1rem; margin: 10px 0 0 0;">Loading...</p>
+    </div>
+    <div id="pitch-error" class="pitch-error" style="display: none"></div>
+    <div id="pitch-content" class="pitch-layout" style="display: none">
+      <div class="pitch-card">
+        <div class="pitch-logo-wrap"><img id="pitch-logo" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" /></div>
+        <h2 id="pitch-name" class="pitch-name"></h2>
+        <div id="pitch-borough" class="pitch-borough"></div>
+        <div class="pitch-stat">
+          <span class="pitch-stat-label">No. of Young People Impacted</span>
+          <span id="pitch-young-people" class="pitch-stat-value"></span>
+        </div>
+        <div class="pitch-stat">
+          <span class="pitch-stat-label">Engagement (h per person)</span>
+          <span id="pitch-hours" class="pitch-stat-value"></span>
+        </div>
+        <div class="pitch-stat">
+          <span class="pitch-stat-label">Benefiting Age Ranges</span>
+          <span id="pitch-ages" class="pitch-stat-value"></span>
+        </div>
+        <div class="pitch-stat">
+          <span class="pitch-stat-label">Cost per Young Person</span>
+          <span id="pitch-cost" class="pitch-stat-value"></span>
+        </div>
+      </div>
+      <div class="pitch-timer-pane">
+        <div id="pitch-counter" class="pitch-counter">– / –</div>
+        <div id="pitch-timer" class="pitch-timer">1:40</div>
+        <div id="pitch-timer-label" class="pitch-timer-label"></div>
+        <div class="pitch-controls">
+          <button class="secondary" onclick="pitchPrev()"><i class="bi bi-chevron-left"></i> Prev</button>
+          <button onclick="pitchToggleTimer()" id="pitch-toggle-btn"><i class="bi bi-play-fill"></i> Start</button>
+          <button onclick="pitchNext()">Next <i class="bi bi-chevron-right"></i></button>
+          <button class="secondary" onclick="pitchReset()"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+        </div>
+        <div class="pitch-hint">Space: start/pause · ←/→: prev/next · R: reset</div>
+      </div>
+    </div>
   </div>
 
 <script>
@@ -499,6 +706,8 @@
     }
     document.getElementById(cityName).style.display = (cityName === 'side-by-side') ? 'flex' : 'block'
 
+    if (cityName === 'pitch') { pitchInit(); }
+
     // Set active button
     if (evt) {
       evt.currentTarget.className += ' active';
@@ -519,6 +728,165 @@
       showLockOverlay(cityName);
     }
   }
+
+  var pitchApiUrl = '';
+  var pitchDuration = 100;
+  var pitchApplicants = [];
+  var pitchIndex = 0;
+  var pitchTimerId = null;
+  var pitchRemaining = 100;
+  var pitchRunning = false;
+  var pitchLoaded = false;
+  var pitchLoading = false;
+
+  function pitchInit() {
+    if (pitchLoaded || pitchLoading) return;
+    if (!pitchApiUrl) {
+      pitchShowError('Pitch API not configured. Set "applicantsApi" in config.json to your Vercel proxy URL.');
+      return;
+    }
+    pitchLoading = true;
+    fetch(pitchApiUrl + (pitchApiUrl.indexOf('?') === -1 ? '?year=2026' : '&year=2026'))
+      .then(function(r) {
+        if (!r.ok) return r.text().then(function(t) { throw new Error('HTTP ' + r.status + ': ' + t); });
+        return r.json();
+      })
+      .then(function(data) {
+        pitchApplicants = data.applicants || [];
+        if (pitchApplicants.length === 0) {
+          pitchShowError('No applicants found for 2026.');
+          return;
+        }
+        pitchLoaded = true;
+        document.getElementById('loading-pitch').style.display = 'none';
+        document.getElementById('pitch-content').style.display = 'flex';
+        pitchIndex = 0;
+        pitchRender();
+        pitchResetTimer(false);
+      })
+      .catch(function(err) {
+        pitchShowError('Failed to load applicants: ' + err.message);
+      })
+      .then(function() { pitchLoading = false; });
+  }
+
+  function pitchShowError(msg) {
+    document.getElementById('loading-pitch').style.display = 'none';
+    document.getElementById('pitch-content').style.display = 'none';
+    var el = document.getElementById('pitch-error');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function pitchRender() {
+    var a = pitchApplicants[pitchIndex];
+    if (!a) return;
+    var logoEl = document.getElementById('pitch-logo');
+    if (a.logo) { logoEl.src = a.logo; logoEl.style.display = ''; }
+    else { logoEl.style.display = 'none'; }
+    document.getElementById('pitch-name').textContent = a.project || '(no name)';
+    document.getElementById('pitch-borough').textContent = a.borough || '';
+    document.getElementById('pitch-young-people').textContent = (a.youngPeopleImpacted == null) ? '—' : a.youngPeopleImpacted;
+    document.getElementById('pitch-hours').textContent = (a.hoursPerPerson == null) ? '—' : a.hoursPerPerson;
+    var ages = (a.benefitingAgeRanges && a.benefitingAgeRanges.length) ? a.benefitingAgeRanges : (a.ageRange ? [a.ageRange] : []);
+    var agesEl = document.getElementById('pitch-ages');
+    agesEl.innerHTML = '';
+    if (ages.length === 0) {
+      agesEl.textContent = '—';
+    } else {
+      ages.forEach(function(r) {
+        var pill = document.createElement('span');
+        pill.className = 'pitch-age-pill';
+        pill.textContent = r;
+        agesEl.appendChild(pill);
+      });
+    }
+    var cost = a.costPerYoungPerson;
+    document.getElementById('pitch-cost').textContent = (cost == null) ? '—' :
+      '£' + Number(cost).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById('pitch-counter').textContent = (pitchIndex + 1) + ' / ' + pitchApplicants.length;
+  }
+
+  function pitchFmt(seconds) {
+    var sign = seconds < 0 ? '-' : '';
+    var s = Math.abs(seconds);
+    var m = Math.floor(s / 60);
+    var sec = s % 60;
+    return sign + m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  function pitchUpdateTimerDisplay() {
+    var t = document.getElementById('pitch-timer');
+    t.textContent = pitchFmt(pitchRemaining);
+    if (pitchRemaining < 0) {
+      t.classList.add('over');
+      document.getElementById('pitch-timer-label').textContent = 'Over time';
+    } else {
+      t.classList.remove('over');
+      document.getElementById('pitch-timer-label').textContent = pitchRunning ? '' : 'Paused';
+    }
+  }
+
+  function pitchTick() {
+    pitchRemaining -= 1;
+    pitchUpdateTimerDisplay();
+  }
+
+  function pitchStartTimer() {
+    if (pitchTimerId) return;
+    pitchRunning = true;
+    pitchTimerId = setInterval(pitchTick, 1000);
+    var btn = document.getElementById('pitch-toggle-btn');
+    btn.innerHTML = '<i class="bi bi-pause-fill"></i> Pause';
+    pitchUpdateTimerDisplay();
+  }
+
+  function pitchStopTimer() {
+    if (pitchTimerId) { clearInterval(pitchTimerId); pitchTimerId = null; }
+    pitchRunning = false;
+    var btn = document.getElementById('pitch-toggle-btn');
+    if (btn) btn.innerHTML = '<i class="bi bi-play-fill"></i> Start';
+    pitchUpdateTimerDisplay();
+  }
+
+  function pitchToggleTimer() {
+    if (pitchRunning) pitchStopTimer(); else pitchStartTimer();
+  }
+
+  function pitchResetTimer(autoStart) {
+    pitchStopTimer();
+    pitchRemaining = pitchDuration;
+    pitchUpdateTimerDisplay();
+    if (autoStart) pitchStartTimer();
+  }
+
+  function pitchNext() {
+    if (!pitchApplicants.length) return;
+    pitchIndex = (pitchIndex + 1) % pitchApplicants.length;
+    pitchRender();
+    pitchResetTimer(true);
+  }
+
+  function pitchPrev() {
+    if (!pitchApplicants.length) return;
+    pitchIndex = (pitchIndex - 1 + pitchApplicants.length) % pitchApplicants.length;
+    pitchRender();
+    pitchResetTimer(true);
+  }
+
+  function pitchReset() {
+    pitchResetTimer(false);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('pitch').style.display === 'none') return;
+    var tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); pitchToggleTimer(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); pitchNext(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); pitchPrev(); }
+    else if (e.key === 'r' || e.key === 'R') { e.preventDefault(); pitchReset(); }
+  });
 
   // On page load, open tab from URL hash
   var defaultTab = 'spreadsheet';
@@ -552,6 +920,8 @@
           iframe.src = config.resultsSheetUrl;
         });
       }
+      if (config.applicantsApi) { pitchApiUrl = config.applicantsApi; }
+      if (typeof config.pitchSeconds === 'number') { pitchDuration = config.pitchSeconds; }
     })
     .then(openTabFromHash);
 </script>
