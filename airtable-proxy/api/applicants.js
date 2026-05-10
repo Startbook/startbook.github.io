@@ -38,6 +38,7 @@ const FIELD_WHITELIST = [
   'Start Date',
   'End Date',
   'Financial Breakdown',
+  'Young Girls/Women in STEM',
 ];
 
 const ALLOWED_ORIGINS = [
@@ -109,6 +110,7 @@ function shape(rec) {
     startDate: f['Start Date'] || '',
     endDate: f['End Date'] || '',
     financialBreakdown: financial,
+    youngGirlsWomenInStem: f['Young Girls/Women in STEM'] || '',
   };
 }
 

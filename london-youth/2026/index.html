@@ -2478,6 +2478,7 @@
           { label: 'Standalone or Enhancing', value: a.standaloneOrEnhancing },
           { label: 'Project Viable Without Grant?', value: a.viabilityWithoutGrant },
           { label: 'Previous Application History', value: a.previousApplicationHistory },
+          { label: 'Young Girls/Women in STEM', value: a.youngGirlsWomenInStem },
           { label: 'Summary', value: a.summary },
           { label: 'Proposal Overview', value: a.proposalOverview },
           { label: 'Project Impact', value: a.projectImpact },
@@ -2514,11 +2515,20 @@
             body.appendChild(link)
           } else if (s.kind === 'attachments') {
             var attachmentBase = pitchApiUrl ? pitchApiUrl.replace(/\/api\/applicants.*$/, '/api/attachment') : ''
+            var officeTypes = [
+              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+              'application/vnd.ms-excel',
+              'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+              'application/msword',
+              'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+              'application/vnd.ms-powerpoint',
+            ]
             v.forEach(function (att) {
               var wrap = document.createElement('div')
               wrap.className = 'pitch-attachment'
               var type = (att.type || '').toLowerCase()
               var proxiedUrl = attachmentBase ? attachmentBase + '?url=' + encodeURIComponent(att.url) : att.url
+              var openHref = proxiedUrl
               if (type === 'application/pdf') {
                 var ifr = document.createElement('iframe')
                 ifr.src = proxiedUrl
@@ -2526,9 +2536,16 @@
                 wrap.appendChild(ifr)
               } else if (type.indexOf('image/') === 0) {
                 var img = document.createElement('img')
-                img.src = proxiedUrl
+                img.src = att.url
                 img.alt = att.filename || 'Attachment'
                 wrap.appendChild(img)
+              } else if (officeTypes.indexOf(type) !== -1) {
+                var officeViewer = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(att.url)
+                var ifr = document.createElement('iframe')
+                ifr.src = officeViewer
+                ifr.title = att.filename || 'Attachment'
+                wrap.appendChild(ifr)
+                openHref = 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(att.url)
               }
               var cap = document.createElement('div')
               cap.className = 'pitch-attachment-caption'
@@ -2536,7 +2553,7 @@
               name.textContent = att.filename || 'Attachment'
               cap.appendChild(name)
               var open = document.createElement('a')
-              open.href = proxiedUrl
+              open.href = openHref
               open.textContent = 'Open in new tab ↗'
               open.target = '_blank'
               open.rel = 'noopener'
