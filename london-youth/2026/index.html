@@ -375,16 +375,62 @@
     padding: 30px;
   }
 
+  .attendees-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    align-items: center;
+  }
+
+  .attendees-filter-btn {
+    background: white;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .attendees-filter-btn:hover {
+    border-color: #482961;
+    color: #482961;
+  }
+
+  .attendees-filter-btn.active {
+    background: #482961;
+    border-color: #482961;
+    color: white;
+  }
+
+  .attendees-filter-count {
+    color: #9ca3af;
+    font-size: 12px;
+    margin-left: 4px;
+  }
+
+  .attendees-filter-btn.active .attendees-filter-count {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .attendee-card.hidden {
+    display: none;
+  }
+
   .attendees-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+    gap: 24px;
+    justify-content: center;
   }
 
   .attendee-card {
     background: white;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 28px 20px;
     text-align: center;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -403,39 +449,39 @@
   }
 
   .attendee-photo {
-    width: 110px;
-    height: 110px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     background: #ddd;
-    margin-bottom: 14px;
+    margin-bottom: 18px;
   }
 
   .attendee-photo-placeholder {
-    width: 110px;
-    height: 110px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background: #482961;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 600;
-    margin-bottom: 14px;
+    margin-bottom: 18px;
   }
 
   .attendee-name {
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 600;
-    margin: 0 0 4px 0;
+    margin: 0 0 6px 0;
   }
 
   .attendee-job {
     color: #666;
-    font-size: 13px;
-    margin-bottom: 10px;
-    min-height: 16px;
+    font-size: 14px;
+    margin-bottom: 14px;
+    min-height: 18px;
   }
 
   .attendee-orgs {
@@ -544,6 +590,7 @@
     </div>
     <div id="attendees-error" class="pitch-error" style="display: none"></div>
     <div id="attendees-content" class="attendees-content" style="display: none">
+      <div id="attendees-filters" class="attendees-filters"></div>
       <div id="attendees-grid" class="attendees-grid"></div>
     </div>
   </div>
@@ -897,12 +944,53 @@
     return 'attendee-org-' + (known.indexOf(key) !== -1 ? key : 'default');
   }
 
+  var attendeesActiveFilter = 'all';
+
+  function attendeesApplyFilter() {
+    var cards = document.querySelectorAll('#attendees-grid .attendee-card');
+    cards.forEach(function(card) {
+      var orgs = (card.getAttribute('data-orgs') || '').split('|').filter(Boolean);
+      var match = attendeesActiveFilter === 'all' || orgs.indexOf(attendeesActiveFilter) !== -1;
+      card.classList.toggle('hidden', !match);
+    });
+    document.querySelectorAll('.attendees-filter-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-org') === attendeesActiveFilter);
+    });
+  }
+
+  function attendeesBuildFilters(list) {
+    var counts = {};
+    list.forEach(function(a) {
+      (a.organisation || []).forEach(function(o) { counts[o] = (counts[o] || 0) + 1; });
+    });
+    var orgs = Object.keys(counts).sort();
+    var bar = document.getElementById('attendees-filters');
+    bar.innerHTML = '';
+
+    function makeBtn(label, key, count) {
+      var b = document.createElement('button');
+      b.className = 'attendees-filter-btn' + (key === attendeesActiveFilter ? ' active' : '');
+      b.setAttribute('data-org', key);
+      b.innerHTML = label + ' <span class="attendees-filter-count">' + count + '</span>';
+      b.addEventListener('click', function() {
+        attendeesActiveFilter = key;
+        attendeesApplyFilter();
+      });
+      return b;
+    }
+
+    bar.appendChild(makeBtn('All', 'all', list.length));
+    orgs.forEach(function(o) { bar.appendChild(makeBtn(o, o, counts[o])); });
+  }
+
   function attendeesRender(list) {
+    attendeesBuildFilters(list);
     var grid = document.getElementById('attendees-grid');
     grid.innerHTML = '';
     list.forEach(function(a) {
       var card = document.createElement('div');
       card.className = 'attendee-card' + (a.attending ? '' : ' absent');
+      card.setAttribute('data-orgs', (a.organisation || []).join('|'));
 
       if (a.photo) {
         var img = document.createElement('img');
