@@ -85,7 +85,7 @@
       width: 100%;
       bottom: 0;
       background-color: #202023;
-      z-index: 5;
+      z-index: 6;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1047,7 +1047,7 @@
         </div>
 
         <div id="login-pick-area">
-          <input id="login-search" class="login-search" type="search" placeholder="Search by name or organisation…" autocomplete="off" />
+          <input id="login-search" class="login-search" type="search" placeholder="Search by name, email or organisation…" autocomplete="off" />
           <div id="login-grid" class="login-grid"></div>
         </div>
 
@@ -1584,6 +1584,17 @@
       Object.keys(tabConfig).forEach(function(id) { unlockedTabs[id] = true; });
       document.querySelectorAll('.lock-overlay').forEach(function(el) { el.remove(); });
       hideLoginOverlay();
+      if (attendeesApiUrl) {
+        return fetchAttendeesData().then(function() {
+          var judge = attendeesData.find(function(a) { return a.id === savedId; });
+          if (judge && judge.judgingUrl) {
+            setScoringIframes(judge.judgingUrl);
+          }
+          applyUserWidget();
+        }).catch(function(err) {
+          console.warn('post-login attendees fetch failed', err);
+        });
+      }
       return Promise.resolve();
     }
     if (!attendeesApiUrl) {
@@ -1646,6 +1657,7 @@
     if (q) {
       list = list.filter(function(a) {
         if (a.name.toLowerCase().indexOf(q) !== -1) return true;
+        if ((a.email || '').toLowerCase().indexOf(q) !== -1) return true;
         if ((a.organisation || []).some(function(o) { return o.toLowerCase().indexOf(q) !== -1; })) return true;
         if ((a.attendeeType || '').toLowerCase().indexOf(q) !== -1) return true;
         return false;
@@ -2469,20 +2481,10 @@
           // Set scoring sheet iframe URLs from config
           if (config.scoringSheetUrl) {
             defaultScoringSheetUrl = config.scoringSheetUrl
-            var savedId = localStorage.getItem('scoring-judge-id')
-            if (!savedId) {
-              document.querySelectorAll('.scoring-sheet-iframe').forEach(function (iframe) {
-                iframe.src = config.scoringSheetUrl
-              })
-            } else if (attendeesApiUrl) {
-              fetchAttendeesData().then(function () {
-                var judge = attendeesData.find(function (a) {
-                  return a.id === savedId
-                })
-                setScoringIframes((judge && judge.judgingUrl) || config.scoringSheetUrl)
-                applyUserWidget()
-              })
-            }
+            // Always set default — loginInit will override with judge URL if applicable
+            document.querySelectorAll('.scoring-sheet-iframe').forEach(function (iframe) {
+              iframe.src = config.scoringSheetUrl
+            })
           }
           if (config.resultsSheetUrl) {
             document.querySelectorAll('.results-sheet-iframe').forEach(function (iframe) {
