@@ -331,13 +331,14 @@
       style="flex: 0 0 33%"
       height="100%"
       loading="lazy"
-      onload="document.getElementById('loading-side-by-side').style.display = 'none'"></iframe>
+      onload="markSideBySideLoaded()"></iframe>
     <div class="split-divider" id="side-by-side-divider" title="Drag to resize"></div>
     <iframe
       class="scoring-sheet-iframe"
       style="flex: 1 1 auto"
       height="100%"
-      loading="lazy"></iframe>
+      loading="lazy"
+      onload="markSideBySideLoaded()"></iframe>
   </div>
 
   <div id="results" class="tabcontent" style="display: none">
@@ -382,6 +383,15 @@
   resizeContent();
   window.addEventListener('load', resizeContent);
   window.addEventListener('resize', resizeContent);
+
+  var sideBySideLoaded = 0;
+  function markSideBySideLoaded() {
+    sideBySideLoaded++;
+    if (sideBySideLoaded >= 2) {
+      var el = document.getElementById('loading-side-by-side');
+      if (el) el.style.display = 'none';
+    }
+  }
 
   (function setupSplitDivider() {
     var divider = document.getElementById('side-by-side-divider');
