@@ -6,12 +6,16 @@ const FIELD_WHITELIST = [
   'Project',
   'Logo',
   'Borough',
+  'Website',
+  'Organisation Type',
+  'Quality Mark',
   'Age Range',
   'Benefiting Age Ranges',
   'No. of Young People Impacted',
   'Engagement (h per person)',
   'Cost per Young Person',
   'Grant Requested',
+  'Annual Turnover',
   'Application Type',
   'Video Link',
   'Summary',
@@ -19,6 +23,21 @@ const FIELD_WHITELIST = [
   'Project Impact',
   'Delivery Plan',
   'Expected Outcomes',
+  'Details of Activities',
+  'Evidence of Need',
+  'Involvement of Young People in Programme Development',
+  'Engaging Young People Facing Barriers',
+  'Engaging Hard to Reach',
+  'Recruitment & Engagement of Young People',
+  'Safety & Inclusion Plan',
+  'Accreditations',
+  'Other Funders',
+  'Standalone project or enhancing an existing programme',
+  'Project Viability Without Grant Funding',
+  'Previous Application History',
+  'Start Date',
+  'End Date',
+  'Financial Breakdown',
 ];
 
 const ALLOWED_ORIGINS = [
@@ -44,18 +63,25 @@ function setCors(req, res) {
 function shape(rec) {
   const f = rec.fields || {};
   const logo = Array.isArray(f['Logo']) && f['Logo'][0] ? f['Logo'][0].url : null;
+  const financial = Array.isArray(f['Financial Breakdown'])
+    ? f['Financial Breakdown'].map((att) => ({ url: att.url, filename: att.filename }))
+    : [];
   return {
     id: rec.id,
     number: f['No.'] ?? null,
     project: f['Project'] || '',
     logo,
     borough: f['Borough'] || '',
+    website: f['Website'] || '',
+    organisationType: f['Organisation Type'] || '',
+    qualityMark: f['Quality Mark'] || '',
     ageRange: f['Age Range'] || '',
     benefitingAgeRanges: f['Benefiting Age Ranges'] || [],
     youngPeopleImpacted: f['No. of Young People Impacted'] ?? null,
     hoursPerPerson: f['Engagement (h per person)'] ?? null,
     costPerYoungPerson: f['Cost per Young Person'] ?? null,
     grantRequested: f['Grant Requested'] ?? null,
+    annualTurnover: f['Annual Turnover'] ?? null,
     applicationType: f['Application Type'] || '',
     videoLink: f['Video Link'] || '',
     summary: f['Summary'] || '',
@@ -63,6 +89,21 @@ function shape(rec) {
     projectImpact: f['Project Impact'] || '',
     deliveryPlan: f['Delivery Plan'] || '',
     expectedOutcomes: f['Expected Outcomes'] || [],
+    detailsOfActivities: f['Details of Activities'] || '',
+    evidenceOfNeed: f['Evidence of Need'] || '',
+    youngPeopleInvolvement: f['Involvement of Young People in Programme Development'] || '',
+    engagingBarriers: f['Engaging Young People Facing Barriers'] || '',
+    engagingHardToReach: f['Engaging Hard to Reach'] || '',
+    recruitment: f['Recruitment & Engagement of Young People'] || '',
+    safetyAndInclusion: f['Safety & Inclusion Plan'] || '',
+    accreditations: f['Accreditations'] || '',
+    otherFunders: f['Other Funders'] || '',
+    standaloneOrEnhancing: f['Standalone project or enhancing an existing programme'] || '',
+    viabilityWithoutGrant: f['Project Viability Without Grant Funding'] || '',
+    previousApplicationHistory: f['Previous Application History'] || '',
+    startDate: f['Start Date'] || '',
+    endDate: f['End Date'] || '',
+    financialBreakdown: financial,
   };
 }
 

@@ -289,6 +289,54 @@
       margin-right: 6px;
     }
 
+    .pitch-details {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .pitch-details-section {
+      margin-bottom: 22px;
+    }
+
+    .pitch-details-section h4 {
+      margin: 0 0 6px 0;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #482961;
+    }
+
+    .pitch-details-section .pitch-details-body {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .pitch-details-section .pitch-details-body p {
+      margin: 0 0 8px 0;
+    }
+
+    .pitch-details-section a {
+      color: #482961;
+      word-break: break-all;
+    }
+
+    .pitch-details-list {
+      list-style: disc;
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .pitch-details-list li {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
     .pitch-timer-pane {
       flex: 1 1 auto;
       background: #202023;
@@ -1310,6 +1358,7 @@
             <span class="pitch-stat-label">Cost per Young Person</span>
             <span id="pitch-cost" class="pitch-stat-value"></span>
           </div>
+          <div id="pitch-details" class="pitch-details"></div>
         </div>
         <div class="pitch-timer-pane">
           <div id="pitch-counter" class="pitch-counter">– / –</div>
@@ -2359,6 +2408,90 @@
           ' / ' +
           pitchApplicants.length
         document.getElementById('pitch-counter').textContent = counterText
+        pitchRenderDetails(a)
+      }
+
+      function pitchRenderDetails(a) {
+        var details = document.getElementById('pitch-details')
+        if (!details) return
+        details.innerHTML = ''
+        var fmtMoney = function (n) {
+          return '£' + Number(n).toLocaleString('en-GB')
+        }
+        var dateRange = ''
+        if (a.startDate || a.endDate) {
+          dateRange = (a.startDate || '?') + ' → ' + (a.endDate || '?')
+        }
+        var sections = [
+          { label: 'Application Type', value: a.applicationType },
+          { label: 'Organisation Type', value: a.organisationType },
+          { label: 'Website', kind: 'link', value: a.website },
+          { label: 'Quality Mark', value: a.qualityMark },
+          { label: 'Grant Requested', value: a.grantRequested != null ? fmtMoney(a.grantRequested) : '' },
+          { label: 'Annual Turnover', value: a.annualTurnover != null ? fmtMoney(a.annualTurnover) : '' },
+          { label: 'Project Dates', value: dateRange },
+          { label: 'Standalone or Enhancing', value: a.standaloneOrEnhancing },
+          { label: 'Project Viable Without Grant?', value: a.viabilityWithoutGrant },
+          { label: 'Previous Application History', value: a.previousApplicationHistory },
+          { label: 'Summary', value: a.summary },
+          { label: 'Proposal Overview', value: a.proposalOverview },
+          { label: 'Project Impact', value: a.projectImpact },
+          { label: 'Delivery Plan', value: a.deliveryPlan },
+          { label: 'Details of Activities', value: a.detailsOfActivities },
+          { label: 'Expected Outcomes', value: a.expectedOutcomes },
+          { label: 'Evidence of Need', value: a.evidenceOfNeed },
+          { label: 'Involvement of Young People in Programme Development', value: a.youngPeopleInvolvement },
+          { label: 'Engaging Young People Facing Barriers', value: a.engagingBarriers },
+          { label: 'Engaging Hard to Reach', value: a.engagingHardToReach },
+          { label: 'Recruitment & Engagement', value: a.recruitment },
+          { label: 'Safety & Inclusion Plan', value: a.safetyAndInclusion },
+          { label: 'Accreditations', value: a.accreditations },
+          { label: 'Other Funders', value: a.otherFunders },
+          { label: 'Financial Breakdown', kind: 'attachments', value: a.financialBreakdown },
+          { label: 'Video Link', kind: 'link', value: a.videoLink },
+        ]
+        sections.forEach(function (s) {
+          var v = s.value
+          if (v == null || v === '' || (Array.isArray(v) && v.length === 0)) return
+          var section = document.createElement('div')
+          section.className = 'pitch-details-section'
+          var h = document.createElement('h4')
+          h.textContent = s.label
+          section.appendChild(h)
+          var body = document.createElement('div')
+          body.className = 'pitch-details-body'
+          if (s.kind === 'link') {
+            var link = document.createElement('a')
+            link.href = v
+            link.textContent = v
+            link.target = '_blank'
+            link.rel = 'noopener'
+            body.appendChild(link)
+          } else if (s.kind === 'attachments') {
+            v.forEach(function (att, i) {
+              if (i > 0) body.appendChild(document.createTextNode(' · '))
+              var link = document.createElement('a')
+              link.href = att.url
+              link.textContent = att.filename || 'Download'
+              link.target = '_blank'
+              link.rel = 'noopener'
+              body.appendChild(link)
+            })
+          } else if (Array.isArray(v)) {
+            var ul = document.createElement('ul')
+            ul.className = 'pitch-details-list'
+            v.forEach(function (item) {
+              var li = document.createElement('li')
+              li.textContent = item
+              ul.appendChild(li)
+            })
+            body.appendChild(ul)
+          } else {
+            body.textContent = v
+          }
+          section.appendChild(body)
+          details.appendChild(section)
+        })
       }
 
       function pitchFmt(seconds) {
